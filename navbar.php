@@ -32,14 +32,12 @@
 
        <div  id="links"> 
 
-        <p><a href="#">Home</a></p> 
-
-        <p><a href="#aboutus">About Us</a></p> 
-
-        <p><a href="#ourservices">Our Services</a></p> 
-        <p><a href="#contactus">Contact Us</a></p> 
-        <p class="special_button"><a href="#Signup">Sign Up</a></p> 
-        <p><a href="#login">Login</a></p> 
+        <p><a href="home.php">Home</a></p> 
+        <p><a href="service.php">Our Services</a></p>
+        <p><a href="about.php">About Us</a></p> 
+        <p><a href="contact.php">Contact Us</a></p> 
+        <p class="special_button"><a href="signin.php">Sign Up</a></p> 
+        <p><a href="login.php">Login</a></p> 
          
         
         </div>
