@@ -1,5 +1,5 @@
 .container{
-    background-image: url('./imgs/Background_Image.png');
+    background-image: url('../imgs/Background_Image.png');
      background-size: cover;
     background-repeat: no-repeat;
 }
