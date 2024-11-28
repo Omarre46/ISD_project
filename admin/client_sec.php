@@ -13,6 +13,7 @@ include('admin_navbar.php')
     <link rel="stylesheet" href="style/client_sec.css">
 </head>
 <center>
+    <h1 class="error" style="color: red; font-size:25px;">Cannot display admin panel on small devices</h1>
 <body>
     <h2>Client List</h2>
     <table>
