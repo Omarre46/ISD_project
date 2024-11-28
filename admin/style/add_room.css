@@ -1,4 +1,7 @@
-
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+}
 form {
     background: #ffffff;
     padding: 20px 40px;
