@@ -36,8 +36,8 @@
         <p><a href="service.php">Our Services</a></p>
         <p><a href="about.php">About Us</a></p> 
         <p><a href="contact.php">Contact Us</a></p> 
-        <p class="special_button"><a href="signin.php">Sign Up</a></p> 
-        <p><a href="login.php">Login</a></p> 
+        <p class="special_button"><a href="../users/signin.php">Sign Up</a></p> 
+        <p><a href="../users/login.php">Login</a></p> 
          
         
         </div>
