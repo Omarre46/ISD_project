@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
     <link rel="stylesheet" href="style/register.css">
+    <link rel="stylesheet" href="../includes/style/navbar.css">
+    <link rel="stylesheet" href="../includes/style/footer.css">
 </head>
 <body>
 <div class="container">
