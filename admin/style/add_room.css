@@ -1,7 +1,8 @@
-body{
+body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
 }
+
 form {
     background: #ffffff;
     padding: 20px 40px;
@@ -28,7 +29,9 @@ label {
     margin-bottom: 5px;
 }
 
-input[type="text"], input[type="submit"], input[type="reset"] {
+input[type="text"],
+input[type="submit"],
+input[type="reset"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -42,7 +45,8 @@ input[type="text"]:focus {
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-input[type="submit"], input[type="reset"] {
+input[type="submit"],
+input[type="reset"] {
     background-color: #007bff;
     color: white;
     border: none;
@@ -69,7 +73,7 @@ input[type="reset"]:hover {
 }
 
 @media (max-width: 575.98px) {
-    body{
+    body {
         display: none;
         background: #00f85f;
     }
@@ -77,7 +81,7 @@ input[type="reset"]:hover {
 
 /* Small Devices (Landscape phones, 576px and up) */
 @media (min-width: 576px) and (max-width: 767.98px) {
-    body{
+    body {
         display: none;
         background: #00f85f;
     }
@@ -85,70 +89,73 @@ input[type="reset"]:hover {
 
 /* Medium Devices (Tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 991.98px) {
-     
-form {
-    background: #ffffff;
-    padding: 20px 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-}
 
-h1 {
-    text-align: center;
-    color: #000000;
-    margin-bottom: 20px;
-}
+    form {
+        background: #ffffff;
+        padding: 20px 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
 
-p {
-    margin-bottom: 15px;
-}
+    h1 {
+        text-align: center;
+        color: #000000;
+        margin-bottom: 20px;
+    }
 
-label {
-    display: block;
-    font-size: 14px;
-    color: #000000;
-    margin-bottom: 5px;
-}
+    p {
+        margin-bottom: 15px;
+    }
 
-input[type="text"], input[type="submit"], input[type="reset"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-}
+    label {
+        display: block;
+        font-size: 14px;
+        color: #000000;
+        margin-bottom: 5px;
+    }
 
-input[type="text"]:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
+    input[type="text"],
+    input[type="submit"],
+    input[type="reset"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+    }
 
-input[type="submit"], input[type="reset"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
+    input[type="text"]:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
 
-input[type="reset"] {
-    background-color: #dc3545;
-}
+    input[type="submit"],
+    input[type="reset"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
 
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
+    input[type="reset"] {
+        background-color: #dc3545;
+    }
 
-input[type="reset"]:hover {
-    background-color: #c82333;
-}
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
 
-.form-actions {
-    display: flex;
-    gap: 10px;
-}
+    input[type="reset"]:hover {
+        background-color: #c82333;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 10px;
+    }
 }

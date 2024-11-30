@@ -1,31 +1,24 @@
-
 /* Desktop*/
 @media only screen and (min-width: 992px) {
-     
-     .navbar_container{
+
+    .navbar_container {
         background-color: black;
-     }
+    }
 
-
-    #logo-out{
+    #logo-out {
         display: none;
-    } 
-    
+    }
+
 
     .special_button {
-        
-       width: 120px;
-      
-       text-align: center;
+        width: 120px;
+        text-align: center;
         border: 1px solid #0C4774;
         box-sizing: border-box;
         background-color: #0C4774;
         color: white;
         text-decoration: none;
         padding: auto;
-         
-         
-        
     }
 
     #logo {
@@ -34,48 +27,45 @@
         left: 20px;
         width: 180px;
         height: 30px;
-          
-          
     }
 
     #logoX {
         display: none;
     }
-      #links {
+
+    #links {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         font-size: 17px;
-        color: white; 
+        color: white;
     }
 
     #links p a {
         color: rgb(255, 255, 255);
-        text-decoration: none; 
+        text-decoration: none;
         font-weight: normal;
-         font-family: 'Roboto',sans-serif; 
-         padding: 10px;   
-             
+        font-family: 'Roboto', sans-serif;
+        padding: 10px;
     }
 
     #links a:hover {
-       font-weight: 900;
-       cursor: pointer;
-        
+        font-weight: 900;
+        cursor: pointer;
     }
-    
 }
 
 /* Small mobile devices*/
 @media only screen and (max-width: 600px) {
     body {
-         
+
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
-    .navbar_container{
+
+    .navbar_container {
         background-color: black;
     }
-    
+
     #logo-out {
         position: relative;
         display: flex;
@@ -94,7 +84,6 @@
         width: 24px;
         height: 20px;
         top: 20px;
-          
     }
 
 
@@ -113,26 +102,25 @@
         background-color: rgba(99, 99, 129, 0.9);
         width: 100%;
         height: 100vh;
-        
     }
 
     #navbar.show {
         display: flex;
         background-color: #0C4774;
         background-size: cover;
-        position: fixed;          
-        top: 0;                 
-        left: 0;                 
-        width: 100%;            
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100vh;
     }
-    #navbar.show .special_button{
+
+    #navbar.show .special_button {
         border: 6px solid #24BF40;
         background-color: #24BF40;
         color: white;
         width: 100px;
         text-align: center;
-        
     }
 
     #navbar.show #links {
@@ -149,10 +137,9 @@
         margin-bottom: 10px;
         width: 150px;
         text-decoration: none;
-         
     }
 
-    #navbar.show #links a:focus{
+    #navbar.show #links a:focus {
         font-weight: 900;
     }
 
@@ -184,7 +171,8 @@
     body {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
-    .navbar_container{
+
+    .navbar_container {
         background-color: black;
     }
 
@@ -206,7 +194,6 @@
         width: 24px;
         height: 20px;
         top: 20px;
-        
     }
 
     .line {
@@ -224,27 +211,25 @@
         background-color: rgba(99, 99, 129, 0.9);
         width: 100%;
         height: 100vh;
-        
-         
-        
     }
+
     #navbar.show {
         display: flex;
         background-color: #0C4774;
         background-size: cover;
-        position: fixed;          
-        top: 0;                 
-        left: 0;                 
-        width: 100%;            
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100vh;
     }
-    #navbar.show .special_button{
+
+    #navbar.show .special_button {
         border: 6px solid #24BF40;
         background-color: #24BF40;
         color: white;
         width: 100px;
         text-align: center;
-        
     }
 
     #navbar.show #links {
@@ -261,10 +246,9 @@
         margin-bottom: 10px;
         width: 150px;
         text-decoration: none;
-         
     }
 
-    #navbar.show #links a:focus{
+    #navbar.show #links a:focus {
         font-weight: 900;
     }
 
@@ -285,7 +269,6 @@
         height: 24px;
     }
 
-
     .navbar_container nav p {
         color: white;
         text-decoration: none;
@@ -293,29 +276,24 @@
 }
 
 /* Tablets and Small Laptops   */
-@media only screen and (min-width: 768px) and (max-width: 992px)  {
-    #logo-out{
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    #logo-out {
         display: none;
-    } 
-    .navbar_container{
+    }
+
+    .navbar_container {
         background-color: black;
     }
-    
 
     .special_button {
-        
-       width: 120px;
-      
-       text-align: center;
+        width: 120px;
+        text-align: center;
         border: 1px solid #0C4774;
         box-sizing: border-box;
         background-color: #0C4774;
         color: white;
         text-decoration: none;
         padding: auto;
-         
-         
-        
     }
 
     #logo {
@@ -324,34 +302,30 @@
         left: 20px;
         width: 180px;
         height: 30px;
-          
-          
     }
 
     #logoX {
         display: none;
     }
-      #links {
+
+    #links {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
         font-size: 17px;
-        color: white; 
+        color: white;
     }
 
     #links p a {
         color: rgb(255, 255, 255);
-        text-decoration: none; 
+        text-decoration: none;
         font-weight: normal;
-         font-family: 'Roboto',sans-serif; 
-         padding: 10px;   
-             
+        font-family: 'Roboto', sans-serif;
+        padding: 10px;
     }
 
     #links a:hover {
-       font-weight: 900;
-       cursor: pointer;
-        
+        font-weight: 900;
+        cursor: pointer;
     }
-     
 }

@@ -1,16 +1,15 @@
-<?php
-include("admin_navbar.php")
-
-?>
+<?php include("admin_navbar.php")?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style/list_room.css">
 </head>
+
 <body>
     <h2>Room List</h2>
     <table>
@@ -70,4 +69,5 @@ include("admin_navbar.php")
         </tbody>
     </table>
 </body>
+
 </html>
