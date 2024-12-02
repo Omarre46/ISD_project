@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style/login.css">
-    <link rel="stylesheet" href="../includes/style/navbar.css">
-    <link rel="stylesheet" href="../includes/style/footer.css">
-    
 </head>
+
 <body>
-    
+
     <div class="container">
         <div class="box">
             <h1>Sign in</h1>
@@ -29,7 +28,23 @@
                 <input type="submit" name="submit" value="Sign in">
             </form>
             <a href="register.php" class="register">Register</a>
+            <a href="#" id="back-home" class="register">Back to Home</a>
+
+            <script>
+                const previousPage = document.referrer;
+                const backHomeButton = document.getElementById('back-home');
+
+                if (previousPage && previousPage !== window.location.href) {
+                    backHomeButton.href = previousPage;
+                } else {
+                    backHomeButton.href = '/ISD_project_ongit/ISD_project/client_side/home.php';
+                }
+            </script>
+
+
+
         </div>
     </div>
 </body>
+
 </html>

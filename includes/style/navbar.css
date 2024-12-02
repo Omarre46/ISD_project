@@ -2,7 +2,14 @@
   @media only screen and (min-width: 992px) {
 
       .navbar_container {
-          background-color: black;
+        background-color: black;
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        align-items: center;
+        justify-content: space-between; 
       }
 
       #logo-out {

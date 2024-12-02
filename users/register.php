@@ -46,7 +46,19 @@
                 <a href="#"><input type="submit" name="submit" value="Register"></a>
             </form>
             <h6>Already have an account?</h6>
-            <a href="login.php" class="sign">Sign in</a>
+            <a href="login.php" class="singin">Sign in</a>
+            <a href="#" id="back-home" class="signin">Back to Home</a>
+
+            <script>
+                const previousPage = document.referrer;
+                const backHomeButton = document.getElementById('back-home');
+
+                if (previousPage && previousPage !== window.location.href) {
+                    backHomeButton.href = previousPage;
+                } else {
+                    backHomeButton.href = '/ISD_project_ongit/ISD_project/client_side/home.php';
+                }
+            </script>
         </div>
     </div>
 </body>
