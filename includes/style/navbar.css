@@ -55,9 +55,10 @@
           padding: 10px;
       }
 
-      #links a:hover {
+     .navbar_container #links a:hover {
           font-weight: 900;
           cursor: pointer;
+          
       }
       #links a {
         text-decoration: none; /* Remove default underline */

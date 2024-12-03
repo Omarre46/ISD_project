@@ -8,22 +8,33 @@
           background-color: #0C4774;
       }
 
-      .footer #links {
+      #footer_links  {
           display: flex;
           align-items: flex-start;
           justify-content: flex-start;
           color: white;
           padding: 30px;
-          width: 500px;
+          width: 400px;
       }
+
+      #footer_links p a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        font-weight: normal;
+        font-family: 'Roboto', sans-serif;
+        padding: 10px;
+    }
+
+      #footer_links a:hover {
+        font-weight: 900;
+        cursor: pointer;
+    }
 
       .four_circles {
           display: flex;
-          align-items: flex-end;
-          justify-content: flex-end;
-          margin-top: -70px;
-          position: relative;
-          right: 40px;
+          align-items: center;
+          justify-content: center;
+            
       }
 
       .four_circles img {

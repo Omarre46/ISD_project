@@ -10,11 +10,11 @@
 <body>
     
 <div class="footer">
-    <div id="links">
-        <p><a href="#">Home</a></p> 
-        <p><a href="#aboutus">About Us</a></p> 
-        <p><a href="#ourservices">Our Services</a></p> 
-        <p><a href="#contactus">Contact Us</a></p> 
+    <div id="footer_links">
+        <p><a href="../client_side/home.php">Home</a></p> 
+        <p><a href="../client_side/about.php">About Us</a></p> 
+        <p><a href="../client_side/services.php">Our Services</a></p> 
+        <p><a href="../client_side/contact.php">Contact Us</a></p> 
     </div>
 
     <div class="four_circles">
