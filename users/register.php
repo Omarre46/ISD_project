@@ -11,6 +11,8 @@
 <body>
 <div class="container">
         <div class="box">
+        <a href="#" id="back-home" class="signin"><img id="x_button" src="../client_side/imgs/x-solid.svg" alt=""></a>
+
             <h1>Register</h1>
             <form>
                 <label>Full Name</label>
@@ -47,7 +49,7 @@
             </form>
             <h6>Already have an account?</h6>
             <a href="login.php" class="singin">Sign in</a>
-            <a href="#" id="back-home" class="signin">Back to Home</a>
+            
 
             <script>
                 const previousPage = document.referrer;

@@ -12,7 +12,10 @@
 
     <div class="container">
         <div class="box">
+        <a href="#" id="back-home" class="login"><img id="x_button" src="../client_side/imgs/x-solid.svg" alt=""></a>
+
             <h1>Sign in</h1>
+            
             <form action="sign_in.php" method="post">
                 <label>Username</label>
                 <div>
@@ -28,8 +31,7 @@
                 <input type="submit" name="submit" value="Sign in">
             </form>
             <a href="register.php" class="register">Register</a>
-            <a href="#" id="back-home" class="register">Back to Home</a>
-
+            
             <script>
                 const previousPage = document.referrer;
                 const backHomeButton = document.getElementById('back-home');
