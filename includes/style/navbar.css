@@ -59,6 +59,24 @@
           font-weight: 900;
           cursor: pointer;
       }
+      #links a {
+        text-decoration: none; /* Remove default underline */
+        color: black; /* Base link color */
+        position: relative;
+    }
+    
+    #links a.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px; /* Adjust spacing below the text */
+        left: 0;
+        width: 100%;
+        height: 2px; /* Thickness of the underline */
+        background-color: rgb(255, 255, 255); /* Color of the underline */
+        display: block;
+    }
+    
+       
   }
 
   /* Small mobile devices*/
