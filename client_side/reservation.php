@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style/service.css">
+    <link rel="stylesheet" href="style/contact.css">
     <link rel="stylesheet" href="../includes/style/navbar.css">
     <link rel="stylesheet" href="../includes/style/footer.css">
 </head>
@@ -25,7 +25,6 @@
     <div class="footer">
         <?php include('../includes/footer.php'); ?>
     </div>
-
 
 </body>
 

@@ -18,7 +18,7 @@
         </div>
 
         <div class="contents">
-            <h1>Explainer Header Goes Here</h1>
+            <h1>Four Seasons Hotel Beirut</h1>
             <p>Another sub-headline goes here to explain the business further</p>
             <li>Some Body text or highlights go here</li>
             <li>Some Body text or highlights go here</li>
@@ -53,7 +53,15 @@
             </div>
         </div>
 
-        <!-- row services(left to right) -->
+        <div class="check_resrevation_home">
+            <div class="check_boxes">
+                <a href="" class="check_box">Check-In/Out</a>
+                <a href="" class="check_box">Guests</a>
+                <a href="" class="check_box">Promo Codes</a>
+                <a href="reservation.php" class="check_box">Check Availability</a>
+            </div>
+        </div>
+
         <div class="services_row">
             <img src="./imgs/grey.jpeg" alt="">
             <div class="text">
@@ -61,7 +69,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
         </div>
-        <!-- row services(right to left) -->
+
         <div class="services_row_inverted">
             <div class="text">
                 <h1>Service Title Here</h1>
@@ -70,7 +78,6 @@
             <img src="./imgs/grey.jpeg" alt="">
         </div>
 
-        <!-- row services(mobile) -->
         <div class="services_row_mobile1">
             <img src="./imgs/grey.jpeg" alt="">
             <div class="text">

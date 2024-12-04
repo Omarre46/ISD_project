@@ -15,16 +15,14 @@
 </head>
 
 <body>
-    
-    <div class="container">
 
 
 
 
 
-        <div class="footer">
-            <?php include('../includes/footer.php'); ?>
-        </div>
+
+    <div class="footer">
+        <?php include('../includes/footer.php'); ?>
     </div>
 </body>
 
