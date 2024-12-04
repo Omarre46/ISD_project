@@ -2,7 +2,6 @@
 
         .navbar_container {
             background-color: black;
-            
             width: 100%;
             z-index: 1000;
             align-items: center;
@@ -25,7 +24,7 @@
         }
 
         #logo {
-            margin-top: 50px;
+             
             width: 180px;
             height: 30px;
         }
@@ -337,7 +336,7 @@
         }
 
         #logo {
-            margin-top: 50px;
+             
             width: 180px;
             height: 30px;
         }
