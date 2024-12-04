@@ -12,15 +12,18 @@
     <link rel="stylesheet" href="style/contact.css">
     <link rel="stylesheet" href="../includes/style/navbar.css">
     <link rel="stylesheet" href="../includes/style/footer.css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
+=======
+</head>
+>>>>>>> 3843354b00a8a0c7c7bc2f26d1d0da446e7572be
 
 <body>
-
-    <div class="contact">
-        <div class="google-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13246.131959710738!2d35.4799490871582!3d33.90167949999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f16dd38749253%3A0xc25f0ac5ac2581fc!2sFour%20Seasons%20Hotel%20Beirut!5e0!3m2!1sen!2slb!4v1733312203465!5m2!1sen!2slb" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
+        <div class="contact">
+            <div class="google-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13246.131959710738!2d35.4799490871582!3d33.90167949999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151f16dd38749253%3A0xc25f0ac5ac2581fc!2sFour%20Seasons%20Hotel%20Beirut!5e0!3m2!1sen!2slb!4v1733312203465!5m2!1sen!2slb" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
 
             <div class="info">
                 <div class="loc">
@@ -65,9 +68,9 @@
                     <textarea name="description" placeholder="Write your message here..." required></textarea>
                 </div>
 
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
 
         <div class="footer">
             <?php include('../includes/footer.php'); ?>
