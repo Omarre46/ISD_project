@@ -26,7 +26,6 @@
             <button>Start Free Trial</button>
         </div>
 
-        <!-- column services -->
         <div class="services">
             <div class="service_box">
                 <img src="./imgs/circle-solid.svg" alt="">
@@ -54,6 +53,7 @@
         </div>
 
         <div class="check_resrevation_home">
+            <h1>Reserve Now</h1>
             <div class="check_boxes">
                 <a href="" class="check_box">Check-In/Out</a>
                 <a href="" class="check_box">Guests</a>
