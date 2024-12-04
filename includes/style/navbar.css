@@ -27,9 +27,7 @@
         }
 
         #logo {
-            position: relative;
-            top: 40px;
-            left: 20px;
+            margin-top: 50px;
             width: 180px;
             height: 30px;
         }
@@ -315,12 +313,19 @@
     }
 
     @media only screen and (min-width: 768px) and (max-width: 992px) {
-        #logo-out {
-            display: none;
-        }
-
         .navbar_container {
             background-color: black;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #logo-out {
+            display: none;
         }
 
         .special_button {
@@ -335,9 +340,7 @@
         }
 
         #logo {
-            position: relative;
-            top: 40px;
-            left: 20px;
+            margin-top: 50px;
             width: 180px;
             height: 30px;
         }
@@ -362,8 +365,42 @@
             padding: 10px;
         }
 
+        #links a {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+        }
+
         #links a:hover {
-            font-weight: 900;
-            cursor: pointer;
+            color: #0C4774;
+        }
+
+        #links a.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        #links a.active:hover::after {
+            background-color: #0C4774;
+        }
+
+        #links a.active {
+            color: white;
+        }
+
+        #links a.active::after {
+            transform: scaleX(1);
         }
     }
