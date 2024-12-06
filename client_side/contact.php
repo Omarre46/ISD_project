@@ -12,12 +12,8 @@
     <link rel="stylesheet" href="style/contact.css">
     <link rel="stylesheet" href="../includes/style/navbar.css">
     <link rel="stylesheet" href="../includes/style/footer.css">
-<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     </head>
-=======
-</head>
->>>>>>> 3843354b00a8a0c7c7bc2f26d1d0da446e7572be
 
 <body>
         <div class="contact">

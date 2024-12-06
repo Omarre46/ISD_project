@@ -36,7 +36,7 @@
                 const previousPage = document.referrer;
                 const backHomeButton = document.getElementById('back-home');
 
-                if (previousPage && previousPage !== window.location.href) {
+                if (previousPage && previousPage != window.location.href) {
                     backHomeButton.href = previousPage;
                 } else {
                     backHomeButton.href = '/ISD_project_ongit/ISD_project/client_side/home.php';
