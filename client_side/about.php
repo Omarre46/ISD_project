@@ -47,6 +47,6 @@
 </body>
 </html>
 
-<div class="navbar">
+<div class="footer">
     <?php include('../includes/footer.php'); ?>
 </div>
