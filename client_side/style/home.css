@@ -1,7 +1,8 @@
 .container {
-    background-image: url('../imgs/Background_Image.png');
+    background-image:  url('../imgs/FSH_1199_original.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    background-blend-mode: darken;
 }
 
 body {
@@ -16,6 +17,7 @@ body {
         padding: 0;
         height: 100%;
         font-family: 'Roboto';
+        background-color: #dddddd;
     }
 
     .container {
@@ -50,7 +52,7 @@ body {
         align-self: flex-start;
     }
 
-    button {
+    button  {
         margin-top: 30px;
         border: 10px solid #24BF40;
         background-color: #24BF40;
@@ -58,9 +60,11 @@ body {
         width: 200px;
         font-size: 20px;
         align-self: flex-start;
+        
     }
 
-    button:hover {
+     button :hover {
+        
         cursor: pointer;
         font-weight: bold;
     }
@@ -69,6 +73,7 @@ body {
         display: flex;
         justify-content: space-between;
         padding: 20px;
+       
     }
 
     .services h1 {
@@ -291,6 +296,7 @@ body {
         display: flex;
         justify-content: space-between;
         padding: 20px;
+        margin-top: -90px;
     }
 
     .services h1 {

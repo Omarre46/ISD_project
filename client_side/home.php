@@ -19,38 +19,24 @@
 
         <div class="contents">
             <h1>Four Seasons Hotel Beirut</h1>
-            <p>Another sub-headline goes here to explain the business further</p>
-            <li>Some Body text or highlights go here</li>
-            <li>Some Body text or highlights go here</li>
-            <li>Some Body text or highlights go here</li>
-            <button>Start Free Trial</button>
+            <p>At Four Seasons, we redefine luxury by blending timeless elegance with personalized service, creating unforgettable experiences that make every stay feel like home.</p>
+           <a href="./service.php"><button>Explore</button></a>
         </div>
 
         <div class="services">
             <div class="service_box">
                 <img src="./imgs/circle-solid.svg" alt="">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h1>Laundry and Dry Cleaning</h1>
+                <p>Our laundry and cleaning service ensures your clothes and linens are treated with the utmost care and attention. From fresh linens to expertly cleaned garments, we provide a premium service that keeps you feeling comfortable and at home throughout your stay.</p>
             </div>
 
             <div class="service_box">
                 <img src="./imgs/circle-solid.svg" alt="">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h1>Airport Transportation</h1>
+                <p>Enjoy a seamless and stress-free arrival with our airport transportation service. Whether you're arriving or departing, our reliable and comfortable vehicles ensure you travel in style and convenience, making your journey as pleasant as possible.</p>
             </div>
 
-            <div class="service_box">
-                <img src="./imgs/circle-solid.svg" alt="">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-
-            <div class="service_box">
-                <img src="./imgs/circle-solid.svg" alt="">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-        </div>
+                     </div>
 
         <div class="check_resrevation_home">
             <h1>Reserve Now</h1>
@@ -63,19 +49,19 @@
         </div>
 
         <div class="services_row">
-            <img src="./imgs/grey.jpeg" alt="">
+            <img src="../client_side/imgs/hotel_sauna.jpg" alt="">
             <div class="text">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h1>Steam Room and Sauna</h1>
+                <p>Relax and rejuvenate in our luxurious steam room and sauna, where tranquility meets wellness. Immerse yourself in soothing heat that helps detoxify, relieve stress, and refresh your mind and body, providing the perfect escape after a busy day.</p>
             </div>
         </div>
 
         <div class="services_row_inverted">
             <div class="text">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h1>Year-round Rooftop Bar & Lounge</h1>
+                <p>Elevate your experience at our year-round rooftop bar and lounge, where stunning city views meet expertly crafted cocktails. Whether you're unwinding with friends or enjoying a quiet evening, our rooftop provides the perfect atmosphere for relaxation and celebration, all year long.</p>
             </div>
-            <img src="./imgs/grey.jpeg" alt="">
+            <img src="../client_side/imgs/hotel_bar.jpg" alt="">
         </div>
 
         <div class="services_row_mobile1">

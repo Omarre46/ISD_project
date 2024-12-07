@@ -144,7 +144,7 @@
 
         #navbar.show {
             display: flex;
-            background-color: #0C4774;
+            background-color: black;
             background-size: cover;
             position: fixed;
             top: 0;
@@ -172,7 +172,7 @@
             font-size: 17px;
             font-family: 'Roboto';
             color: white;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             width: 150px;
             text-decoration: none;
         }
@@ -253,7 +253,7 @@
 
         #navbar.show {
             display: flex;
-            background-color: #0C4774;
+            background-color: black;
             background-size: cover;
             position: fixed;
             top: 0;
@@ -281,7 +281,7 @@
             font-size: 17px;
             font-family: 'Roboto';
             color: white;
-            margin-bottom: 10px;
+            margin-bottom: 50px;
             width: 150px;
             text-decoration: none;
         }
