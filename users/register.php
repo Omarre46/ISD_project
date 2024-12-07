@@ -39,11 +39,7 @@
                     <input type="password" name="password" placeholder="Enter Password">
                 </div>
 
-                <label>Repeat Password</label>
-                <div>
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" name="repeatPassword" placeholder="Enter Password">
-                </div>
+                
 
                 <a href="#"><input type="submit" name="submit" value="Register"></a>
             </form>
