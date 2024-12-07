@@ -36,7 +36,7 @@
         <img src="./imgs/Logo.png" alt="" id="logo-out">
 
         <nav id="navbar">
-            <img src="./imgs/Logo.png" alt="" id="logo">
+            <img src="../client_side/imgs/1.png" alt="" id="logo">
             <div id="links">
                 <p><a href="home.php">Home</a></p>
                 <p><a href="service.php">Our Services</a></p>

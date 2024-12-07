@@ -1,114 +1,145 @@
-html,
+
+
+ /* General styles */
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
     font-family: 'Roboto';
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-    line-height: 1.6;
-}
- 
-
-
-
- 
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
+     background: #dddddd;
+     height: 100vh;
+  }
+  
+  .about-us {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
-}
-
-/* Header Section */
-.header {
+  }
+  
+  .story {
     text-align: center;
-    margin-bottom: 20px;
-}
-
-.header h1 {
+    margin-bottom: 40px;
+   border-radius: 15px;
+    
+  }
+  
+  .story h1 {
     font-size: 2.5rem;
-    color: #0C4774;
-}
-
-.header p {
-    font-size: 1.2rem;
-    margin-top: 10px;
-}
-
-/* Story Section */
-.story {
-    background-color: #24BF40;
-    color: #fff;
-    padding: 30px;
-    text-align: center;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.story-content h2 {
-    font-size: 2rem;
     margin-bottom: 10px;
-}
-
-/* Info Sections */
-.info-sections .info-row {
+    
+  }
+  
+  .story p {
+    font-size: 1rem;
+    
+  }
+  
+  /* Content styles */
+  .content {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-.info-sections .info-row.reverse {
-    flex-direction: row-reverse;
-}
-
-.description {
-    width: 45%;
-    padding: 20px;
-}
-
-.description h3 {
-    font-size: 1.8rem;
-    color: #0C4774;
-    margin-bottom: 10px;
-}
-
-.image-placeholder {
-    width: 45%;
-    height: 200px;
-    background-color: #d9d9d9;
-    border-radius: 10px;
-}
-
-/* Footer Section */
-.footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #0C4774;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Shared image container styles */
+  .image-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #dddd;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .image {
+    background-color: #ccc;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+  }
+  
+  /* Shared caption styles */
+  .caption {
+    position: absolute;
+    background-color: rgba(80, 76, 76, 0.6);
     color: #fff;
-    border-radius: 10px;
-}
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1rem;
+    z-index: 10;
+  }
+  
+  /* Design for the first container */
+  .design-one .caption {
+    top: 10px;
+    left: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color:transparent;
+  }
+  
+  .design-one .image {
+    background-image: url('../imgs/hotel_room.jpg'); /* Replace with your image URL */
+     
+  }
+  
+  /* Design for the second container (image + description beside it) */
+  .design-two {
+    flex-direction: row;
+    height: auto; /* Let the content determine height */
+    gap: 20px;
+    background: none;
+    align-items: center;
+  }
+  
+  .design-two .image {
+    width: 50%; /* Image takes half the width */
+    height: 250px;
+    background-image: url('../imgs/hotel_lobby.jpg'); /* Replace with your image URL */
+    border-radius: 8px;
+  }
+  
+  .design-two .description {
+    width: 50%; /* Description takes the other half */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(0, 0, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .design-two .description h2 {
+    margin: 0 0 10px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .design-two .description p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Design for the third container */
 
-.footer h3 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .info-sections .info-row {
-        flex-direction: column;
-    }
-
-    .info-sections .description,
-    .info-sections .image-placeholder {
-        width: 100%;
-    }
-
-    .info-sections .image-placeholder {
-        margin-bottom: 20px;
-    }
-}
+  
+  .design-three .caption {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(182, 182, 182, 0.753);
+    padding: 15px 25px;
+    font-size: 1.5rem;
+    text-align: center;
+    opacity: 0.9;
+  }
+  
+  .design-three .image {
+    background-image: url('../imgs/hotel_dining.jpg'); /* Replace with your image URL */
+    filter: grayscale(50%);
+     
+  }
+  

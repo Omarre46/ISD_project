@@ -17,7 +17,7 @@
             text-align: center;
             border: 1px solid #0C4774;
             box-sizing: border-box;
-            background-color: #0C4774;
+            background-color: #24BF40;
             color: white;
             text-decoration: none;
             padding: auto;
@@ -26,7 +26,8 @@
         #logo {
              
             width: 180px;
-            height: 30px;
+            height: 180px;
+             
         }
 
         #logoX {
@@ -39,6 +40,9 @@
             justify-content: flex-end;
             font-size: 17px;
             color: white;
+          position: absolute;
+          top: 5%;
+          right: 5%;
         }
 
         #links p a {
@@ -60,7 +64,8 @@
         }
 
         #links a:hover {
-            color: #0C4774;
+             font-size: larger;
+             font-weight: bold;
         }
 
         #links a.active::after {
@@ -329,7 +334,7 @@
             text-align: center;
             border: 1px solid #0C4774;
             box-sizing: border-box;
-            background-color: #0C4774;
+            background-color:  #24BF40;
             color: white;
             text-decoration: none;
             padding: auto;
@@ -337,8 +342,10 @@
 
         #logo {
              
+                
             width: 180px;
-            height: 30px;
+            height: 180px;
+             
         }
 
         #logoX {
@@ -351,6 +358,9 @@
             justify-content: flex-end;
             font-size: 17px;
             color: white;
+            position: absolute;
+            top: 5%;
+            right: 2%;
         }
 
         #links p a {
@@ -372,7 +382,8 @@
         }
 
         #links a:hover {
-            color: #0C4774;
+            font-size: larger;
+            font-weight: bold;
         }
 
         #links a.active::after {
@@ -389,7 +400,7 @@
         }
 
         #links a.active:hover::after {
-            background-color: #0C4774;
+            background-color:  #24BF40;
         }
 
         #links a.active {
