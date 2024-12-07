@@ -1,148 +1,201 @@
-
-
- /* General styles */
+/* General styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto';
-     background: #dddddd;
-     height: 100vh;
-  }
-  
-  .about-us {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .story {
-    text-align: center;
-    margin-bottom: 40px;
-   border-radius: 15px;
-    
-  }
-  
-  .story h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-      
-    
-  }
-  
-  .story p {
-    font-size: 1rem;
-    
-  }
-  
-  /* Content styles */
-  .content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    
-  }
-  
-  /* Shared image container styles */
-  .image-container {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: #dddd;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .image {
-    background-color: #ccc;
-    background-size: cover;
-    background-position: center;
-    width: 100%;
-    height: 300px;
-  }
-  
-  /* Shared caption styles */
-  .caption {
-    position: absolute;
-    background-color: rgba(80, 76, 76, 0.6);
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1rem;
-     
-  }
-  
-  /* Design for the first container */
-  .design-one .caption {
-    top: 10px;
-    left: 10px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color:transparent;
-  }
-  
-  .design-one .image {
-    background-image: url('../imgs/hotel_room.jpg'); /* Replace with your image URL */
-     
-  }
-  
-  /* Design for the second container (image + description beside it) */
-  .design-two {
-    flex-direction: row;
-    height: auto; /* Let the content determine height */
-    gap: 20px;
-    background: none;
-    align-items: center;
-  }
-  
-  .design-two .image {
-    width: 70%; /* Image takes half the width */
-    height: 250px;
-    background-image: url('../imgs/hotel_lobby.jpg'); /* Replace with your image URL */
-    border-radius: 8px;
-  }
-  
-  .design-two .description {
-    width: 30%; /* Description takes the other half */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: rgba(0, 0, 255, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 3px;
-  }
-  
-  .design-two .description h2 {
-    margin: 0 0 10px;
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  .design-two .description p {
-    margin: 0;
-    font-size: 1rem;
-    color: #555;
-  }
-  
-  /* Design for the third container */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto';
+  background: #dddddd;
+  height: 100vh;
+}
 
-  
-  .design-three .caption {
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(182, 182, 182, 0.753);
-    padding: 15px 25px;
-    font-size: 1.5rem;
-    text-align: center;
-    
+.about-us {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.story {
+  text-align: center;
+  margin-bottom: 40px;
+  border-radius: 15px;
+}
+
+.story h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.story p {
+  font-size: 1rem;
+}
+
+/* Content styles */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Shared image container styles */
+.image-container {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #dddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  background-color: #ccc;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 300px;
+}
+
+/* Shared caption styles */
+.caption {
+  position: absolute;
+  background-color: rgba(80, 76, 76, 0.6);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Design for the first container */
+.design-one .caption {
+  top: 10px;
+  left: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.design-one .image {
+  background-image: url('../imgs/hotel_room.jpg'); /* Replace with your image URL */
+}
+
+/* Design for the second container (image + description beside it) */
+.design-two {
+  flex-direction: row;
+  height: auto; /* Let the content determine height */
+  gap: 20px;
+  background: none;
+  align-items: center;
+}
+
+.design-two .image {
+  width: 70%; /* Image takes half the width */
+  height: 250px;
+  background-image: url('../imgs/hotel_lobby.jpg'); /* Replace with your image URL */
+  border-radius: 8px;
+}
+
+.design-two .description {
+  width: 30%; /* Description takes the other half */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(0, 0, 255, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.design-two .description h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.design-two .description p {
+  margin: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Design for the third container */
+.design-three .caption {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(182, 182, 182, 0.753);
+  padding: 15px 25px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.design-three .image {
+  background-image: url('../imgs/hotel_dining.jpg'); /* Replace with your image URL */
+  filter: grayscale(50%);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .story h1 {
+      font-size: 2rem;
   }
-  
+
+  .content {
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  .design-two {
+      flex-direction: column; /* Stack image and description on smaller screens */
+  }
+
+  .design-two .image {
+      width: 100%;
+      height: 200px;
+  }
+
+  .design-two .description {
+      width: 100%;
+      padding: 15px;
+  }
+
   .design-three .image {
-    background-image: url('../imgs/hotel_dining.jpg'); /* Replace with your image URL */
-    filter: grayscale(50%);
-     
+      height: 250px; /* Adjust image size */
   }
-  
+
+  .design-three .caption {
+      padding: 10px 15px;
+      font-size: 1.2rem;
+  }
+
+  .image {
+      height: 200px; /* Reduce image size for small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .story h1 {
+      font-size: 1.8rem;
+  }
+
+  .design-one .caption {
+      font-size: 1rem;
+  }
+
+  .design-two .description h2 {
+      font-size: 1.2rem;
+  }
+
+  .design-two .description p {
+      font-size: 0.9rem;
+  }
+
+  .design-three .caption {
+      font-size: 1rem;
+      padding: 10px;
+  }
+
+  .design-three .image {
+      height: 200px; /* Reduce height even more */
+  }
+}
