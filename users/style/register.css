@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+=======
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #1d1d1d;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+>>>>>>> 42439a08370133505c051012f4fef68c5b012cd8
 html,
 body {
     margin: 0;
@@ -17,7 +31,12 @@ body {
     }
 
 .container {
+<<<<<<< HEAD
     background-color: #b7ea35;
+=======
+    background-color: #1d1d1d;
+    min-height: 100vh;
+>>>>>>> 42439a08370133505c051012f4fef68c5b012cd8
     width: 100%;
     display: flex;
     align-items: center;
@@ -68,7 +87,7 @@ body {
 }
 
 .box form div:hover {
-    border-color: #b7ea35;
+    border-color: #000000;
     box-shadow: 0 0 5px rgba(183, 234, 53, 0.5);
 }
 
@@ -101,11 +120,11 @@ body {
 }
 
 .box form .forgot:hover {
-    color: #b7ea35;
+    color: #000000;
 }
 
 .box form input[type="submit"] {
-    background-color: #b7ea35;
+    background-color: #000000;
     color: #ffffff;
     font-size: 14px;
     font-weight: bold;
@@ -119,7 +138,9 @@ body {
 }
 
 .box form input[type="submit"]:hover {
-    background-color: #8bc34a;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid black;
 }
 
 .box a {
@@ -135,7 +156,7 @@ body {
 
 .box .signin:hover {
     text-decoration: underline;
-    color: #b7ea35;
+    color: #000000;
 }
 
 .box .back-home {
@@ -146,7 +167,7 @@ body {
 
 .box .back-home:hover {
     text-decoration: underline;
-    color: #b7ea35;
+    color: #000000;
 }
 
 .box a {
@@ -157,7 +178,7 @@ body {
 }
 
 .box a:hover {
-    color: #b7ea35; 
+    color: #000000; 
     text-decoration: underline;
 }
 
