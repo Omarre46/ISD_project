@@ -65,19 +65,19 @@
         </div>
 
         <div class="services_row_mobile1">
-            <img src="./imgs/grey.jpeg" alt="">
+        <img src="../client_side/imgs/hotel_sauna.jpg" alt="">
             <div class="text">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h1>Steam Room and Sauna</h1>
+                <p>Relax and rejuvenate in our luxurious steam room and sauna, where tranquility meets wellness. Immerse yourself in soothing heat that helps detoxify, relieve stress, and refresh your mind and body, providing the perfect escape after a busy day.</p>
             </div>
 
         </div>
         <div class="services_row_mobile2">
-            <img src="./imgs/grey.jpeg" alt="">
-            <div class="text">
-                <h1>Service Title Here</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="text">
+                <h1>Year-round Rooftop Bar & Lounge</h1>
+                <p>Elevate your experience at our year-round rooftop bar and lounge, where stunning city views meet expertly crafted cocktails. Whether you're unwinding with friends or enjoying a quiet evening, our rooftop provides the perfect atmosphere for relaxation and celebration, all year long.</p>
             </div>
+            <img src="../client_side/imgs/hotel_bar.jpg" alt="">
         </div>
 
         <div class="footer">
