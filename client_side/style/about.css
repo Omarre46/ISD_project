@@ -26,6 +26,7 @@ body {
   .story h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
+      
     
   }
   
@@ -39,6 +40,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    
   }
   
   /* Shared image container styles */
@@ -67,7 +69,7 @@ body {
     padding: 8px 12px;
     border-radius: 5px;
     font-size: 1rem;
-    z-index: 10;
+     
   }
   
   /* Design for the first container */
@@ -94,20 +96,21 @@ body {
   }
   
   .design-two .image {
-    width: 50%; /* Image takes half the width */
+    width: 70%; /* Image takes half the width */
     height: 250px;
     background-image: url('../imgs/hotel_lobby.jpg'); /* Replace with your image URL */
     border-radius: 8px;
   }
   
   .design-two .description {
-    width: 50%; /* Description takes the other half */
+    width: 30%; /* Description takes the other half */
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgba(0, 0, 255, 0.1);
     padding: 20px;
     border-radius: 8px;
+    font-size: 3px;
   }
   
   .design-two .description h2 {
@@ -134,7 +137,7 @@ body {
     padding: 15px 25px;
     font-size: 1.5rem;
     text-align: center;
-    opacity: 0.9;
+    
   }
   
   .design-three .image {

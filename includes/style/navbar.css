@@ -213,11 +213,8 @@
         }
 
         #logo-out {
-            position: relative;
+
             display: none;
-            width: 156px;
-            height: 100px;
-            margin-left: 27px;
         }
 
         .burger-icon {
