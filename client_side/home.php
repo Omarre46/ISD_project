@@ -19,7 +19,8 @@
 
         <div class="contents">
             <h1>Four Seasons Hotel Beirut</h1>
-            <p>At Four Seasons, we redefine luxury by blending timeless elegance with personalized service, creating unforgettable experiences that make every stay feel like home.</p>
+            <p>At Four Seasons, we redefine luxury by blending timeless elegance with personalized service, <br>
+                creating unforgettable experiences that make every stay feel like home.</p>
            <a href="./service.php"><button>Explore</button></a>
         </div>
 
