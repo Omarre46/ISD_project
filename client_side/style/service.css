@@ -44,7 +44,8 @@ body {
 }
 
 .service-main-img img {
-    height: auto;
+    height: 800px;
+    width: 100%;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-bottom: 30px;
@@ -92,7 +93,6 @@ body {
 .amenities {
     width: 100%;
     text-align: center;
-    justify-content: center;
     align-items: center;
     margin-top: 20px;
 }
@@ -104,10 +104,8 @@ body {
 }
 
 .carousel {
-    margin-left: 340px;
-    position: relative;
-    width: 80%;
-    max-width: 800px;
+    align-items: center;
+    width: 100%;
     overflow: hidden;
 }
 
@@ -135,9 +133,7 @@ body {
 }
 
 .more-amenities {
-    margin-left: 325px;
-    width: 80%;
-    max-width: 800px;
+    width: 100%;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -155,18 +151,6 @@ body {
     gap: 20px;
     list-style-type: none;
     padding: 0;
-}
-
-.more-left-amenities {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.more-right-amenities {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
 }
 
 .more-amenities ul li {
