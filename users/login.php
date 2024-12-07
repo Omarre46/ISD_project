@@ -12,7 +12,7 @@
 
     <div class="container">
         <div class="box">
-        <a href="#" id="back-home" class="login"><img id="x_button" src="../client_side/imgs/x-solid.svg" alt=""></a>
+        <a href="#" id="back-home" class="login"><img id="x_button" src="./img/x-solid.svg" alt=""></a>
 
             <h1>Sign in</h1>
             
