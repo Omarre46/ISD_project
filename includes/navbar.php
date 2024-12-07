@@ -33,7 +33,7 @@
             <div class="line"></div>
         </div>
 
-        <img src="./imgs/Logo.png" alt="" id="logo-out">
+        <img src="../client_side/imgs/1.png" alt="" id="logo-out">
 
         <nav id="navbar">
             <img src="../client_side/imgs/1.png" alt="" id="logo">

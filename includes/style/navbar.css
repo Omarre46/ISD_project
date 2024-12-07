@@ -105,11 +105,9 @@
         }
 
         #logo-out {
-            position: relative;
-            display: flex;
-            width: 156px;
-            height: 22px;
-            margin-left: 27px;
+            
+            display:none;
+            
         }
 
         .burger-icon {
@@ -216,9 +214,9 @@
 
         #logo-out {
             position: relative;
-            display: flex;
+            display: none;
             width: 156px;
-            height: 22px;
+            height: 100px;
             margin-left: 27px;
         }
 
