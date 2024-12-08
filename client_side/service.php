@@ -29,7 +29,7 @@
                 </div>
                 <div class="service-body">
                     <div class="service-main-img">
-                        <img src="imgs/Background_Image.png">
+                        <img src="./imgs/hotel_aementy.avif">
                     </div>
                     <div class="contact-part">
                         <div class="contact-title">

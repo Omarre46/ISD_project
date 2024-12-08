@@ -1,9 +1,7 @@
 .container {
-    background-image:  url('../imgs/BEI_412_original.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../imgs/BEI_412_original.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
-    background-blend-mode: darken;
-}
+    background-blend-mode: darken;}
 
 body {
     font-family: 'Roboto';
@@ -195,7 +193,7 @@ body {
     .check_boxes .check_box {
         flex: 1 1 calc(25% - 15px);
         text-align: center;
-        background-color: #0C4774;
+        background-color: #000000;
         color: white;
         padding: 15px;
         border-radius: 5px;
@@ -211,7 +209,8 @@ body {
     }
 
     .check_boxes .check_box:hover {
-        background-color: #08325B;
+        background-color: #ffffff;
+        color: black;
         transform: scale(1.05);
         text-decoration: none;
     }
@@ -403,7 +402,7 @@ body {
         font-size: 22px;
         font-weight: 700;
         margin-bottom: 25px;
-        color: #0C4774;
+        color: #000000;
     }
 
     .check_boxes {
@@ -415,7 +414,7 @@ body {
     }
 
     .check_boxes .check_box {
-        background-color: #0C4774;
+        background-color: #000000;
         color: #ffffff;
         padding: 16px;
         border-radius: 8px;
@@ -429,7 +428,8 @@ body {
     }
 
     .check_boxes .check_box:hover {
-        background-color: #08325B;
+        background-color: #ffffff;
+        color: black;
         transform: scale(1.05);
     }
 }
