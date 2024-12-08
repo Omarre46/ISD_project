@@ -19,10 +19,10 @@
             <div class="line"></div>
         </div>
 
-        <img src="../imgs/Logo.png" alt="" id="logo-out">
+        <img src="" alt="" id="logo-out">
 
         <nav id="navbar">
-            <img src="../imgs/Logo.png" alt="" id="logo">
+            <img src="../client_side/imgs/1.png" alt="" id="logo">
             <div id="links">
                 <p><a href="add_room.php">Add</a></p>
                 <p><a href="modify_room.php">Modify</a></p>
