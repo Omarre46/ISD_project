@@ -40,9 +40,9 @@
             <div id="links">
                 <p><a href="home.php">Home</a></p>
                 <p><a href="service.php">Our Services</a></p>
+                <p><a href="reservation.php">Reservation</a></p>
                 <p><a href="about.php">About Us</a></p>
                 <p><a href="contact.php">Contact Us</a></p>
-                <p><a href="reservation.php">Reservation</a></p>
                 <p class="special_button"><a href="../users/register.php">Sign Up</a></p>
                 <p><a href="../users/login.php">Login</a></p>
             </div>
