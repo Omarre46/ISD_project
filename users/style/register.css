@@ -25,7 +25,9 @@ body {
 
 .container {
  
-    background-color: #dddddd;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/355477619_657358413099447_2886246589304627763_n.jpg");
+    background-size: cover;
+    background-blend-mode: darken;
  
     
     min-height: 100vh;
