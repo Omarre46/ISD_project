@@ -14,7 +14,7 @@ function applyChanges() {
 
     const guestInfo = document.getElementById("guest-info");
     guestInfo.textContent = `${adults} Adults, ${children} Children`;
-    
+
     closePopup();
 }
 
@@ -32,9 +32,9 @@ function showCalendar(field) {
 
     document.querySelector('.check-in').classList.remove('highlighted');
     document.querySelector('.check-out').classList.remove('highlighted');
-    if (field === 'check-in') {
+    if (field == 'check-in') {
         document.querySelector('.check-in').classList.add('highlighted');
-    } else if (field === 'check-out') {
+    } else if (field == 'check-out') {
         document.querySelector('.check-out').classList.add('highlighted');
     }
 
@@ -68,7 +68,7 @@ function buildMonth(date) {
     today.setHours(0, 0, 0, 0);
 
     let minDate = today;
-    if (selectedField === 'check-out' && checkInDate) {
+    if (selectedField == 'check-out' && checkInDate) {
         minDate = checkInDate;
     }
 
@@ -90,7 +90,7 @@ function buildMonth(date) {
     for (let i = 0; i < 6; i++) {
         html += '<tr>';
         for (let j = 0; j < 7; j++) {
-            if (i === 0 && j < firstDay) {
+            if (i == 0 && j < firstDay) {
                 html += '<td></td>';
             } else if (day > daysInMonth) {
                 break;
@@ -134,7 +134,7 @@ function selectDate(year, month, day) {
         checkOutDate = null; 
         document.getElementById('check-in-date').textContent = date.toDateString();
         document.getElementById('check-in-date').dataset.date = date.toISOString();
-    } else if (selectedField === 'check-out') {
+    } else if (selectedField == 'check-out') {
         if (checkInDate && date > checkInDate) {
             checkOutDate = date;
             document.getElementById('check-out-date').textContent = date.toDateString();
