@@ -1,9 +1,9 @@
 const images = [
-    'imgs/Background_Image.png',
-    'imgs/Background_Image.png',
-    'imgs/Background_Image.png',
-    'imgs/Background_Image.png',
-    'imgs/Background_Image.png',
+    'imgs/BEI_1104_original.jpg',
+    'imgs/BEI_889_original.jpg',
+    'imgs/BEI_178_aspect16x9.jpg',
+    'imgs/BEI_161_original.jpg',
+    'imgs/BEI_133_original.jpg',
 ];
 
 const carouselInner = document.querySelector('.carousel-inner');

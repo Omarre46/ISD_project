@@ -1,13 +1,250 @@
-html,
 body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
-    font-family: 'Roboto';
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
 }
 
-.container {
-    padding: 0;
+.wrapper {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.reservation {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 75%;
+    padding: 20px;
+}
+
+.reserve-page-title h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.reserve-information {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.reserve-information>div {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    flex: 1;
+    gap: 10px;
+    position: relative;
+}
+
+.reserve-information .font {
+    color: #555;
+    font-size: 20px;
+}
+
+.title-information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.title-information h6:first-child {
+    font-size: 14px;
+    color: #666;
     margin: 0;
-    height: 100vh;
+}
+
+.title-information h6:last-child {
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+    margin: 0;
+}
+
+.guests button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: none;
+    z-index: 10;
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+.popup h6 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.popup select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 14px;
+}
+
+.popup-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    align-items: center;
+}
+
+.cancel-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.apply-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup.visible {
+    display: block;
+}
+
+
+.cart {
+    width: 25%;
+    height: 30vh;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart h1 {
+    font-size: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.calendar-container {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.calendar-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar {
+    width: 45%;
+}
+
+.calendar table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.calendar th,
+.calendar td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.calendar th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    color: #333;
+}
+
+.calendar td:hover {
+    background-color: #f0f0f0;
+}
+
+.calendar td.highlighted-range {
+    background-color: rgba(0, 123, 255, 0.2);
+    border-radius: 0;
+}
+
+.calendar td.selected-date {
+    background-color: #007bff;
+    color: white;
+}
+
+.calendar td.disabled {
+    color: #ccc;
+    pointer-events: none;
+    background-color: #f9f9f9;
+}
+
+.check-in,
+.check-out {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.active {
+    background-color: #000000;
+    border-color: #0056b3;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
