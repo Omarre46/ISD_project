@@ -53,7 +53,7 @@
                             <button class="apply-button" onclick="applyChanges()">Apply</button>
                         </div>
                     </div>
-                    <div class="check-in"  onclick="handleSectionClick('check-in')">
+                    <div class="check-in" onclick="handleSectionClick('check-in')">
                         <div class="font">
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
@@ -62,7 +62,7 @@
                             <h6 id="check-in-date">Select Date</h6>
                         </div>
                     </div>
-                    <div class="check-out"  onclick="handleSectionClick('check-out')">
+                    <div class="check-out" onclick="handleSectionClick('check-out')">
                         <div class="font">
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
@@ -73,10 +73,54 @@
                     </div>
                 </div>
             </div>
-            <div class="calendar-container" id="calendar-container"></div>
+            <div class="calendar-container" id="calendar-container">
+
+            </div>
+            <div class="cancel-search-buttons">
+                <div class="Cbutton">
+                    <button onclick="resetValues()">Cancel</button>
+                </div>
+                <div class="Sbutton">
+                    <button onclick="showRooms()">Search</button>
+                </div>
+            </div>
+            <div class="searched-rooms" id="searched-rooms" style="display: none;">
+                <div class="rooms-container">
+                    <div class="room">
+                        <img src="imgs/BEI_1104_original.jpg" alt="Classic King Guest Room">
+                        <div class="room-info">
+                            <h3>Classic King Guest Room</h3>
+                            <p>King platform bed, 5-star bedding, floor-to-ceiling windows, elegant bathroom, walk-in shower.</p>
+                            <div class="price">$441 Per Night</div>
+                            <button>Book Now</button>
+                        </div>
+                    </div>
+                    <div class="room">
+                        <img src="imgs/BEI_412_original.jpg" alt="Classic Queen Guest Room">
+                        <div class="room-info">
+                            <h3>Classic Queen Guest Room</h3>
+                            <p>Queen platform bed, luxurious linens, city view, spacious desk, and free Wi-Fi.</p>
+                            <div class="price">$399 Per Night</div>
+                            <button>Book Now</button>
+                        </div>
+                    </div>
+                    <div class="room">
+                        <img src="imgs/FSH_1199_original.jpg" alt="Classic Queen Guest Room">
+                        <div class="room-info">
+                            <h3>Classic Queen Guest Room</h3>
+                            <p>Queen platform bed, luxurious linens, city view, spacious desk, and free Wi-Fi.</p>
+                            <div class="price">$399 Per Night</div>
+                            <button>Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="cart">
-            <h1>Cart</h1>
+        <div class="cart-container">
+            <h3>Your Cart</h3>
+            <p>Items: 0</p>
+            <p class="cart-total">Total: $0.00</p>
+            <button>Checkout</button>
         </div>
     </div>
 
@@ -85,6 +129,8 @@
     </div>
 
     <script src="scripts/reservation.js"></script>
+    <script src="scripts/search-rooms.js"></script>
+
 
 </body>
 
