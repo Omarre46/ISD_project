@@ -264,11 +264,13 @@ body {
     }
 
     .contents h1 {
+        color: #dddddddd;
         margin-bottom: -15px;
     }
 
-    .contents li {
+    .contents p {
         align-self: flex-start;
+        color: #dddddddd;
     }
 
     button {
@@ -334,7 +336,7 @@ body {
     }
 
     .services_row .text {
-        margin-left: 150px;
+        margin-left: 50px;
         width: 500px;
         flex-direction: column;
         justify-content: center;
@@ -388,7 +390,7 @@ body {
     .services_row_inverted img {
         width: 450px;
         height: 250px;
-        margin-left: 100px;
+        margin-left: 50px;
     }
 
     .check_resrevation_home {
@@ -471,9 +473,11 @@ body {
 
     .contents h1 {
         margin-bottom: -15px;
+        color: #dddddddd;
     }
 
-    .contents li {
+    .contents p{
+        color: #dddddddd;
         align-self: flex-start;
     }
 
@@ -542,7 +546,7 @@ body {
         font-size: 20px;
         font-weight: 600;
         margin-bottom: 20px;
-        color: #0C4774;
+        color: #000000;
     }
 
     .check_boxes {
@@ -552,7 +556,7 @@ body {
     }
 
     .check_boxes .check_box {
-        background-color: #0C4774;
+        background-color: #000000;
         color: #ffffff;
         padding: 14px;
         border-radius: 6px;
@@ -612,10 +616,12 @@ body {
 
     .contents h1 {
         margin-bottom: -15px;
+        color: #dddddddd;
     }
 
-    .contents li {
+    .contents p {
         align-self: flex-start;
+        color: #dddddddd;
 
     }
 
@@ -729,7 +735,7 @@ body {
         font-size: 18px;
         font-weight: 600;
         margin-bottom: 15px;
-        color: #0C4774;
+        color: #000000;
     }
 
     .check_boxes {
@@ -739,7 +745,7 @@ body {
     }
 
     .check_boxes .check_box {
-        background-color: #0C4774;
+        background-color: #000000;
         color: #ffffff;
         padding: 12px;
         border-radius: 5px;
