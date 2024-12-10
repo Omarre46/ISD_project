@@ -38,7 +38,7 @@
         <nav id="navbar">
             <img src="../client_side/imgs/1.png" alt="" id="logo">
             <div id="links">
-                <p><a href="home.php">Home</a></p>
+                <p><a href="index.php">Home</a></p>
                 <p><a href="service.php">Our Services</a></p>
                 <p><a href="reservation.php">Reservation</a></p>
                 <p><a href="about.php">About Us</a></p>
