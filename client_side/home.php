@@ -21,7 +21,7 @@
             <h1>Four Seasons Hotel Beirut</h1>
             <p>At Four Seasons, we redefine luxury by blending timeless elegance with personalized service, <br>
                 creating unforgettable experiences that make every stay feel like home.</p>
-           <a href="./service.php"><button>Explore</button></a>
+           <a href="service.php"><button>Explore</button></a>
         </div>
 
         <div class="services">
@@ -32,7 +32,7 @@
             </div>
 
             <div class="service_box">
-                <img src="./imgs/circle-solid.svg" alt="">
+                <img src="./circle-solid.svg" alt="">
                 <h1>Airport Transportation</h1>
                 <p>Enjoy a seamless and stress-free arrival with our airport transportation service. Whether you're arriving or departing, our reliable and comfortable vehicles ensure you travel in style and convenience, making your journey as pleasant as possible.</p>
             </div>
