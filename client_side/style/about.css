@@ -89,25 +89,26 @@ body {
 }
 
 .design-two .image {
-  width: 50%; /* Image takes half the width */
+  width: 55%; /* Image takes half the width */
   height: 250px;
   background-image: url('../imgs/hotel_lobby.jpg'); /* Replace with your image URL */
   border-radius: 8px;
 }
 
 .design-two .description {
-  width: 50%; /* Description takes the other half */
+  width: 45%; /* Description takes the other half */
   display: flex;
   flex-direction: column;
   justify-content: center;
   background-color: rgba(0, 0, 255, 0.1);
   padding: 20px;
   border-radius: 8px;
+  
 }
 
 .design-two .description h2 {
   margin: 0 0 10px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: #333;
 }
 

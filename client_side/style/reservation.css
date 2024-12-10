@@ -1484,7 +1484,7 @@
         flex: 1;
         position: sticky;
         top: 20px;
-        width: 90%;
+        width: 89%;
         height: fit-content;
         padding: 20px;
         background-color: #fff;
@@ -1555,8 +1555,6 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
-     
     .calendar table {
         width: 30%;
         border-collapse: collapse;
