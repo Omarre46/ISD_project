@@ -44,10 +44,12 @@ body {
 
     .contents h1{
         margin-bottom: -15px;
+        color: #dddddddd;
     }
 
-    .contents li {
+    .contents p {
         align-self: flex-start;
+        color: #dddddddd;
     }
 
     button  {
