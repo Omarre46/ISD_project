@@ -2,11 +2,11 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$dbname = 'if0_37790928_hotel_management';
+$dbname = 'fourseasons';
 
-$conn = mysqli_connect($host, $username, $password, $dbname);
+$con = mysqli_connect($host, $username, $password, $dbname);
 
-if (!$conn) {
+if (!$con) {
     die("Connection failed: ");
 }
 echo "Connected successfully!";

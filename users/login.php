@@ -12,11 +12,11 @@
 
     <div class="container">
         <div class="box">
-        <a href="#" id="back-home" class="login"><img id="x_button" src="./img/x-solid.svg" alt=""></a>
+            <a href="#" id="back-home" class="login"><img id="x_button" src="./img/x-solid.svg" alt=""></a>
 
             <h1>Sign in</h1>
-            
-            <form action="sign_in.php" method="post">
+
+            <form action="logged-in.php" method="post" >
                 <label>Username</label>
                 <div>
                     <i class="fa-solid fa-user"></i>
@@ -31,7 +31,7 @@
                 <input type="submit" name="submit" value="Sign in">
             </form>
             <a href="register.php" class="register">Register</a>
-            
+
             <script>
                 const previousPage = document.referrer;
                 const backHomeButton = document.getElementById('back-home');
@@ -44,7 +44,17 @@
             </script>
 
 
+            <?php
 
+            if (isset($_GET["error"])) {
+                if ($_GET["error"] == "emptyinput") {
+                    echo '<script type="text/javascript"> alert("Fill in all fields!") </script>';
+                } else if ($_GET["error"] == "wrongsignin") {
+                    echo '<script type="text/javascript"> alert("Incorrect login Information!") </script>';
+                }
+            }
+
+            ?>
         </div>
     </div>
 </body>

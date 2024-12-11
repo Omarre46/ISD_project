@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,13 +9,14 @@
     <link rel="stylesheet" href="../includes/style/navbar.css">
     <link rel="stylesheet" href="../includes/style/footer.css">
 </head>
+
 <body>
-<div class="container">
+    <div class="container">
         <div class="box">
-        <a href="#" id="back-home" class="signin"><img id="x_button" src="./img/x-solid.svg" alt=""></a>
+            <a href="#" id="back-home" class="signin"><img id="x_button" src="./img/x-solid.svg" alt=""></a>
 
             <h1>Register</h1>
-            <form>
+            <form action="registered.php" method="post">
                 <label>Full Name</label>
                 <div>
                     <i class="fa-solid fa-user"></i>
@@ -39,13 +41,17 @@
                     <input type="password" name="password" placeholder="Enter Password">
                 </div>
 
-                
+                <label>Repeat Password</label>
+                <div>
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="repeatPassword" placeholder="Enter Password">
+                </div>
 
                 <a href="#"><input type="submit" name="submit" value="Register"></a>
             </form>
             <h6>Already have an account?</h6>
             <a href="login.php" class="singin">Sign in</a>
-            
+
 
             <script>
                 const previousPage = document.referrer;
@@ -57,7 +63,30 @@
                     backHomeButton.href = '/ISD_project_ongit/ISD_project/client_side/home.php';
                 }
             </script>
+
+            <?php
+
+            if (isset($_GET["error"])) {
+                if ($_GET["error"] == "emptyinput") {
+                    echo '<script type="text/javascript"> alert("Fill in all fields!") </script>';
+                } else if ($_GET["error"] == "invalidusername") {
+                    echo '<script type="text/javascript"> alert("Enter a proper username!") </script>';
+                } else if ($_GET["error"] == "invalidemail") {
+                    echo '<script type="text/javascript"> alert("Enter a proper email!") </script>';
+                } else if ($_GET["error"] == "passwordsdontmatch") {
+                    echo '<script type="text/javascript"> alert("Passwords does not match!") </script>';
+                } else if ($_GET["error"] == "usernametaken") {
+                    echo '<script type="text/javascript"> alert("Username or email already taken!") </script>';
+                } else if ($_GET["error"] == "stmtfails") {
+                    echo '<script type="text/javascript"> alert("Something went wrong, try again!") </script>';
+                } else if ($_GET["error"] == "invalidname") {
+                    echo '<script type="text/javascript"> alert("Enter a proper name!") </script>';
+                }
+            }
+
+            ?>
         </div>
     </div>
 </body>
+
 </html>
