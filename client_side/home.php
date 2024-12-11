@@ -32,7 +32,7 @@
             </div>
 
             <div class="service_box">
-                <img src="./circle-solid.svg" alt="">
+                <img src="./imgs/circle-solid.svg" alt="">
                 <h1>Airport Transportation</h1>
                 <p>Enjoy a seamless and stress-free arrival with our airport transportation service. Whether you're arriving or departing, our reliable and comfortable vehicles ensure you travel in style and convenience, making your journey as pleasant as possible.</p>
             </div>

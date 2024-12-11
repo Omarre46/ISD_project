@@ -1,3 +1,66 @@
+ 
+<?php
+session_start();
+require "../includes/connection.php";
+$error="";
+$nerror="";
+ 
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+     
+    $name=$_POST['name'];
+    $username=$_POST['username'];
+    $email=$_POST['email'];
+    $password=$_POST['password'];
+    
+    if (empty($name) || empty($username) || empty($email) || empty($password) ) {
+        $error = "Please fill all the fields";
+    } 
+     
+    else {
+
+    $duplicateFound = false;
+
+        $sqlQueries = [
+            "SELECT Password FROM guest WHERE Password='$password' OR Username='$username'",
+            "SELECT Email FROM guest WHERE Email='$email'"
+        ];
+
+        foreach ($sqlQueries as $sql) {
+            $res = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($res) > 0) {
+                $duplicateFound = true;
+                break;
+            }
+        }
+
+        if ($duplicateFound) {
+            $error= "Username or Password or Email already exists ";
+        }
+
+    else{
+        
+        $_SESSION['loggedin']=true;
+        $_SESSION['name']=$name;
+        $_SESSION['email']=$email;
+       
+        $sql="insert into guest VALUES(NULL,'$name','$username','$email','$password')";
+        $res=mysqli_query($conn,$sql);
+
+        if($res){
+            
+             
+            header("Location: ../client_side/home.php");
+            exit();
+        }
+
+    }
+}
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +79,7 @@
             <a href="#" id="back-home" class="signin"><img id="x_button" src="./img/x-solid.svg" alt=""></a>
 
             <h1>Register</h1>
-            <form action="registered.php" method="post">
+            <form action="register.php" method="post">
                 <label>Full Name</label>
                 <div>
                     <i class="fa-solid fa-user"></i>
@@ -41,13 +104,10 @@
                     <input type="password" name="password" placeholder="Enter Password">
                 </div>
 
-                <label>Repeat Password</label>
-                <div>
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" name="repeatPassword" placeholder="Enter Password">
-                </div>
-
+                 
+                <span><?php echo $error; ?></span>
                 <a href="#"><input type="submit" name="submit" value="Register"></a>
+              
             </form>
             <h6>Already have an account?</h6>
             <a href="login.php" class="singin">Sign in</a>
@@ -64,27 +124,7 @@
                 }
             </script>
 
-            <?php
-
-            if (isset($_GET["error"])) {
-                if ($_GET["error"] == "emptyinput") {
-                    echo '<script type="text/javascript"> alert("Fill in all fields!") </script>';
-                } else if ($_GET["error"] == "invalidusername") {
-                    echo '<script type="text/javascript"> alert("Enter a proper username!") </script>';
-                } else if ($_GET["error"] == "invalidemail") {
-                    echo '<script type="text/javascript"> alert("Enter a proper email!") </script>';
-                } else if ($_GET["error"] == "passwordsdontmatch") {
-                    echo '<script type="text/javascript"> alert("Passwords does not match!") </script>';
-                } else if ($_GET["error"] == "usernametaken") {
-                    echo '<script type="text/javascript"> alert("Username or email already taken!") </script>';
-                } else if ($_GET["error"] == "stmtfails") {
-                    echo '<script type="text/javascript"> alert("Something went wrong, try again!") </script>';
-                } else if ($_GET["error"] == "invalidname") {
-                    echo '<script type="text/javascript"> alert("Enter a proper name!") </script>';
-                }
-            }
-
-            ?>
+           
         </div>
     </div>
 </body>

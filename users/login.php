@@ -1,3 +1,70 @@
+<?php
+
+
+require '../includes/connection.php';
+ 
+
+$error="";
+$username="";
+
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    $username=$_POST['username'];
+    $pass=$_POST['password'];
+    $found=false;
+
+    if(empty($username)||empty($pass)){
+        $error="Please fill all the fields";
+    }
+
+   
+
+    else{
+
+    $sql='select * from guest';
+    $res=mysqli_query($conn,$sql);
+     
+
+ 
+    while ($row=mysqli_fetch_array($res)){
+        
+
+        if($username=='admin123' && $pass=='admin123'){
+            $found=true;
+            $_SESSION['loggedin']=true;
+            $_SESSION['name']=$username;
+            if($found){
+            header("Location:../admin/client_sec.php");
+        }
+    }
+
+        if($username==$row['Username'] && $pass==$row['Password']){
+            $found=true;
+            $_SESSION['loggedin']=true;
+            $_SESSION['name']=$username;
+            $_SESSION['email']=$row['Email'];
+            
+
+            if($found){
+            header("Location:../client_side/home.php");
+        }
+        }
+
+
+        
+        else{
+            if(!$found){
+            $error="Invalid Name or Password";
+        }
+    }
+    }
+ 
+}
+}
+            
+            ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +83,7 @@
 
             <h1>Sign in</h1>
 
-            <form action="logged-in.php" method="post" >
+            <form action="login.php" method="post" >
                 <label>Username</label>
                 <div>
                     <i class="fa-solid fa-user"></i>
@@ -29,6 +96,7 @@
                 </div>
                 <a href="#" class="forgot">Forgot Password?</a>
                 <input type="submit" name="submit" value="Sign in">
+                <span style="color: red;font-weight:bold;"><?php echo $error ?></span>
             </form>
             <a href="register.php" class="register">Register</a>
 
@@ -44,17 +112,7 @@
             </script>
 
 
-            <?php
-
-            if (isset($_GET["error"])) {
-                if ($_GET["error"] == "emptyinput") {
-                    echo '<script type="text/javascript"> alert("Fill in all fields!") </script>';
-                } else if ($_GET["error"] == "wrongsignin") {
-                    echo '<script type="text/javascript"> alert("Incorrect login Information!") </script>';
-                }
-            }
-
-            ?>
+            
         </div>
     </div>
 </body>

@@ -156,8 +156,10 @@ background-blend-mode: darken;
 }
 
 .box .register:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: #000000;
+    font-size: larger;
+    font-weight: bold;
 }
 
 .box .back-home {
