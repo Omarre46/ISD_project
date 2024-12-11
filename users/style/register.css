@@ -174,13 +174,18 @@ body {
 
 .box a:hover {
     color: #000000; 
-    text-decoration: underline;
+   
 }
 
 .signin #x_button{
     width: 15px;
     height: 30px;
    float: right;
+}
+.signin:hover{
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: nonex;
 }
 
 

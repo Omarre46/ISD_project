@@ -2,7 +2,7 @@
 
 
 require '../includes/connection.php';
- 
+session_start();
 
 $error="";
 $username="";

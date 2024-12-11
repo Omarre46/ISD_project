@@ -43,8 +43,18 @@
                 <p><a href="../client_side/reservation.php">Reservation</a></p>
                 <p><a href="../client_side/about.php">About Us</a></p>
                 <p><a href="../client_side/contact.php">Contact Us</a></p>
-                <p class="special_button"><a href="../users/register.php">Sign Up</a></p>
-                <p><a href="../users/login.php">Login</a></p>
+                 
+                <?php
+                session_start();
+        if (isset($_SESSION['loggedin'])) {
+
+            #echo "helo".$_SESSION['name'];
+            echo "<p  class='special_button'><a href='../users/logout.php'>Sign out</a></p>";
+        } else {
+            echo '<p class="special_button"><a href="../users/register.php">Sign Up</a></p>';
+            echo  ' <p><a href="../users/login.php">Login</a></p>';
+        }
+        ?>
             </div>
             <img src="./imgs/x-solid.svg" alt="" id="logoX">
         </nav>

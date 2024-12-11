@@ -110,7 +110,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
               
             </form>
             <h6>Already have an account?</h6>
-            <a href="login.php" class="singin">Sign in</a>
+            <a href="login.php" class="signin">Sign in</a>
 
 
             <script>
