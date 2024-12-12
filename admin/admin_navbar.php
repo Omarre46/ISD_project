@@ -24,10 +24,13 @@
         <nav id="navbar">
             <img src="../client_side/imgs/1.png" alt="" id="logo">
             <div id="links">
-                <p><a href="add_room.php">Add</a></p>
+                <p><a href="add_room.php">Add Room</a></p>
+                <p><a href="add_employee.php">Add Employee</a></p>
                 <p><a href="modify_room.php">Modify</a></p>
                 <p><a href="list_room.php">List</a></p>
                 <p><a href="client_sec.php">Client</a></p>
+                <p><a href="employees_list.php">Employees</a></p>
+
                 <p><a href="../users/logout.php">Logout</a></p>
             </div>
             <img src="../imgs/x-solid.svg" alt="" id="logoX">
