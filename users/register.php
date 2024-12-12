@@ -1,64 +1,53 @@
- 
 <?php
 session_start();
 require "../includes/connection.php";
-$error="";
-$nerror="";
- 
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-     
-    $name=$_POST['name'];
-    $username=$_POST['username'];
-    $email=$_POST['email'];
-    $password=$_POST['password'];
-    
-    if (empty($name) || empty($username) || empty($email) || empty($password) ) {
-        $error = "Please fill all the fields";
-    } 
-     
-    else {
 
-    $duplicateFound = false;
+$error = "";
 
-        $sqlQueries = [
-            "SELECT Password FROM guest WHERE Password='$password' OR Username='$username'",
-            "SELECT Email FROM guest WHERE Email='$email'"
-        ];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize and validate inputs
+    $name = trim($_POST['name']);
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
-        foreach ($sqlQueries as $sql) {
-            $res = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($res) > 0) {
-                $duplicateFound = true;
-                break;
+    if (empty($name) || empty($username) || empty($email) || empty($password)) {
+        $error = "Please fill all the fields.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Invalid email format.";
+    } else {
+        // Check for duplicate entries (username, email)
+        $stmt = $conn->prepare("SELECT * FROM guest WHERE Username = ? OR Email = ?");
+        $stmt->bind_param("ss", $username, $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $error = "Username or Email already exists.";
+        } else {
+            // Hash the password
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // Insert user into the database
+            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $name, $username, $email, $hashedPassword);
+
+            if ($stmt->execute()) {
+                $_SESSION['loggedin'] = true;
+                $_SESSION['name'] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+                $_SESSION['email'] = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+
+                header("Location: ../client_side/home.php");
+                exit();
+            } else {
+                $error = "Error occurred during registration. Please try again.";
             }
         }
-
-        if ($duplicateFound) {
-            $error= "Username or Password or Email already exists ";
-        }
-
-    else{
-        
-        $_SESSION['loggedin']=true;
-        $_SESSION['name']=$name;
-        $_SESSION['email']=$email;
-       
-        $sql="insert into guest VALUES(NULL,'$name','$username','$email','$password')";
-        $res=mysqli_query($conn,$sql);
-
-        if($res){
-            
-             
-            header("Location: ../client_side/home.php");
-            exit();
-        }
-
+        $stmt->close();
     }
 }
-}
-
-
 ?>
+
 
 
 <!DOCTYPE html>

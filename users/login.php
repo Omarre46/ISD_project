@@ -1,67 +1,62 @@
-<?php
-
-
+ <?php
 require '../includes/connection.php';
 session_start();
 
-$error="";
-$username="";
-
-if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $username=$_POST['username'];
-    $pass=$_POST['password'];
-    $found=false;
-
-    if(empty($username)||empty($pass)){
-        $error="Please fill all the fields";
-    }
-
-   
-
-    else{
-
-    $sql='select * from guest';
-    $res=mysqli_query($conn,$sql);
-     
-
+// Secure session settings
  
-    while ($row=mysqli_fetch_array($res)){
-        
-
-        if($username=='admin123' && $pass=='admin123'){
-            $found=true;
-            $_SESSION['loggedin']=true;
-            $_SESSION['name']=$username;
-            if($found){
-            header("Location:../admin/client_sec.php");
-        }
-    }
-
-        if($username==$row['Username'] && $pass==$row['Password']){
-            $found=true;
-            $_SESSION['loggedin']=true;
-            $_SESSION['name']=$username;
-            $_SESSION['email']=$row['Email'];
-            
-
-            if($found){
-            header("Location:../client_side/home.php");
-        }
-        }
-
-
-        
-        else{
-            if(!$found){
-            $error="Invalid Name or Password";
-        }
-    }
-    }
- 
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // CSRF Token Validation
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die("Invalid CSRF token.");
+    }
+
+    // Get and sanitize user inputs
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+
+    if (empty($username) || empty($password)) {
+        $error = "Please fill all the fields.";
+    } else {
+        // SQL Injection prevention using prepared statements
+        $stmt = $conn->prepare("SELECT * FROM guest WHERE Username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($row = $result->fetch_assoc()) {
+            // Verify hashed password
+            if (password_verify($password, $row['Password'])) {
+                // Valid login, set session variables
+                $_SESSION['loggedin'] = true;
+                $_SESSION['name'] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
+                $_SESSION['email'] = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
+
+                // Redirect to client home page
+                header("Location: ../client_side/home.php");
+                exit();
+            } else {
+                $error = "Invalid Username or Password.";
+            }
+        } elseif ($username === 'admin123' && $password === 'admin123') {
+            // Admin login
+            $_SESSION['loggedin'] = true;
+            $_SESSION['name'] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
+
+            header("Location: ../admin/client_sec.php");
+            exit();
+        } else {
+            $error = "Invalid Username or Password.";
+        }
+    }
 }
-            
-            ?>
+?>
+
 
 
 
@@ -84,6 +79,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             <h1>Sign in</h1>
 
             <form action="login.php" method="post" >
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                
                 <label>Username</label>
                 <div>
                     <i class="fa-solid fa-user"></i>

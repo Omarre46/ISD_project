@@ -15,7 +15,7 @@
     <div id="footer_links">
         <p><a href="../client_side/home.php">Home</a></p> 
         <p><a href="../client_side/about.php">About Us</a></p> 
-        <p><a href="../client_side/services.php">Our Services</a></p> 
+        <p><a href="../client_side/service.php">Our Services</a></p> 
         <p><a href="../client_side/contact.php">Contact Us</a></p> 
     </div>
 
