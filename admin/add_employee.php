@@ -18,15 +18,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $role = htmlspecialchars($_POST['role']);
 
-    // Insert the new employee into the database
-    $query = "INSERT INTO employees (Name, Email, Password, Role) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssss", $name, $email, $password, $role);
+    // Check if the email already exists in the guests table
+    $emailCheckQuery = "SELECT * FROM guest WHERE Email = ?";
+    $emailCheckStmt = $conn->prepare($emailCheckQuery);
+    $emailCheckStmt->bind_param("s", $email);
+    $emailCheckStmt->execute();
+    $emailCheckResult = $emailCheckStmt->get_result();
 
-    if ($stmt->execute()) {
-        $successMessage = "Employee added successfully.";
+    if ($emailCheckResult->num_rows > 0) {
+        $errorMessage = "This email is already associated with a guest and cannot be used.";
     } else {
-        $errorMessage = "Error adding employee: " . $conn->error;
+        // Insert the new employee into the database
+        $query = "INSERT INTO employees (Name, Email, Password, Role) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ssss", $name, $email, $password, $role);
+
+        if ($stmt->execute()) {
+            $successMessage = "Employee added successfully.";
+        } else {
+            $errorMessage = "Error adding employee: " . $conn->error;
+        }
     }
 }
 ?>

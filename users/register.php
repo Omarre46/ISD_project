@@ -16,20 +16,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Invalid email format.";
     } else {
-        // Check for duplicate entries (username, email)
-        $stmt = $conn->prepare("SELECT * FROM guest WHERE Username = ? OR Email = ?");
-        $stmt->bind_param("ss", $username, $email);
+        // Check for duplicate entries (username, email in guests or employees)
+        $stmt = $conn->prepare("SELECT Email FROM guest WHERE Username = ? OR Email = ?
+                               UNION
+                               SELECT Email FROM employees WHERE Email = ?");
+        $stmt->bind_param("sss", $username, $email, $email);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $error = "Username or Email already exists.";
+            $error = "Username or Email already exists or the email is associated with an employee.";
         } else {
             // Hash the password
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert user into the database
-            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password,RoomNumber,RoomType) VALUES (?, ?, ?, ?,NULL,NULL)");
+            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password, RoomNumber, RoomType) 
+                                    VALUES (?, ?, ?, ?, NULL, NULL)");
             $stmt->bind_param("ssss", $name, $username, $email, $hashedPassword);
 
             if ($stmt->execute()) {
@@ -47,6 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
+ 
+
 
 
 
