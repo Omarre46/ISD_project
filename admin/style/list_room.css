@@ -44,11 +44,7 @@ tr:hover {
     gap: 10px;
    
 }
-.action-buttons a{
-    text-decoration: none;
-    font-weight: bold;
-    color: white;
-}
+ 
 button{
 padding: 8px 12px;
 border: none;
@@ -65,6 +61,7 @@ button .view-btn {
     font-size: 14px;
     background-color: #28a745;
     transition: background-color 0.3s ease;
+    
 }
 
 button .update-btn{
@@ -91,6 +88,8 @@ button .delete-btn{
 
 .view-btn  {
     background-color: #28a745;
+    font-weight: bold;
+    color: white;
 }
 
 .view-btn:hover {
@@ -99,6 +98,9 @@ button .delete-btn{
 
 .update-btn {
     background-color: #ffc107;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
 }
 
 .update-btn:hover {
@@ -107,6 +109,9 @@ button .delete-btn{
 
 .delete-btn {
     background-color: #dc3545;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
 }
 
 .delete-btn:hover {
