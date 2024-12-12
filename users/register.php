@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert user into the database
-            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password,RoomID,RoomType) VALUES (?, ?, ?, ?,NULL,NULL)");
+            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password,RoomNumber,RoomType) VALUES (?, ?, ?, ?,NULL,NULL)");
             $stmt->bind_param("ssss", $name, $username, $email, $hashedPassword);
 
             if ($stmt->execute()) {

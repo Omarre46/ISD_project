@@ -28,7 +28,7 @@
                 <p><a href="modify_room.php">Modify</a></p>
                 <p><a href="list_room.php">List</a></p>
                 <p><a href="client_sec.php">Client</a></p>
-                <p><a href="../client_side/home.php">Logout</a></p>
+                <p><a href="../users/logout.php">Logout</a></p>
             </div>
             <img src="../imgs/x-solid.svg" alt="" id="logoX">
         </nav>
