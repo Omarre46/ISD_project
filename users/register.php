@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
 
                  
-                <span style="color: red;font-size:larger"><?php echo $error; ?></span>
+                <span style="color: red;font-size:larger;font-weight:bold;"><?php echo $error; ?></span>
                 <a href="#"><input type="submit" name="submit" value="Register"></a>
               
             </form>
