@@ -1,5 +1,8 @@
 <div class="navbar">
-    <?php include('../includes/navbar.php');
+    <?php
+     include('../includes/navbar.php');
+     if (isset($_SESSION['loggedin']))
+        include('../includes/service.php');
     ?>
 </div>
 

@@ -12,7 +12,7 @@
             right: 20px;
             width: 60px;
             height: 60px;
-            background-color: #007bff;
+            background-color:rgb(0, 0, 0);
             color: white;
             border: none;
             border-radius: 50%;
@@ -26,7 +26,7 @@
         }
 
         #floatingButton:hover {
-            background-color: #0056b3;
+            background-color:rgb(102, 102, 102);
         }
 
         /* Modal Styles */
@@ -71,7 +71,7 @@
         }
 
         #popupContent button {
-            background-color: #007bff;
+            background-color:rgb(0, 0, 0);
             color: white;
             border: none;
             padding: 10px 15px;
@@ -80,7 +80,7 @@
         }
 
         #popupContent button:hover {
-            background-color: #0056b3;
+            background-color:rgb(101, 101, 101);
         }
 
         #closeButton {
