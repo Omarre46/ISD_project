@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
 
 // Fetch client data securely using prepared statements
 try {
-    $stmt = $conn->prepare("SELECT ID, Name, Username, Email, RoomNumber, RoomType FROM guest ORDER BY ID ASC");
+    $stmt = $conn->prepare("SELECT ID, Name, Username, Email, RoomNumber, RoomType, DateCreated FROM guest ORDER BY ID ASC");
     $stmt->execute();
     $result = $stmt->get_result();
 } catch (Exception $e) {
@@ -42,6 +42,7 @@ try {
                     <th>Client Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Date Created</th> <!-- Add column header for Date Created -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -54,7 +55,8 @@ try {
                 $email = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
                 $roomNumber = htmlspecialchars($row['RoomNumber'], ENT_QUOTES, 'UTF-8');
                 $roomType = htmlspecialchars($row['RoomType'], ENT_QUOTES, 'UTF-8');
-            
+                $dateCreated = htmlspecialchars($row['DateCreated'], ENT_QUOTES, 'UTF-8'); // Get Date Created
+
                 // Handle cases where RoomNumber and RoomType may be NULL
                 $roomNumber = empty($roomNumber) ? "No rooms reserved" : $roomNumber;
                 $roomType = empty($roomType) ? "No rooms reserved" : $roomType;
@@ -64,6 +66,7 @@ try {
                         <td>{$name}</td>
                         <td>{$username}</td>
                         <td>{$email}</td>
+                        <td>{$dateCreated}</td> <!-- Display Date Created -->
                         <td>
                             <div class='action-buttons'>
                                 <button class='check-btn' onclick='showReservationDetails(\"{$roomNumber}\", \"{$roomType}\")'>Check Reservation</button>
@@ -77,18 +80,18 @@ try {
             </tbody>
         </table>
 
-
         <!-- Modal Popup for Reservation Details -->
-<div id="reservationModal" class="modal">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <h3>Reservation Details</h3>
-        <p><strong>Room Number:</strong> <span id="roomNumber"></span></p>
-        <p><strong>Room Type:</strong> <span id="roomType"></span></p>
-    </div>
-</div>
+        <div id="reservationModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <h3>Reservation Details</h3>
+                <p><strong>Room Number:</strong> <span id="roomNumber"></span></p>
+                <p><strong>Room Type:</strong> <span id="roomType"></span></p>
+            </div>
+        </div>
 
     </center>
+
     <script>
         // JavaScript function to confirm deletion
         function confirmDelete(clientId) {
@@ -96,28 +99,28 @@ try {
                 window.location.href = `delete_client.php?id=${clientId}`;
             }
         }
-            // Function to show the reservation details in a modal
-    function showReservationDetails(roomNumber, roomType) {
-        // Set the content of the modal
-        document.getElementById('roomNumber').textContent = roomNumber;
-        document.getElementById('roomType').textContent = roomType;
 
-        // Show the modal
-        document.getElementById('reservationModal').style.display = "block";
-    }
+        // Function to show the reservation details in a modal
+        function showReservationDetails(roomNumber, roomType) {
+            // Set the content of the modal
+            document.getElementById('roomNumber').textContent = roomNumber;
+            document.getElementById('roomType').textContent = roomType;
 
-    // Function to close the modal
-    function closeModal() {
-        document.getElementById('reservationModal').style.display = "none";
-    }
-
-    // Close the modal when the user clicks outside the modal content
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('reservationModal')) {
-            closeModal();
+            // Show the modal
+            document.getElementById('reservationModal').style.display = "block";
         }
-    }
 
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('reservationModal').style.display = "none";
+        }
+
+        // Close the modal when the user clicks outside the modal content
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('reservationModal')) {
+                closeModal();
+            }
+        }
     </script>
 </body>
 
