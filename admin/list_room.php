@@ -27,7 +27,6 @@ $result = $stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room List</title>
     <link rel="stylesheet" href="style/list_room.css"> <!-- Your original room list CSS -->
-     
 </head>
 
 <body>
@@ -36,7 +35,7 @@ $result = $stmt->get_result();
         <thead>
             <tr>
                 <th>Room ID</th>
-                <th>Room Name</th>
+                <th>Room Name</th> <!-- Column for Room Name -->
                 <th>Room Number</th>
                 <th>Category</th>
                 <th>Description</th>
@@ -50,15 +49,16 @@ $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr>';
                     echo '<td>' . htmlspecialchars($row['ID']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['RoomName']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['RoomName']) . '</td>'; #<!-- Display Room Name -->
                     echo '<td>' . htmlspecialchars($row['RoomNumber']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['RoomCategory']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['Description']) . '</td>';
                     echo '<td>' . '$' . htmlspecialchars($row['RoomPrice']) . '</td>';
                     echo '<td>';
                     echo '<div class="action-buttons">';
-                    echo '<button class=view-btn onclick="showRoomDetails(\'' . htmlspecialchars($row['RoomNumber']) . '\', \'' . htmlspecialchars($row['RoomCategory']) . '\', \'' . htmlspecialchars($row['Description']) . '\', \'' . htmlspecialchars($row['RoomPrice']) . '\', \'' . htmlspecialchars($row['RoomImage']) . '\')">View</button>';
+                    echo '<button class="view-btn" onclick="showRoomDetails(\'' . htmlspecialchars($row['RoomName']) . '\', \'' . htmlspecialchars($row['RoomNumber']) . '\', \'' . htmlspecialchars($row['RoomCategory']) . '\', \'' . htmlspecialchars($row['Description']) . '\', \'' . htmlspecialchars($row['RoomPrice']) . '\', \'' . htmlspecialchars($row['RoomImage']) . '\')">View</button>';
                     echo '<button><a href="modify_room.php?id=' . htmlspecialchars($row['ID']) . 
+                    '&roomName=' . htmlspecialchars($row['RoomName']) .  #<!-- Pass Room Name for modification -->
                     '&roomNumber=' . htmlspecialchars($row['RoomNumber']) . 
                     '&roomCategory=' . htmlspecialchars($row['RoomCategory']) . 
                     '&roomDescription=' . htmlspecialchars($row['Description']) . 
@@ -104,8 +104,8 @@ $result = $stmt->get_result();
 
             // Set the image source
             if (roomImage) {
-                document.getElementById('roomImage').src =  roomImage; // Assuming images are stored in 'uploads' folder
-            } 
+                document.getElementById('roomImage').src = roomImage; // Assuming images are stored in 'uploads' folder
+            }
 
             // Show the modal
             document.getElementById('roomModal').style.display = "block";

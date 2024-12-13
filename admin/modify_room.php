@@ -14,6 +14,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
 // Retrieve query parameters for prepopulating form fields
 $roomId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 $roomNumber = isset($_GET['roomNumber']) ? htmlspecialchars($_GET['roomNumber']) : '';
+$roomName = isset($_GET['roomName']) ? htmlspecialchars($_GET['roomName']) : ''; // Added RoomName
 $roomCategory = isset($_GET['roomCategory']) ? htmlspecialchars($_GET['roomCategory']) : '';
 $roomDescription = isset($_GET['roomDescription']) ? htmlspecialchars($_GET['roomDescription']) : '';
 $roomPrice = isset($_GET['roomPrice']) ? htmlspecialchars($_GET['roomPrice']) : '';
@@ -27,13 +28,14 @@ $successMessage = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $roomId = trim($_POST['room-id']);
     $roomNumber = trim($_POST['room-number']);
+    $roomName = trim($_POST['room-name']); // Added RoomName
     $roomCategory = trim($_POST['room-category']);
     $roomDescription = trim($_POST['room-description']);
     $roomPrice = trim($_POST['room-price']);
     $imagePath = $roomImage; // Use the existing image path by default
 
     // Validate inputs
-    if (empty($roomNumber) || empty($roomCategory) || empty($roomDescription) || empty($roomPrice)) {
+    if (empty($roomName) || empty($roomNumber) || empty($roomCategory) || empty($roomDescription) || empty($roomPrice)) {
         $error = "All fields are required.";
     } elseif (!is_numeric($roomPrice) || $roomPrice <= 0) {
         $error = "Room price must be a positive number.";
@@ -60,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If no errors, update the database
         if (empty($error)) {
-            $stmt = $conn->prepare("UPDATE rooms SET RoomNumber = ?, RoomCategory = ?, Description = ?, RoomPrice = ?, RoomImage = ? WHERE ID = ?");
-            $stmt->bind_param("sssssi", $roomNumber, $roomCategory, $roomDescription, $roomPrice, $imagePath, $roomId);
+            $stmt = $conn->prepare("UPDATE rooms SET RoomName = ?, RoomNumber = ?, RoomCategory = ?, Description = ?, RoomPrice = ?, RoomImage = ? WHERE ID = ?");
+            $stmt->bind_param("ssssssi", $roomName, $roomNumber, $roomCategory, $roomDescription, $roomPrice, $imagePath, $roomId);
 
             if ($stmt->execute()) {
                 $successMessage = "Room updated successfully.";
@@ -105,6 +107,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" id="room-id" name="room-id" value="<?php echo $roomId; ?>" readonly>
             </p>
             <p>
+                <label for="room-name">Room Name:</label>
+                <input type="text" id="room-name" name="room-name" value="<?php echo $roomName; ?>" placeholder="Enter Room Name">
+            </p>
+            <p>
                 <label for="room-number">Room Number:</label>
                 <input type="text" id="room-number" name="room-number" value="<?php echo $roomNumber; ?>" placeholder="Enter Room Number">
             </p>
@@ -131,7 +137,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </p>
             <div class="form-actions">
                 <input type="submit" value="Modify">
-                
             </div>
         </form>
     </center>
