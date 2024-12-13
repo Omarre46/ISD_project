@@ -12,7 +12,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
 }
 
 // Fetch room data from the database
-$query = "SELECT ID, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage FROM rooms";
+$query = "SELECT ID, RoomName, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage FROM rooms";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -36,6 +36,7 @@ $result = $stmt->get_result();
         <thead>
             <tr>
                 <th>Room ID</th>
+                <th>Room Name</th>
                 <th>Room Number</th>
                 <th>Category</th>
                 <th>Description</th>
@@ -49,6 +50,7 @@ $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr>';
                     echo '<td>' . htmlspecialchars($row['ID']) . '</td>';
+                    echo '<td>' . htmlspecialchars($row['RoomName']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['RoomNumber']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['RoomCategory']) . '</td>';
                     echo '<td>' . htmlspecialchars($row['Description']) . '</td>';
@@ -74,6 +76,7 @@ $result = $stmt->get_result();
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal()">&times;</span>
             <h3>Room Details</h3>
+            <p><strong>Room Name:</strong> <span id="roomName"></span></p>
             <p><strong>Room Number:</strong> <span id="roomNumber"></span></p>
             <p><strong>Room Category:</strong> <span id="roomCategory"></span></p>
             <p><strong>Description:</strong> <span id="roomDescription"></span></p>
@@ -85,8 +88,9 @@ $result = $stmt->get_result();
 
     <script>
         // Function to show the room details in the modal, including the image
-        function showRoomDetails(roomNumber, roomCategory, roomDescription, roomPrice, roomImage) {
+        function showRoomDetails(roomName, roomNumber, roomCategory, roomDescription, roomPrice, roomImage) {
             // Set the content of the modal
+            document.getElementById('roomName').textContent = roomName;
             document.getElementById('roomNumber').textContent = roomNumber;
             document.getElementById('roomCategory').textContent = roomCategory;
             document.getElementById('roomDescription').textContent = roomDescription;

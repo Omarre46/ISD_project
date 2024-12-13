@@ -1,5 +1,14 @@
 <div class="navbar">
-    <?php include('../includes/navbar.php'); ?>
+    <?php
+    include('../includes/connection.php');
+    include('../includes/navbar.php');
+
+    $query = "SELECT RoomName, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage FROM rooms";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    ?>
 </div>
 
 <!DOCTYPE html>
@@ -86,41 +95,43 @@
             </div>
             <div class="searched-rooms" id="searched-rooms" style="display: none;">
                 <div class="rooms-container">
-                    <div class="room">
-                        <img src="imgs/BEI_1104_original.jpg" alt="Classic King Guest Room">
-                        <div class="room-info">
-                            <h3>Classic King Guest Room</h3>
-                            <p>King platform bed, 5-star bedding, floor-to-ceiling windows, elegant bathroom, walk-in shower.</p>
-                            <div class="price">$441 Per Night</div>
-                            <button>Book Now</button>
-                        </div>
-                    </div>
-                    <div class="room">
-                        <img src="imgs/BEI_412_original.jpg" alt="Classic Queen Guest Room">
-                        <div class="room-info">
-                            <h3>Classic Queen Guest Room</h3>
-                            <p>Queen platform bed, luxurious linens, city view, spacious desk, and free Wi-Fi.</p>
-                            <div class="price">$399 Per Night</div>
-                            <button>Book Now</button>
-                        </div>
-                    </div>
-                    <div class="room">
-                        <img src="imgs/FSH_1199_original.jpg" alt="Classic Queen Guest Room">
-                        <div class="room-info">
-                            <h3>Classic Queen Guest Room</h3>
-                            <p>Queen platform bed, luxurious linens, city view, spacious desk, and free Wi-Fi.</p>
-                            <div class="price">$399 Per Night</div>
-                            <button>Book Now</button>
-                        </div>
-                    </div>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<div class="room">';
+                            echo '<img src="../admin/' . $row['RoomImage'] . '">';
+                            echo '<div class="room-info">';
+                            echo '<h3> Room Number: ' . htmlspecialchars($row['RoomNumber']) . '</h3>';
+                            echo '<h3>' . htmlspecialchars($row['RoomName']) . '</h3>';
+                            echo '<h3>' . htmlspecialchars($row['RoomCategory']) . ' Room</h3>';
+                            echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
+                            echo '<div class="price">' . '$' . htmlspecialchars($row['RoomPrice']) . ' Per Night</div>';
+                            echo '<button onclick="updateCart(\'' . $row['RoomNumber'] . '\', ' . $row['RoomPrice'] . ')">Book Now</button>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<div class="room">';
+                        echo '<div class="room-info">';
+                        echo '<h3>No Rooms Found</h3>';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>
         <div class="cart-container">
             <h3>Your Cart</h3>
-            <p>Items: 0</p>
-            <p class="cart-total">Total: $0.00</p>
-            <button>Checkout</button>
+            <form id="cart-form" method="POST">
+                <p>Room Number: <span id="room-number">0</span></p>
+                <p>Items: <span id="cart-items">0</span></p>
+                <p>Adults: <span id="cart-adults">0 Adults</span></p>
+                <p>Children: <span id="cart-children">0 Children</span></p>
+                <p>Dates: <span id="cart-dates">Not Selected</span></p>
+                <p class="cart-total">Total: $<span id="cart-total">0.00</span></p>
+                <button type="submit">Checkout</button>
+            </form>
         </div>
     </div>
 
@@ -130,6 +141,7 @@
 
     <script src="scripts/reservation.js"></script>
     <script src="scripts/search-rooms.js"></script>
+    <script src="scripts/cart.js"></script>
 
 
 </body>

@@ -14,6 +14,7 @@ $error = "";
 $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $roomName = trim($_POST['room-name']);
     $roomNumber = trim($_POST['room-number']);
     $roomCategory = trim($_POST['room-category']);
     $roomStatus = "Empty";
@@ -21,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $roomPrice = trim($_POST['room-price']);
 
     // Validate inputs
-    if (empty($roomNumber) || empty($roomCategory) || empty($roomDescription) || empty($roomPrice)) {
+    if (empty($roomName) || empty($roomNumber) || empty($roomCategory) || empty($roomDescription) || empty($roomPrice)) {
         $error = "All fields are required.";
     } elseif (!is_numeric($roomPrice) || $roomPrice <= 0) {
         $error = "Room price must be a positive number.";
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $imageNewName = uniqid('', true) . '.' . pathinfo($_FILES['room-image']['name'], PATHINFO_EXTENSION);
                 $uploadDirectory = './room_imgs/';
-                $imagePath = $uploadDirectory . $imageNewName;
+                $imagePath =  $imageNewName;
 
                 if (!move_uploaded_file($_FILES['room-image']['tmp_name'], $imagePath)) {
                     $error = "Error uploading the image.";
@@ -60,8 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $error = "Room number already exists.";
             } else {
                 // Insert the data into the database
-                $stmt = $conn->prepare("INSERT INTO rooms (RoomNumber, RoomCategory, Status, Description, RoomPrice, RoomImage) VALUES (?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("ssssss", $roomNumber, $roomCategory, $roomStatus, $roomDescription, $roomPrice, $imagePath);
+                $stmt = $conn->prepare("INSERT INTO rooms (RoomName, RoomNumber, RoomCategory, Status, Description, RoomPrice, RoomImage) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("sssssss", $roomName, $roomNumber, $roomCategory, $roomStatus, $roomDescription, $roomPrice, $imagePath);
 
                 if ($stmt->execute()) {
                     $successMessage = "Room added successfully.";
@@ -102,6 +103,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Room addition form -->
         <form action="add_room.php" method="POST" enctype="multipart/form-data">
+        <p>
+                <label for="room-name">Room Name:</label>
+                <input type="text" id="room-name" name="room-name" placeholder="Enter Room Name">
+            </p>
             <p>
                 <label for="room-number">Room Number:</label>
                 <input type="text" id="room-number" name="room-number" placeholder="Enter Room Number">
