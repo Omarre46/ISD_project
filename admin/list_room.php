@@ -56,7 +56,13 @@ $result = $stmt->get_result();
                     echo '<td>';
                     echo '<div class="action-buttons">';
                     echo '<button class=view-btn onclick="showRoomDetails(\'' . htmlspecialchars($row['RoomNumber']) . '\', \'' . htmlspecialchars($row['RoomCategory']) . '\', \'' . htmlspecialchars($row['Description']) . '\', \'' . htmlspecialchars($row['RoomPrice']) . '\', \'' . htmlspecialchars($row['RoomImage']) . '\')">View</button>';
-                    echo '<button><a href="modify_room.php?id=' . htmlspecialchars($row['ID']) . '" class="update-btn">Update</a></button>';
+                    echo '<button><a href="modify_room.php?id=' . htmlspecialchars($row['ID']) . 
+                    '&roomNumber=' . htmlspecialchars($row['RoomNumber']) . 
+                    '&roomCategory=' . htmlspecialchars($row['RoomCategory']) . 
+                    '&roomDescription=' . htmlspecialchars($row['Description']) . 
+                    '&roomPrice=' . htmlspecialchars($row['RoomPrice']) . 
+                    '&roomImage=' . htmlspecialchars($row['RoomImage']) . 
+                    '" class="update-btn">Update</a></button>';
                     echo '<button><a href="delete_room.php?id=' . htmlspecialchars($row['ID']) . '" class="delete-btn" onclick="return confirm(\'Are you sure you want to delete this room?\')">Delete</a></button>';
                     echo '</div>';
                     echo '</td>';

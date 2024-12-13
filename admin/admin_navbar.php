@@ -26,7 +26,7 @@
             <div id="links">
                 <p><a href="add_room.php">Add Room</a></p>
                 <p><a href="add_employee.php">Add Employee</a></p>
-                <p><a href="modify_room.php">Modify</a></p>
+                
                 <p><a href="list_room.php">Rooms</a></p>
                 <p><a href="client_sec.php">Clients</a></p>
                 <p><a href="employees_list.php">Employees</a></p>
