@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </p>
             <div class="form-actions">
                 <input type="submit" value="Modify">
-                <input type="reset" value="Reset">
+                
             </div>
         </form>
     </center>
