@@ -1,21 +1,27 @@
 <div class="navbar">
-    <?php include('../includes/navbar.php'); ?>
+  <?php
+  include('../includes/navbar.php');
+  if (isset($_SESSION['loggedin']))
+    include('../includes/service.php');
+  ?>
 </div>
 
 
 
 
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us</title>
   <link rel="stylesheet" href="style/about.css">
-    <link rel="stylesheet" href="../includes/style/navbar.css">
-    <link rel="stylesheet" href="../includes/style/footer.css">
+  <link rel="stylesheet" href="../includes/style/navbar.css">
+  <link rel="stylesheet" href="../includes/style/footer.css">
 </head>
+
 <body>
   <div class="about-us">
     <section class="story">
@@ -34,7 +40,7 @@
         <div class="image"></div>
         <div class="description">
           <h2>Step into a welcoming atmosphere in our lobby, where modern design meets warm hospitality for an unforgettable first impression.</h2>
-           </div>
+        </div>
       </div>
 
       <!-- Third container -->
@@ -45,8 +51,9 @@
     </div>
   </div>
 </body>
+
 </html>
 
 <div class="footer">
-    <?php include('../includes/footer.php'); ?>
+  <?php include('../includes/footer.php'); ?>
 </div>

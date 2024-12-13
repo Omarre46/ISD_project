@@ -2,6 +2,8 @@
     <?php
     include('../includes/connection.php');
     include('../includes/navbar.php');
+    if (isset($_SESSION['loggedin']))
+        include('../includes/service.php');
 
     $query = "SELECT RoomName, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage FROM rooms";
     $stmt = $conn->prepare($query);
