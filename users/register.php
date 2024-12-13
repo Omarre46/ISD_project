@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Invalid email format.";
     } else {
         // Check for duplicate entries (username, email in guests or employees)
-        $stmt = $conn->prepare("SELECT Email FROM guest WHERE Username = ? OR Email = ?
-                               UNION
+        $stmt = $conn->prepare("SELECT Email FROM guest WHERE Username = ? OR Email = ? 
+                               UNION 
                                SELECT Email FROM employees WHERE Email = ?");
         $stmt->bind_param("sss", $username, $email, $email);
         $stmt->execute();
@@ -30,10 +30,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Hash the password
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+            // Get the current date in the format X/X/XXXX
+            $dateCreated = date("n/j/Y");
+
             // Insert user into the database
-            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password, RoomNumber, RoomType) 
-                                    VALUES (?, ?, ?, ?, NULL, NULL)");
-            $stmt->bind_param("ssss", $name, $username, $email, $hashedPassword);
+            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password, RoomNumber, RoomType, DateCreated) 
+                                    VALUES (?, ?, ?, ?, NULL, NULL, ?)");
+            $stmt->bind_param("sssss", $name, $username, $email, $hashedPassword, $dateCreated);
 
             if ($stmt->execute()) {
                 $_SESSION['loggedin'] = true;
@@ -50,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
  
 
