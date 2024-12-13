@@ -2,6 +2,72 @@
     <?php include('../includes/navbar.php'); ?>
 </div>
 
+<?php
+// Include database connection
+require '../includes/connection.php';
+
+// Initialize messages
+$error = "";
+$successMessage = "";
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get form data
+    $firstName = trim($_POST['first_name']);
+    $lastName = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
+    $phone = trim($_POST['phone']);
+    $description = trim($_POST['description']);
+
+    // Validate inputs
+    if (empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($description)) {
+        $error = "All fields are required.";
+    } else {
+        // Format the current date as X/X/XXXX
+        $createdAt = date("j/n/Y");  // Example: 12/12/2024
+
+        // Prepare SQL query to insert feedback into the database
+        $stmt = $conn->prepare("INSERT INTO feedback (first_name, last_name, email, phone, description, created_at) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $firstName, $lastName, $email, $phone, $description, $createdAt);
+
+        // Execute the query and check if successful
+        if ($stmt->execute()) {
+            $successMessage = "Your feedback has been submitted successfully!";
+        } else {
+            $error = "Error submitting feedback: " . $stmt->error;
+        }
+
+        // Close the prepared statement
+        $stmt->close();
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Submission</title>
+    <link rel="stylesheet" href="../style/contact.css">
+</head>
+<body>
+
+<!-- Display success or error message -->
+<?php if (!empty($successMessage)): ?>
+    <div class="success-message" style="color: green;">
+        <?php echo htmlspecialchars($successMessage); ?>
+    </div>
+<?php elseif (!empty($error)): ?>
+    <div class="error-message" style="color: red;">
+        <?php echo htmlspecialchars($error); ?>
+    </div>
+<?php endif; ?>
+
+</body>
+</html>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +111,7 @@
 
         <div class="contact-form-container">
             <h2>Contact Us</h2>
-            <form action="#">
+            <form action="contact.php" method="POST">
                 <div class="form-group">
                     <input type="text" name="first_name" placeholder="First Name" required>
                 </div>
