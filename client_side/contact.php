@@ -1,5 +1,5 @@
 <?php
-require '../includes/connection.php'; // Database connection file
+include '../includes/connection.php'; // Database connection file
 
 // Initialize message variables
 $message = '';
@@ -81,7 +81,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php
         include('../includes/navbar.php');
         if (isset($_SESSION['loggedin'])) {
-            include('../includes/service.php');
+
+            $guest_id = $_SESSION['guest_id'];
+            $hasReservation = false;
+
+            $query = "SELECT COUNT(*) as reservation_count FROM reservation WHERE Guest_ID = ?";
+            $stmt = $conn->prepare($query);
+
+            if ($stmt) {
+                $stmt->bind_param("i", $guest_id); 
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $hasReservation = $row['reservation_count'] > 0;
+                }
+                $stmt->close();
+            }
+
+            if ($hasReservation)
+                include('../includes/service.php');
         }
         ?>
     </div>
