@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'check_out' => $_POST['check_out']
         ];
     }
-
+    if(!isset($_SESSION['isReserved'])){
     $sql = "UPDATE rooms SET Status = 1 WHERE ID = ?";
     $stmt = $conn->prepare($sql);
 
@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $stmt->close();
     }
+}
 }
 
 
@@ -81,7 +82,7 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
         }
     }
     else{
-       $errors[]="You have reserved a room !";
+       $errors[]="You have already reserved a room !";
     }
  } else {
         $errors[] = "You need to be logged in to complete the reservation.";
