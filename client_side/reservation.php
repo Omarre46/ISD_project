@@ -86,6 +86,7 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
     }
  } else {
         $errors[] = "You need to be logged in to complete the reservation.";
+        $_SESSION['cart'] = [];
     }
 }
 
