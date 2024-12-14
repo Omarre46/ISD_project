@@ -34,8 +34,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $dateCreated = date("n/j/Y");
 
             // Insert user into the database
-            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, RoomType, DateCreated) 
-                                    VALUES (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password, DateCreated) 
+                                    VALUES (?, ?, ?, ?
+                                    , ?)");
             $stmt->bind_param("sssss", $name, $username, $email, $hashedPassword, $dateCreated);
 
             if ($stmt->execute()) {
