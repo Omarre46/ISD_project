@@ -22,6 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($email) || empty($password)) {
         $error = "Please fill all the fields.";
     } else {
+        // Check if email matches the admin credentials
+        if ($email === 'admin123@gmail.com' && $password === 'admin123') {
+            // Set session variables for admin
+            $_SESSION['loggedin'] = true;
+            $_SESSION['name'] = 'admin123'; // Admin name can be a placeholder
+            $_SESSION['email'] = $email;
+
+            // Redirect to admin dashboard
+            header("Location: ../admin/client_sec.php"); // Assuming your admin page is 'admin_dashboard.php'
+            exit();
+        }
+
         // First, check if the email exists in the guest table
         $stmt = $conn->prepare("SELECT * FROM guest WHERE Email = ?");
         $stmt->bind_param("s", $email);
