@@ -97,8 +97,8 @@ function buildMonth(date) {
             } else {
                 const currentDate = new Date(year, month, day);
                 const isDisabled = currentDate < minDate;
-                const isSelected = 
-                    (checkInDate && currentDate.getTime() === checkInDate.getTime()) || 
+                const isSelected =
+                    (checkInDate && currentDate.getTime() === checkInDate.getTime()) ||
                     (checkOutDate && currentDate.getTime() === checkOutDate.getTime());
                 const isInRange =
                     checkInDate &&
@@ -128,10 +128,13 @@ function buildMonth(date) {
 }
 function selectDate(year, month, day) {
     const date = new Date(year, month, day);
+    const messageContainer = document.getElementById('message-container');
+
+    messageContainer.textContent = "";
 
     if (selectedField === 'check-in') {
         checkInDate = date;
-        checkOutDate = null; 
+        checkOutDate = null;
         document.getElementById('check-in-date').textContent = date.toDateString();
         document.getElementById('check-in-date').dataset.date = date.toISOString();
     } else if (selectedField == 'check-out') {
@@ -140,18 +143,19 @@ function selectDate(year, month, day) {
             document.getElementById('check-out-date').textContent = date.toDateString();
             document.getElementById('check-out-date').dataset.date = date.toISOString();
         } else {
-            alert("Check-out date must be after check-in date.");
+            messageContainer.textContent = "You can't select check out before check in";
+            messageContainer.style.color = "red";
             return;
         }
     }
 
-    generateCalendar(); 
+    generateCalendar();
 }
 function updateHighlightedRange() {
     const checkInDate = new Date(document.getElementById('check-in-date').dataset.date);
     const checkOutDate = new Date(document.getElementById('check-out-date').dataset.date);
     const allCells = document.querySelectorAll('.calendar td');
-    
+
     allCells.forEach(cell => {
         const cellDate = new Date(
             parseInt(cell.dataset.year, 10),
@@ -177,3 +181,15 @@ function highlightSection(section) {
 window.onload = function () {
     generateCalendar();
 };
+
+function showRooms() {
+    // Display the rooms container
+    document.getElementById("searched-rooms").style.display = "block";
+}
+
+function resetValues() {
+    // Reset UI elements
+    document.getElementById('check-in-date').textContent = "Select Date";
+    document.getElementById('check-out-date').textContent = "Select Date";
+    document.getElementById('searched-rooms').style.display = "none";
+}

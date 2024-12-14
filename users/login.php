@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['name'] = htmlspecialchars($username, ENT_QUOTES, 'UTF-8');
                 $_SESSION['email'] = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
+                $_SESSION['guest_id'] = htmlspecialchars($row['ID'], ENT_QUOTES, 'UTF-8');
 
                 // Redirect to client home page
                 header("Location: ../client_side/home.php");

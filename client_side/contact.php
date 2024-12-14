@@ -49,7 +49,7 @@
 
     <div class="contact-form-container">
         <h2>Contact Us</h2>
-        <form action="#">
+        <form>
             <div class="form-group">
                 <input type="text" name="first_name" placeholder="First Name" required>
             </div>

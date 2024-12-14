@@ -39,12 +39,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sssss", $name, $username, $email, $hashedPassword, $dateCreated);
 
             if ($stmt->execute()) {
-                $_SESSION['loggedin'] = true;
-                $_SESSION['name'] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-                $_SESSION['email'] = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
-
-                header("Location: ../client_side/home.php");
-                exit();
+                // Get the auto-incremented ID of the inserted row
+                $guestId = $conn->insert_id;
+            
+                // Check if the ID was retrieved successfully
+                if ($guestId > 0) {
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['name'] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+                    $_SESSION['email'] = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+                    $_SESSION['guest_id'] = htmlspecialchars($guestId, ENT_QUOTES, 'UTF-8');
+        
+                    header("Location: ../client_side/home.php");
+                    exit();
+                } else {
+                    $error = "Failed to retrieve the Guest ID. Insert may have failed.";
+                }
+          
             } else {
                 $error = "Error occurred during registration. Please try again.";
             }
@@ -55,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
- 
+
 
 
 
@@ -103,10 +113,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input type="password" name="password" placeholder="Enter Password">
                 </div>
 
-                 
+
                 <span style="color: red;font-size:larger;font-weight:bold;"><?php echo $error; ?></span>
                 <a href="#"><input type="submit" name="submit" value="Register"></a>
-              
+
             </form>
             <h6>Already have an account?</h6>
             <a href="login.php" class="signin">Sign in</a>
@@ -123,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             </script>
 
-           
+
         </div>
     </div>
 </body>

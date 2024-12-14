@@ -8,13 +8,13 @@
         min-height: 100vh;
         background-color: #f4f4f4;
     }
-    
+
     .wrapper {
         display: flex;
         width: 100%;
         gap: 20px;
     }
-    
+
     .reservation {
         background-color: white;
         border-radius: 8px;
@@ -22,20 +22,20 @@
         width: 75%;
         padding: 20px;
     }
-    
+
     .reserve-page-title h2 {
         text-align: center;
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
     }
-    
+
     .reserve-information {
         display: flex;
         justify-content: space-between;
         gap: 10px;
     }
-    
+
     .reserve-information>div {
         display: flex;
         align-items: center;
@@ -47,31 +47,31 @@
         gap: 10px;
         position: relative;
     }
-    
+
     .reserve-information .font {
         color: #555;
         font-size: 20px;
     }
-    
+
     .title-information {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .title-information h6:first-child {
         font-size: 14px;
         color: #666;
         margin: 0;
     }
-    
+
     .title-information h6:last-child {
         font-size: 14px;
         color: #333;
         font-weight: bold;
         margin: 0;
     }
-    
+
     .guests button {
         all: unset;
         display: flex;
@@ -79,7 +79,7 @@
         width: 100%;
         cursor: pointer;
     }
-    
+
     .popup {
         position: absolute;
         top: 100%;
@@ -95,13 +95,13 @@
         max-width: 400px;
         margin-top: 10px;
     }
-    
+
     .popup h6 {
         font-size: 14px;
         margin-bottom: 8px;
         color: #333;
     }
-    
+
     .popup select {
         width: 100%;
         padding: 8px;
@@ -112,14 +112,14 @@
         color: #333;
         font-size: 14px;
     }
-    
+
     .popup-actions {
         display: flex;
         justify-content: flex-start;
         gap: 10px;
         align-items: center;
     }
-    
+
     .cancel-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -130,7 +130,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .apply-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -141,11 +141,11 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .popup.visible {
         display: block;
     }
-    
+
     .cart-container {
         flex: 1;
         position: sticky;
@@ -158,25 +158,25 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart-container h3 {
         margin: 0 0 10px 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .cart-container p {
         font-size: 0.95rem;
         color: #555;
     }
-    
+
     .cart-container .cart-total {
         font-size: 1.1rem;
         font-weight: bold;
         margin: 10px 0;
         color: #333;
     }
-    
+
     .cart-container button {
         width: 100%;
         padding: 10px;
@@ -188,11 +188,11 @@
         cursor: pointer;
         transition: all 0.3s ease;
     }
-    
+
     .cart-container button:hover {
         background-color: #0056b3;
     }
-    
+
     .calendar-container {
         margin-top: 20px;
         padding: 10px;
@@ -205,7 +205,7 @@
         gap: 10px;
         justify-content: center;
     }
-    
+
     .calendar-container {
         display: flex;
         gap: 20px;
@@ -217,50 +217,50 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .calendar {
         width: 45%;
     }
-    
+
     .calendar table {
         width: 100%;
         border-collapse: collapse;
         text-align: center;
     }
-    
+
     .calendar th,
     .calendar td {
         padding: 10px;
         border: 1px solid #ddd;
         cursor: pointer;
     }
-    
+
     .calendar th {
         background-color: #f4f4f4;
         font-weight: bold;
         color: #333;
     }
-    
+
     .calendar td:hover {
         background-color: #f0f0f0;
     }
-    
+
     .calendar td.highlighted-range {
         background-color: rgba(0, 123, 255, 0.2);
         border-radius: 0;
     }
-    
+
     .calendar td.selected-date {
         background-color: #007bff;
         color: white;
     }
-    
+
     .calendar td.disabled {
         color: #ccc;
         pointer-events: none;
         background-color: #f9f9f9;
     }
-    
+
     .check-in,
     .check-out {
         padding: 10px;
@@ -269,21 +269,21 @@
         background-color: #f9f9f9;
         transition: background-color 0.3s, border-color 0.3s;
     }
-    
+
     .active {
         background-color: #000000;
         border-color: #b30000;
         color: rgb(0, 0, 0);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .rooms-container {
         display: flex;
         flex-direction: column;
         gap: 20px;
         margin: 20px;
     }
-    
+
     .room {
         display: flex;
         flex-direction: row;
@@ -295,41 +295,41 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         align-items: center;
     }
-    
+
     .room img {
         width: 300px;
         height: 200px;
         object-fit: cover;
         border-radius: 8px;
     }
-    
+
     .room-info {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .room-info h3 {
         margin: 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .room-info p {
         margin: 0;
         font-size: 0.95rem;
         color: #555;
         line-height: 1.5;
     }
-    
+
     .room-info .price {
         margin: 0;
         font-size: 1rem;
         font-weight: bold;
         color: #007bff;
     }
-    
+
     .room-info button {
         padding: 10px 20px;
         font-size: 0.9rem;
@@ -341,11 +341,11 @@
         align-self: flex-start;
         transition: background-color 0.3s ease;
     }
-    
+
     .room-info button:hover {
         background-color: #0056b3;
     }
-    
+
     .cart {
         position: fixed;
         top: 20px;
@@ -357,7 +357,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart h3 {
         margin: 0;
         font-size: 1.2rem;
@@ -366,7 +366,7 @@
         padding-bottom: 10px;
         margin-bottom: 15px;
     }
-    
+
     .cart-items {
         list-style: none;
         padding: 0;
@@ -375,7 +375,7 @@
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .cart-total {
         font-weight: bold;
         margin-top: 15px;
@@ -383,7 +383,7 @@
         text-align: right;
         color: #007bff;
     }
-    
+
     .cart button {
         width: 100%;
         padding: 10px 20px;
@@ -396,12 +396,12 @@
         margin-top: 10px;
         transition: background-color 0.3s ease;
     }
-    
+
     .cart button:hover {
         background-color: #218838;
     }
-    
-    
+
+
     .cancel-search-buttons {
         display: flex;
         justify-content: center;
@@ -409,7 +409,7 @@
         margin-top: 20px;
         padding: 10px;
     }
-    
+
     .Cbutton button,
     .Sbutton button {
         padding: 10px 20px;
@@ -419,28 +419,28 @@
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
+
     .Cbutton button {
         background-color: #f44336;
         color: white;
     }
-    
+
     .Cbutton button:hover {
         background-color: #d32f2f;
     }
-    
+
     .Sbutton button {
         background-color: #007bff;
         color: white;
     }
-    
+
     .Sbutton button:hover {
         background-color: #0056b3;
     }
-    
+
 }
 
-@media only screen and  (min-width: 768px) and (max-width: 992px){
+@media only screen and (min-width: 768px) and (max-width: 992px) {
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -450,13 +450,13 @@
         min-height: 100vh;
         background-color: #f4f4f4;
     }
-    
+
     .wrapper {
         text-align: center;
         width: 100%;
         gap: 20px;
     }
-    
+
     .reservation {
         background-color: white;
         border-radius: 8px;
@@ -464,20 +464,20 @@
         width: 92%;
         padding: 20px;
     }
-    
+
     .reserve-page-title h2 {
         text-align: center;
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
     }
-    
+
     .reserve-information {
         display: flex;
         justify-content: space-between;
         gap: 10px;
     }
-    
+
     .reserve-information>div {
         display: flex;
         align-items: center;
@@ -489,31 +489,31 @@
         gap: 10px;
         position: relative;
     }
-    
+
     .reserve-information .font {
         color: #555;
         font-size: 20px;
     }
-    
+
     .title-information {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .title-information h6:first-child {
         font-size: 14px;
         color: #666;
         margin: 0;
     }
-    
+
     .title-information h6:last-child {
         font-size: 14px;
         color: #333;
         font-weight: bold;
         margin: 0;
     }
-    
+
     .guests button {
         all: unset;
         display: flex;
@@ -521,7 +521,7 @@
         width: 100%;
         cursor: pointer;
     }
-    
+
     .popup {
         position: absolute;
         top: 100%;
@@ -537,13 +537,13 @@
         max-width: 400px;
         margin-top: 10px;
     }
-    
+
     .popup h6 {
         font-size: 14px;
         margin-bottom: 8px;
         color: #333;
     }
-    
+
     .popup select {
         width: 100%;
         padding: 8px;
@@ -554,14 +554,14 @@
         color: #333;
         font-size: 14px;
     }
-    
+
     .popup-actions {
         display: flex;
         justify-content: flex-start;
         gap: 10px;
         align-items: center;
     }
-    
+
     .cancel-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -572,7 +572,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .apply-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -583,12 +583,12 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .popup.visible {
         display: block;
     }
-    
-    
+
+
     .cart-container {
         flex: 1;
         position: sticky;
@@ -601,18 +601,18 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart-container h3 {
         margin: 0 0 10px 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .cart-container p {
         font-size: 0.95rem;
         color: #555;
     }
-    
+
     .cart-container .cart-total {
         font-size: 1.1rem;
         font-weight: bold;
@@ -620,7 +620,7 @@
         color: #333;
         text-align: center;
     }
-    
+
     .cart-container button {
         width: 100%;
         padding: 10px;
@@ -632,11 +632,11 @@
         cursor: pointer;
         transition: all 0.3s ease;
     }
-    
+
     .cart-container button:hover {
         background-color: #0056b3;
     }
-    
+
     .calendar-container {
         margin-top: 20px;
         padding: 10px;
@@ -650,7 +650,7 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     .calendar-container {
         display: flex;
         flex-direction: column;
@@ -663,51 +663,51 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .calendar {
         width: 55%;
-         
+
     }
-    
+
     .calendar table {
         width: 100%;
         border-collapse: collapse;
         text-align: center;
     }
-    
+
     .calendar th,
     .calendar td {
         padding: 10px;
         border: 1px solid #ddd;
         cursor: pointer;
     }
-    
+
     .calendar th {
         background-color: #f4f4f4;
         font-weight: bold;
         color: #333;
     }
-    
+
     .calendar td:hover {
         background-color: #f0f0f0;
     }
-    
+
     .calendar td.highlighted-range {
         background-color: rgba(0, 123, 255, 0.2);
         border-radius: 0;
     }
-    
+
     .calendar td.selected-date {
         background-color: #007bff;
         color: white;
     }
-    
+
     .calendar td.disabled {
         color: #ccc;
         pointer-events: none;
         background-color: #f9f9f9;
     }
-    
+
     .check-in,
     .check-out {
         padding: 10px;
@@ -716,21 +716,21 @@
         background-color: #f9f9f9;
         transition: background-color 0.3s, border-color 0.3s;
     }
-    
+
     .active {
         background-color: #000000;
         border-color: #b30000;
         color: rgb(0, 0, 0);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .rooms-container {
         display: flex;
         flex-direction: column;
         gap: 20px;
         margin: 20px;
     }
-    
+
     .room {
         display: flex;
         flex-direction: row;
@@ -742,41 +742,41 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         align-items: center;
     }
-    
+
     .room img {
         width: 230px;
         height: 150px;
         object-fit: cover;
         border-radius: 8px;
     }
-    
+
     .room-info {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .room-info h3 {
         margin: 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .room-info p {
         margin: 0;
         font-size: 0.95rem;
         color: #555;
         line-height: 1.5;
     }
-    
+
     .room-info .price {
         margin: 0;
         font-size: 1rem;
         font-weight: bold;
         color: #007bff;
     }
-    
+
     .room-info button {
         padding: 10px 20px;
         font-size: 0.9rem;
@@ -788,11 +788,11 @@
         align-self: flex-start;
         transition: background-color 0.3s ease;
     }
-    
+
     .room-info button:hover {
         background-color: #0056b3;
     }
-    
+
     .cart {
         position: fixed;
         top: 20px;
@@ -804,7 +804,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart h3 {
         margin: 0;
         font-size: 1.2rem;
@@ -813,7 +813,7 @@
         padding-bottom: 10px;
         margin-bottom: 15px;
     }
-    
+
     .cart-items {
         list-style: none;
         padding: 0;
@@ -822,7 +822,7 @@
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .cart-total {
         font-weight: bold;
         margin-top: 15px;
@@ -830,7 +830,7 @@
         text-align: right;
         color: #007bff;
     }
-    
+
     .cart button {
         width: 100%;
         padding: 10px 20px;
@@ -843,12 +843,12 @@
         margin-top: 10px;
         transition: background-color 0.3s ease;
     }
-    
+
     .cart button:hover {
         background-color: #218838;
     }
-    
-    
+
+
     .cancel-search-buttons {
         display: flex;
         justify-content: center;
@@ -856,7 +856,7 @@
         margin-top: 20px;
         padding: 10px;
     }
-    
+
     .Cbutton button,
     .Sbutton button {
         padding: 10px 20px;
@@ -866,28 +866,28 @@
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
+
     .Cbutton button {
         background-color: #f44336;
         color: white;
     }
-    
+
     .Cbutton button:hover {
         background-color: #d32f2f;
     }
-    
+
     .Sbutton button {
         background-color: #007bff;
         color: white;
     }
-    
+
     .Sbutton button:hover {
         background-color: #0056b3;
     }
-    
+
 }
 
-@media only screen and  (min-width: 600px) and (max-width: 768px){
+@media only screen and (min-width: 600px) and (max-width: 768px) {
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -897,13 +897,13 @@
         min-height: 100vh;
         background-color: #f4f4f4;
     }
-    
+
     .wrapper {
         text-align: center;
         width: 100%;
         gap: 20px;
     }
-    
+
     .reservation {
         background-color: white;
         border-radius: 8px;
@@ -911,20 +911,20 @@
         width: 92%;
         padding: 20px;
     }
-    
+
     .reserve-page-title h2 {
         text-align: center;
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
     }
-    
+
     .reserve-information {
         display: flex;
         justify-content: space-between;
         gap: 10px;
     }
-    
+
     .reserve-information>div {
         display: flex;
         align-items: center;
@@ -936,31 +936,31 @@
         gap: 10px;
         position: relative;
     }
-    
+
     .reserve-information .font {
         color: #555;
         font-size: 20px;
     }
-    
+
     .title-information {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .title-information h6:first-child {
         font-size: 14px;
         color: #666;
         margin: 0;
     }
-    
+
     .title-information h6:last-child {
         font-size: 14px;
         color: #333;
         font-weight: bold;
         margin: 0;
     }
-    
+
     .guests button {
         all: unset;
         display: flex;
@@ -968,7 +968,7 @@
         width: 100%;
         cursor: pointer;
     }
-    
+
     .popup {
         position: absolute;
         top: 100%;
@@ -984,13 +984,13 @@
         max-width: 400px;
         margin-top: 10px;
     }
-    
+
     .popup h6 {
         font-size: 14px;
         margin-bottom: 8px;
         color: #333;
     }
-    
+
     .popup select {
         width: 100%;
         padding: 8px;
@@ -1001,14 +1001,14 @@
         color: #333;
         font-size: 14px;
     }
-    
+
     .popup-actions {
         display: flex;
         justify-content: flex-start;
         gap: 10px;
         align-items: center;
     }
-    
+
     .cancel-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -1019,7 +1019,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .apply-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -1030,12 +1030,12 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .popup.visible {
         display: block;
     }
-    
-    
+
+
     .cart-container {
         flex: 1;
         position: sticky;
@@ -1048,18 +1048,18 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart-container h3 {
         margin: 0 0 10px 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .cart-container p {
         font-size: 0.95rem;
         color: #555;
     }
-    
+
     .cart-container .cart-total {
         font-size: 1.1rem;
         font-weight: bold;
@@ -1067,7 +1067,7 @@
         color: #333;
         text-align: center;
     }
-    
+
     .cart-container button {
         width: 100%;
         padding: 10px;
@@ -1079,11 +1079,11 @@
         cursor: pointer;
         transition: all 0.3s ease;
     }
-    
+
     .cart-container button:hover {
         background-color: #0056b3;
     }
-    
+
     .calendar-container {
         margin-top: 20px;
         padding: 10px;
@@ -1097,7 +1097,7 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     .calendar-container {
         display: flex;
         flex-direction: column;
@@ -1110,47 +1110,47 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
-     
+
+
     .calendar table {
         width: 100%;
         border-collapse: collapse;
         text-align: center;
     }
-    
+
     .calendar th,
     .calendar td {
         padding: 10px;
         border: 1px solid #ddd;
         cursor: pointer;
     }
-    
+
     .calendar th {
         background-color: #f4f4f4;
         font-weight: bold;
         color: #333;
     }
-    
+
     .calendar td:hover {
         background-color: #f0f0f0;
     }
-    
+
     .calendar td.highlighted-range {
         background-color: rgba(0, 123, 255, 0.2);
         border-radius: 0;
     }
-    
+
     .calendar td.selected-date {
         background-color: #007bff;
         color: white;
     }
-    
+
     .calendar td.disabled {
         color: #ccc;
         pointer-events: none;
         background-color: #f9f9f9;
     }
-    
+
     .check-in,
     .check-out {
         padding: 10px;
@@ -1159,21 +1159,21 @@
         background-color: #f9f9f9;
         transition: background-color 0.3s, border-color 0.3s;
     }
-    
+
     .active {
         background-color: #000000;
         border-color: #b30000;
         color: rgb(0, 0, 0);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .rooms-container {
         display: flex;
         flex-direction: column;
         gap: 20px;
         margin: 20px;
     }
-    
+
     .room {
         display: flex;
         flex-direction: column;
@@ -1185,41 +1185,41 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         align-items: center;
     }
-    
+
     .room img {
         width: 230px;
         height: 150px;
         object-fit: cover;
         border-radius: 8px;
     }
-    
+
     .room-info {
-       
+
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .room-info h3 {
         margin: 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .room-info p {
         margin: 0;
         font-size: 0.95rem;
         color: #555;
         line-height: 1.5;
     }
-    
+
     .room-info .price {
         margin: 0;
         font-size: 1rem;
         font-weight: bold;
         color: #007bff;
     }
-    
+
     .room-info button {
         padding: 10px 20px;
         font-size: 0.9rem;
@@ -1231,11 +1231,11 @@
         align-self: center;
         transition: background-color 0.3s ease;
     }
-    
+
     .room-info button:hover {
         background-color: #0056b3;
     }
-    
+
     .cart {
         position: fixed;
         top: 20px;
@@ -1247,7 +1247,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart h3 {
         margin: 0;
         font-size: 1.2rem;
@@ -1256,7 +1256,7 @@
         padding-bottom: 10px;
         margin-bottom: 15px;
     }
-    
+
     .cart-items {
         list-style: none;
         padding: 0;
@@ -1265,7 +1265,7 @@
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .cart-total {
         font-weight: bold;
         margin-top: 15px;
@@ -1273,7 +1273,7 @@
         text-align: right;
         color: #007bff;
     }
-    
+
     .cart button {
         width: 100%;
         padding: 10px 20px;
@@ -1286,12 +1286,12 @@
         margin-top: 10px;
         transition: background-color 0.3s ease;
     }
-    
+
     .cart button:hover {
         background-color: #218838;
     }
-    
-    
+
+
     .cancel-search-buttons {
         display: flex;
         justify-content: center;
@@ -1299,7 +1299,7 @@
         margin-top: 20px;
         padding: 10px;
     }
-    
+
     .Cbutton button,
     .Sbutton button {
         padding: 10px 20px;
@@ -1309,28 +1309,28 @@
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
+
     .Cbutton button {
         background-color: #f44336;
         color: white;
     }
-    
+
     .Cbutton button:hover {
         background-color: #d32f2f;
     }
-    
+
     .Sbutton button {
         background-color: #007bff;
         color: white;
     }
-    
+
     .Sbutton button:hover {
         background-color: #0056b3;
     }
-    
+
 }
 
-@media only screen and  (max-width: 600px){
+@media only screen and (max-width: 600px) {
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -1340,13 +1340,13 @@
         min-height: 100vh;
         background-color: #f4f4f4;
     }
-    
+
     .wrapper {
         text-align: center;
         width: 100%;
         gap: 20px;
     }
-    
+
     .reservation {
         background-color: white;
         border-radius: 8px;
@@ -1354,20 +1354,20 @@
         width: 92%;
         padding: 20px;
     }
-    
+
     .reserve-page-title h2 {
         text-align: center;
         font-size: 24px;
         margin-bottom: 20px;
         color: #333;
     }
-    
+
     .reserve-information {
         display: flex;
         justify-content: space-between;
         gap: 10px;
     }
-    
+
     .reserve-information>div {
         display: flex;
         align-items: center;
@@ -1379,31 +1379,31 @@
         gap: 10px;
         position: relative;
     }
-    
+
     .reserve-information .font {
         color: #555;
         font-size: 20px;
     }
-    
+
     .title-information {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
     }
-    
+
     .title-information h6:first-child {
         font-size: 14px;
         color: #666;
         margin: 0;
     }
-    
+
     .title-information h6:last-child {
         font-size: 14px;
         color: #333;
         font-weight: bold;
         margin: 0;
     }
-    
+
     .guests button {
         all: unset;
         display: flex;
@@ -1411,7 +1411,7 @@
         width: 100%;
         cursor: pointer;
     }
-    
+
     .popup {
         position: absolute;
         top: 100%;
@@ -1427,13 +1427,13 @@
         max-width: 400px;
         margin-top: 10px;
     }
-    
+
     .popup h6 {
         font-size: 14px;
         margin-bottom: 8px;
         color: #333;
     }
-    
+
     .popup select {
         width: 100%;
         padding: 8px;
@@ -1444,14 +1444,14 @@
         color: #333;
         font-size: 14px;
     }
-    
+
     .popup-actions {
         display: flex;
         justify-content: flex-start;
         gap: 10px;
         align-items: center;
     }
-    
+
     .cancel-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -1462,7 +1462,7 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .apply-button {
         padding: 8px 16px;
         font-size: 14px;
@@ -1473,12 +1473,12 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-    
+
     .popup.visible {
         display: block;
     }
-    
-    
+
+
     .cart-container {
         flex: 1;
         position: sticky;
@@ -1491,18 +1491,18 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart-container h3 {
         margin: 0 0 10px 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .cart-container p {
         font-size: 0.95rem;
         color: #555;
     }
-    
+
     .cart-container .cart-total {
         font-size: 1.1rem;
         font-weight: bold;
@@ -1510,7 +1510,7 @@
         color: #333;
         text-align: center;
     }
-    
+
     .cart-container button {
         width: 100%;
         padding: 10px;
@@ -1522,11 +1522,11 @@
         cursor: pointer;
         transition: all 0.3s ease;
     }
-    
+
     .cart-container button:hover {
         background-color: #0056b3;
     }
-    
+
     .calendar-container {
         margin-top: 20px;
         padding: 10px;
@@ -1540,13 +1540,13 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     .calendar-container {
         display: flex;
         flex-direction: column;
         gap: 20px;
         justify-content: flex-start;
-        
+
         margin-top: 20px;
         padding: 20px;
         background-color: #fff;
@@ -1554,45 +1554,46 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+
     .calendar table {
         width: 30%;
         border-collapse: collapse;
         text-align: center;
     }
-    
+
     .calendar th,
     .calendar td {
         padding: 10px;
         border: 1px solid #ddd;
         cursor: pointer;
     }
-    
+
     .calendar th {
         background-color: #f4f4f4;
         font-weight: bold;
         color: #333;
     }
-    
+
     .calendar td:hover {
         background-color: #f0f0f0;
     }
-    
+
     .calendar td.highlighted-range {
         background-color: rgba(0, 123, 255, 0.2);
         border-radius: 0;
     }
-    
+
     .calendar td.selected-date {
         background-color: #007bff;
         color: white;
     }
-    
+
     .calendar td.disabled {
         color: #ccc;
         pointer-events: none;
         background-color: #f9f9f9;
     }
-    
+
     .check-in,
     .check-out {
         padding: 10px;
@@ -1601,21 +1602,21 @@
         background-color: #f9f9f9;
         transition: background-color 0.3s, border-color 0.3s;
     }
-    
+
     .active {
         background-color: #000000;
         border-color: #b30000;
         color: rgb(0, 0, 0);
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
+
     .rooms-container {
         display: flex;
         flex-direction: column;
         gap: 20px;
         margin: 20px;
     }
-    
+
     .room {
         display: flex;
         flex-direction: column;
@@ -1627,41 +1628,41 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         align-items: center;
     }
-    
+
     .room img {
         width: 230px;
         height: 150px;
         object-fit: cover;
         border-radius: 8px;
     }
-    
+
     .room-info {
         flex: 1;
         display: flex;
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .room-info h3 {
         margin: 0;
         font-size: 1.2rem;
         color: #333;
     }
-    
+
     .room-info p {
         margin: 0;
         font-size: 0.95rem;
         color: #555;
         line-height: 1.5;
     }
-    
+
     .room-info .price {
         margin: 0;
         font-size: 1rem;
         font-weight: bold;
         color: #007bff;
     }
-    
+
     .room-info button {
         padding: 10px 20px;
         font-size: 0.9rem;
@@ -1673,11 +1674,11 @@
         align-self: center;
         transition: background-color 0.3s ease;
     }
-    
+
     .room-info button:hover {
         background-color: #0056b3;
     }
-    
+
     .cart {
         position: fixed;
         top: 20px;
@@ -1689,7 +1690,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     .cart h3 {
         margin: 0;
         font-size: 1.2rem;
@@ -1698,7 +1699,7 @@
         padding-bottom: 10px;
         margin-bottom: 15px;
     }
-    
+
     .cart-items {
         list-style: none;
         padding: 0;
@@ -1707,7 +1708,7 @@
         flex-direction: column;
         gap: 10px;
     }
-    
+
     .cart-total {
         font-weight: bold;
         margin-top: 15px;
@@ -1715,7 +1716,7 @@
         text-align: right;
         color: #007bff;
     }
-    
+
     .cart button {
         width: 100%;
         padding: 10px 20px;
@@ -1728,12 +1729,12 @@
         margin-top: 10px;
         transition: background-color 0.3s ease;
     }
-    
+
     .cart button:hover {
         background-color: #218838;
     }
-    
-    
+
+
     .cancel-search-buttons {
         display: flex;
         justify-content: center;
@@ -1741,7 +1742,7 @@
         margin-top: 20px;
         padding: 10px;
     }
-    
+
     .Cbutton button,
     .Sbutton button {
         padding: 10px 20px;
@@ -1751,24 +1752,23 @@
         cursor: pointer;
         transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
+
     .Cbutton button {
         background-color: #f44336;
         color: white;
     }
-    
+
     .Cbutton button:hover {
         background-color: #d32f2f;
     }
-    
+
     .Sbutton button {
         background-color: #007bff;
         color: white;
     }
-    
+
     .Sbutton button:hover {
         background-color: #0056b3;
     }
-    
-}
 
+}
