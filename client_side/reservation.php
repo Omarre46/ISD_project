@@ -2,20 +2,21 @@
 include('../includes/connection.php');
 include('../includes/navbar.php');
 
-// Fetch room details
-$query = "SELECT ID, RoomName, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage FROM rooms";
+$query = "SELECT ID, RoomName, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage 
+          FROM rooms
+          WHERE Status = 0";
+
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Initialize cart if not set
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
-// Add room to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['room_id'], $_POST['room_name'], $_POST['room_price'], $_POST['check_in'], $_POST['check_out'])) {
+        $room_id = $_POST['room_id'];
         $_SESSION['cart'][] = [
             'room_id' => $_POST['room_id'],
             'room_name' => $_POST['room_name'],
@@ -24,19 +25,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'check_out' => $_POST['check_out']
         ];
     }
+
+    $sql = "UPDATE rooms SET Status = 1 WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt) {
+        $stmt->bind_param("i", $room_id);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
 
-// Checkout logic
+
 $errors = [];
 $success = [];
 
-// Example: Validate cart data before processing
 if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
     if (isset($_SESSION['loggedin']) && isset($_SESSION['guest_id'])) {
         $guest_id = $_SESSION['guest_id'];
 
         foreach ($_SESSION['cart'] as $cart_item) {
-            // Extract check-in and check-out dates from the cart item
+
             $room_id = $cart_item['room_id'];
             $check_in = $cart_item['check_in'];
             $check_out = $cart_item['check_out'];
@@ -46,10 +55,9 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
 
             if (!$check_in || !$check_out) {
                 $errors[] = "Invalid date format.";
-                continue; // Skip to the next cart item
+                continue;
             }
 
-            // Insert reservation into the database
             $sql = "INSERT INTO reservation (Room_ID, Guest_ID, CheckIn, CheckOut) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
 
@@ -66,7 +74,6 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
             }
         }
 
-        // Clear the cart after successful reservation
         if (empty($errors)) {
             unset($_SESSION['cart']);
         }
@@ -257,22 +264,21 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
             const checkOutDate = document.getElementById('check-out-date').textContent.trim();
             const messageContainer = document.getElementById('message');
 
-            // Clear any previous messages
             messageContainer.textContent = "";
 
             if (checkInDate === "Select Date" || checkOutDate === "Select Date") {
-                // Display the message without using an alert
+
                 messageContainer.textContent = "Please select both check-in and check-out dates before booking.";
                 messageContainer.style.color = "red";
-                return false; // Prevent form submission
+                return false;
             }
 
             function formatLocalDate(dateString) {
                 const date = new Date(dateString);
                 const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+                const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
+                return `${year}-${month}-${day}`
             }
 
             form.querySelector("input[name='check_in']").value = formatLocalDate(checkInDate);

@@ -183,12 +183,12 @@ window.onload = function () {
 };
 
 function showRooms() {
-    // Display the rooms container
+    
     document.getElementById("searched-rooms").style.display = "block";
 }
 
 function resetValues() {
-    // Reset UI elements
+
     document.getElementById('check-in-date').textContent = "Select Date";
     document.getElementById('check-out-date').textContent = "Select Date";
     document.getElementById('searched-rooms').style.display = "none";
