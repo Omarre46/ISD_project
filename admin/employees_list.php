@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
 
 // Fetch employee data securely using prepared statements
 try {
-    $stmt = $conn->prepare("SELECT Name, Email, Role FROM employees ORDER BY Name ASC");
+    $stmt = $conn->prepare("SELECT ID, Name, Email, Role FROM employees ORDER BY Name ASC");
     $stmt->execute();
     $result = $stmt->get_result();
 } catch (Exception $e) {
@@ -37,6 +37,7 @@ try {
         <table>
             <thead>
                 <tr>
+                    <th>Employee ID</th> <!-- Added Employee ID column -->
                     <th>Employee Name</th>
                     <th>Email</th>
                     <th>Role</th>
@@ -46,11 +47,13 @@ try {
             <tbody>
                 <?php
                 while ($row = $result->fetch_assoc()) {
+                    $id = htmlspecialchars($row['ID'], ENT_QUOTES, 'UTF-8'); // Employee ID
                     $name = htmlspecialchars($row['Name'], ENT_QUOTES, 'UTF-8');
                     $email = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
                     $role = htmlspecialchars($row['Role'], ENT_QUOTES, 'UTF-8');
 
                     echo "<tr>
+                            <td>{$id}</td> <!-- Display Employee ID -->
                             <td>{$name}</td>
                             <td>{$email}</td>
                             <td>{$role}</td>
@@ -75,7 +78,6 @@ try {
         }
 
         // JavaScript function to edit employee details
-       
     </script>
 </body>
 

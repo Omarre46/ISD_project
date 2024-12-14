@@ -24,6 +24,7 @@
         <nav id="navbar">
             <img src="../client_side/imgs/1.png" alt="" id="logo">
             <div id="links">
+            <p><a href="client_requests.php">Client Requests</a></p>
             <p><a href="feedback.php">Feedback</a></p>
                 <p><a href="add_room.php">Add Room</a></p>
                 <p><a href="add_employee.php">Add Employee</a></p>
