@@ -12,17 +12,6 @@
             display: none;
         }
 
-        .special_button {
-            width: 120px;
-            text-align: center;
-            border: 1px solid #0C4774;
-            box-sizing: border-box;
-            background-color: #24BF40;
-            color: white;
-            text-decoration: none;
-            padding: auto;
-        }
-
         #logo {
              
             width: 180px;

@@ -81,8 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div>
-            <label for="role">Role:</label>
-            <input type="text" id="role" name="role" required>
+        <label for="role">Service Type</label>
+                <select id="role" name="role" required>
+                    <option value="">Select a Role</option>
+                    <option value="housekeeping">Housekeeping Staff</option>
+                    <option value="waiter">Waiter</option>
+                    <option value="maintenance">Maintenance Technician</option>
+                </select>
         </div>
 
         <div>

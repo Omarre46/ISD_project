@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p class="<?php echo $messageClass; ?>"><?php echo $message; ?></p>
         <?php endif; ?>
 
-        <form action="" method="POST">
+        <form action="contact.php" method="POST">
             <div class="form-group">
                 <input type="text" name="first_name" placeholder="First Name" required>
             </div>

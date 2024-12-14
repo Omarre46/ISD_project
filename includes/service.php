@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 $stmt->close();
 
 // Handle Form Submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_identifier']) && $_POST['form_identifier'] === 'service_form') {
     $serviceType = trim($_POST['serviceType']);
 
     if (empty($serviceType)) {
@@ -191,6 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button id="closeButton">&times;</button>
             <h3>Request Service</h3>
             <form id="serviceForm" action="service.php" method="POST">
+            <input type="hidden" name="form_identifier" value="service_form">
                 <label for="roomNumber">Room Number</label>
                 <input type="text" id="roomNumber" name="roomNumber" value="<?php echo $roomNumber; ?>" readonly required>
 

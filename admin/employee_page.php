@@ -27,7 +27,7 @@ if (isset($_GET['action']) && isset($_GET['service_id'])) {
 
     if ($action === 'accept') {
         // Assign the service request to the current employee
-        $stmt = $conn->prepare("UPDATE service SET Employee_ID = ? WHERE ID = ?");
+        $stmt = $conn->prepare("UPDATE service SET Employee_ID = ?, Status = 'Accepted' WHERE ID = ?");
         $stmt->bind_param("ii", $employee_id, $service_id);
         $stmt->execute();
         $message = "Service request accepted.";
@@ -54,7 +54,7 @@ if (isset($_GET['action']) && isset($_GET['service_id'])) {
 <body>
     <div class="container">
         <header>
-            <h1>Welcome, <?php echo htmlspecialchars($_SESSION['employee_name'], ENT_QUOTES, 'UTF-8'); ?>!</h1>
+            <h1>Welcome, <?php echo htmlspecialchars($_SESSION['employee_name'], ENT_QUOTES, 'UTF-8');?>!</h1>
             <a href="../users/logout.php">Logout</a>
         </header>
 
@@ -84,7 +84,6 @@ if (isset($_GET['action']) && isset($_GET['service_id'])) {
                                 <td><?php echo htmlspecialchars($row['Type'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td>
                                     <a href="employee_page.php?action=accept&service_id=<?php echo $row['ID']; ?>">Accept</a>
-                                    <a href="employee_page.php?action=reject&service_id=<?php echo $row['ID']; ?>">Reject</a>
                                 </td>
                             </tr>
                     <?php } 
