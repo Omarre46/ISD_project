@@ -1,5 +1,80 @@
+<?php
+include "../includes/connection.php";
+
+$roomNumber = "";
+$guestID = $_SESSION['guest_id'];
+
+// Fetch Room Number
+$stmt = $conn->prepare("
+    SELECT rooms.RoomNumber
+    FROM reservation
+    JOIN rooms ON reservation.Room_ID = rooms.ID
+    WHERE reservation.Guest_ID = ?
+");
+$stmt->bind_param("i", $guestID);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $roomNumber = htmlspecialchars($row['RoomNumber'], ENT_QUOTES, 'UTF-8');
+} else {
+    $roomNumber = "Not Assigned";
+}
+
+$stmt->close();
+
+// Fetch Username
+$stmt = $conn->prepare("
+    SELECT Name
+    FROM guest
+    WHERE ID = ?
+");
+$stmt->bind_param("i", $guestID);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $userRow = $result->fetch_assoc();
+    $username = htmlspecialchars($userRow['Name'], ENT_QUOTES, 'UTF-8');
+} else {
+    echo "Guest not found.";
+    exit;
+}
+
+$stmt->close();
+
+// Handle Form Submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $serviceType = trim($_POST['serviceType']);
+
+    if (empty($serviceType)) {
+        echo "All fields are required.";
+    } else {
+        try {
+            // Insert into the service table
+            $stmt = $conn->prepare("INSERT INTO service (Name, Guest_ID, Type) VALUES (?, ?, ?)");
+            $stmt->bind_param("sis", $username, $_SESSION['guest_id'], $serviceType);
+            
+            if ($stmt->execute()) {
+                echo "Service request submitted successfully!";
+            } else {
+                echo "Failed to submit service request.";
+            }
+
+            $stmt->close();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +87,7 @@
             right: 20px;
             width: 60px;
             height: 60px;
-            background-color:rgb(0, 0, 0);
+            background-color: rgb(0, 0, 0);
             color: white;
             border: none;
             border-radius: 50%;
@@ -26,7 +101,7 @@
         }
 
         #floatingButton:hover {
-            background-color:rgb(102, 102, 102);
+            background-color: rgb(102, 102, 102);
         }
 
         /* Modal Styles */
@@ -62,7 +137,8 @@
             font-weight: bold;
         }
 
-        #popupContent input, #popupContent select {
+        #popupContent input,
+        #popupContent select {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -71,7 +147,7 @@
         }
 
         #popupContent button {
-            background-color:rgb(0, 0, 0);
+            background-color: rgb(0, 0, 0);
             color: white;
             border: none;
             padding: 10px 15px;
@@ -80,7 +156,7 @@
         }
 
         #popupContent button:hover {
-            background-color:rgb(101, 101, 101);
+            background-color: rgb(101, 101, 101);
         }
 
         #closeButton {
@@ -106,6 +182,7 @@
         }
     </style>
 </head>
+
 <body>
     <button id="floatingButton">+</button>
 
@@ -113,9 +190,9 @@
         <div id="popupContent">
             <button id="closeButton">&times;</button>
             <h3>Request Service</h3>
-            <form id="serviceForm">
+            <form id="serviceForm" action="service.php" method="POST">
                 <label for="roomNumber">Room Number</label>
-                <input type="text" id="roomNumber" name="roomNumber" placeholder="Enter your room number" required>
+                <input type="text" id="roomNumber" name="roomNumber" value="<?php echo $roomNumber; ?>" readonly required>
 
                 <label for="serviceType">Service Type</label>
                 <select id="serviceType" name="serviceType" required>
@@ -127,6 +204,9 @@
 
                 <button type="submit">Submit</button>
             </form>
+
+
+
         </div>
     </div>
 
@@ -151,4 +231,5 @@
         });
     </script>
 </body>
+
 </html>
