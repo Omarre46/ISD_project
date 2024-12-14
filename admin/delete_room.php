@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
 
         // If there's an image, delete it from the server
         if ($roomImage && file_exists("room_imgs/" . $roomImage)) {
-            unlink("uploads/" . $roomImage); // Delete the image file
+            unlink("room_imgs/" . $roomImage); // Delete the image file
         }
 
         // Now delete the room record from the database
