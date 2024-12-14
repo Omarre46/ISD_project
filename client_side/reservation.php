@@ -42,6 +42,7 @@ $success = [];
 
 if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
     if (isset($_SESSION['loggedin']) && isset($_SESSION['guest_id'])) {
+        if(!isset($_SESSION['isReserved'])){
         $guest_id = $_SESSION['guest_id'];
 
         foreach ($_SESSION['cart'] as $cart_item) {
@@ -64,9 +65,10 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
             if ($stmt) {
                 $stmt->bind_param("ssss", $room_id, $guest_id, $check_in, $check_out);
                 if ($stmt->execute()) {
+                    $_SESSION['isReserved']=true;
                     $success[] = "Reservation successfully added";
                 } else {
-                    $errors[] = "Error booking room";
+                    $errors[] = "Error bookin room";
                 }
                 $stmt->close();
             } else {
@@ -77,7 +79,11 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
         if (empty($errors)) {
             unset($_SESSION['cart']);
         }
-    } else {
+    }
+    else{
+       $errors[]="You have reserved a room !";
+    }
+ } else {
         $errors[] = "You need to be logged in to complete the reservation.";
     }
 }
