@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             // Insert into the service table
-            $stmt = $conn->prepare("INSERT INTO service (Name, Guest_ID, Type) VALUES (?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO service (Name, Guest_ID,Employee_ID, Type) VALUES (?, ?,NULL, ?)");
             $stmt->bind_param("sis", $username, $_SESSION['guest_id'], $serviceType);
             
             if ($stmt->execute()) {
