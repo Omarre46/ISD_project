@@ -48,7 +48,7 @@ try {
                     <th>Service Type</th>
                     <th>Employee Name</th>
                     <th>Status</th>
-                    
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,7 +67,9 @@ try {
                             <td>{$service_type}</td>
                             <td>{$employee_name}</td>
                             <td>{$status}</td>
-                             
+                            <td>
+                                <button class='delete-btn' onclick='confirmDelete({$service_id})'>Delete</button>
+                            </td>
                         </tr>";
                 }
                 ?>
