@@ -8,8 +8,8 @@ $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, 
           ON r.ID = res.Room_ID
           AND (
               (res.CheckIn <= '2024-12-1' AND res.CheckOut > '2024-12-1') OR
-              (res.CheckIn < '2024-2-1' AND res.CheckOut >= '2024-2-1') OR
-              (res.CheckIn >= '2024-12-1' AND res.CheckOut <= '2024-2-1')
+              (res.CheckIn < '2025-2-1' AND res.CheckOut >= '2025-2-1') OR
+              (res.CheckIn >= '2024-12-1' AND res.CheckOut <= '2025-2-1')
             )
           WHERE res.Room_ID IS NULL;";
 
