@@ -2,14 +2,20 @@
 include('../includes/connection.php');
 include('../includes/navbar.php');
 
+$check_in_date = $_POST['check_in'] ?? null;
+$check_out_date = $_POST['check_out'] ?? null;
+
+print_r($check_in_date); 
+print_r(" " . $check_out_date);
+
 $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
           FROM rooms r
           LEFT JOIN reservation res
           ON r.ID = res.Room_ID
           AND (
-              (res.CheckIn <= '2024-12-1' AND res.CheckOut > '2024-12-1') OR
-              (res.CheckIn < '2025-2-1' AND res.CheckOut >= '2025-2-1') OR
-              (res.CheckIn >= '2024-12-1' AND res.CheckOut <= '2025-2-1')
+              (res.CheckIn <= '$check_in_date' AND res.CheckOut > '$check_out_date') OR
+              (res.CheckIn < '$check_in_date' AND res.CheckOut >= '$check_out_date') OR
+              (res.CheckIn >= '$check_in_date' AND res.CheckOut <= '$check_out_date')
             )
           WHERE res.Room_ID IS NULL;";
 
