@@ -2,22 +2,19 @@
 include('../includes/connection.php');
 include('../includes/navbar.php');
 
+
 $check_in_date = $_POST['check_in'] ?? null;
 $check_out_date = $_POST['check_out'] ?? null;
 
-print_r($check_in_date); 
-print_r(" " . $check_out_date);
-
 $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
-          FROM rooms r
-          LEFT JOIN reservation res
-          ON r.ID = res.Room_ID
-          AND (
-              (res.CheckIn <= '$check_in_date' AND res.CheckOut > '$check_out_date') OR
-              (res.CheckIn < '$check_in_date' AND res.CheckOut >= '$check_out_date') OR
-              (res.CheckIn >= '$check_in_date' AND res.CheckOut <= '$check_out_date')
-            )
-          WHERE res.Room_ID IS NULL;";
+FROM rooms r
+LEFT JOIN reservation res
+ON r.ID = res.Room_ID
+AND NOT (
+    res.CheckOut <= '$check_in_date' OR  
+    res.CheckIn >= '$check_out_date'   
+)
+WHERE res.Room_ID IS NULL;";
 
 $stmt = $conn->prepare($query);
 $stmt->execute();
@@ -38,16 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'check_out' => $_POST['check_out']
         ];
     }
-    if(!isset($_SESSION['isReserved'])){
-    $sql = "UPDATE rooms SET Status = 1 WHERE ID = ?";
-    $stmt = $conn->prepare($sql);
+    if (!isset($_SESSION['isReserved'])) {
+        $sql = "UPDATE rooms SET Status = 1 WHERE ID = ?";
+        $stmt = $conn->prepare($sql);
 
-    if ($stmt) {
-        $stmt->bind_param("i", $room_id);
-        $stmt->execute();
-        $stmt->close();
+        if ($stmt) {
+            $stmt->bind_param("i", $room_id);
+            $stmt->execute();
+            $stmt->close();
+        }
     }
-}
 }
 
 
@@ -56,48 +53,47 @@ $success = [];
 
 if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
     if (isset($_SESSION['loggedin']) && isset($_SESSION['guest_id'])) {
-        if(!isset($_SESSION['isReserved'])){
-        $guest_id = $_SESSION['guest_id'];
+        if (!isset($_SESSION['isReserved'])) {
+            $guest_id = $_SESSION['guest_id'];
 
-        foreach ($_SESSION['cart'] as $cart_item) {
+            foreach ($_SESSION['cart'] as $cart_item) {
 
-            $room_id = $cart_item['room_id'];
-            $check_in = $cart_item['check_in'];
-            $check_out = $cart_item['check_out'];
+                $room_id = $cart_item['room_id'];
+                $check_in = $cart_item['check_in'];
+                $check_out = $cart_item['check_out'];
 
-            $check_in = date('Y-m-d', strtotime($check_in));
-            $check_out = date('Y-m-d', strtotime($check_out));
+                $check_in = date('Y-m-d', strtotime($check_in));
+                $check_out = date('Y-m-d', strtotime($check_out));
 
-            if (!$check_in || !$check_out) {
-                $errors[] = "Invalid date format.";
-                continue;
-            }
-
-            $sql = "INSERT INTO reservation (Room_ID, Guest_ID, CheckIn, CheckOut) VALUES (?, ?, ?, ?)";
-            $stmt = $conn->prepare($sql);
-
-            if ($stmt) {
-                $stmt->bind_param("ssss", $room_id, $guest_id, $check_in, $check_out);
-                if ($stmt->execute()) {
-                    $_SESSION['isReserved']=true;
-                    $success[] = "Reservation successfully added";
-                } else {
-                    $errors[] = "Error bookin room";
+                if (!$check_in || !$check_out) {
+                    $errors[] = "Invalid date format.";
+                    continue;
                 }
-                $stmt->close();
-            } else {
-                $errors[] = "Error preparing statement";
-            }
-        }
 
-        if (empty($errors)) {
-            unset($_SESSION['cart']);
+                $sql = "INSERT INTO reservation (Room_ID, Guest_ID, CheckIn, CheckOut) VALUES (?, ?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+
+                if ($stmt) {
+                    $stmt->bind_param("ssss", $room_id, $guest_id, $check_in, $check_out);
+                    if ($stmt->execute()) {
+                        $_SESSION['isReserved'] = true;
+                        $success[] = "Reservation successfully added";
+                    } else {
+                        $errors[] = "Error bookin room";
+                    }
+                    $stmt->close();
+                } else {
+                    $errors[] = "Error preparing statement";
+                }
+            }
+
+            if (empty($errors)) {
+                unset($_SESSION['cart']);
+            }
+        } else {
+            $errors[] = "You have already reserved a room !";
         }
-    }
-    else{
-       $errors[]="You have already reserved a room !";
-    }
- } else {
+    } else {
         $errors[] = "You need to be logged in to complete the reservation.";
         $_SESSION['cart'] = [];
     }
