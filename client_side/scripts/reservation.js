@@ -1,3 +1,7 @@
+let selectedField = '';
+let checkInDate = null;
+let checkOutDate = null;
+
 function togglePopup() {
     const popup = document.getElementById("guest-popup");
     popup.classList.toggle("visible");
@@ -23,18 +27,14 @@ function handleSectionClick(section) {
     showCalendar(section);
 }
 
-let selectedField = '';
-let checkInDate = null;
-let checkOutDate = null;
-
 function showCalendar(field) {
     selectedField = field;
 
     document.querySelector('.check-in').classList.remove('highlighted');
     document.querySelector('.check-out').classList.remove('highlighted');
-    if (field == 'check-in') {
+    if (field === 'check-in') {
         document.querySelector('.check-in').classList.add('highlighted');
-    } else if (field == 'check-out') {
+    } else if (field === 'check-out') {
         document.querySelector('.check-out').classList.add('highlighted');
     }
 
@@ -68,7 +68,7 @@ function buildMonth(date) {
     today.setHours(0, 0, 0, 0);
 
     let minDate = today;
-    if (selectedField == 'check-out' && checkInDate) {
+    if (selectedField === 'check-out' && checkInDate) {
         minDate = checkInDate;
     }
 
@@ -90,7 +90,7 @@ function buildMonth(date) {
     for (let i = 0; i < 6; i++) {
         html += '<tr>';
         for (let j = 0; j < 7; j++) {
-            if (i == 0 && j < firstDay) {
+            if (i === 0 && j < firstDay) {
                 html += '<td></td>';
             } else if (day > daysInMonth) {
                 break;
@@ -126,18 +126,21 @@ function buildMonth(date) {
     html += '</tbody></table>';
     return html;
 }
+
 function selectDate(year, month, day) {
     const date = new Date(year, month, day);
     const messageContainer = document.getElementById('message-container');
+    messageContainer.textContent = "";  // Clear previous messages
 
-    messageContainer.textContent = "";
-
+    // Handle check-in selection
     if (selectedField === 'check-in') {
         checkInDate = date;
-        checkOutDate = null;
+        checkOutDate = null; // Reset check-out when a new check-in is selected
         document.getElementById('check-in-date').textContent = date.toDateString();
         document.getElementById('check-in-date').dataset.date = date.toISOString();
-    } else if (selectedField == 'check-out') {
+    } 
+    // Handle check-out selection
+    else if (selectedField === 'check-out') {
         if (checkInDate && date > checkInDate) {
             checkOutDate = date;
             document.getElementById('check-out-date').textContent = date.toDateString();
@@ -149,26 +152,26 @@ function selectDate(year, month, day) {
         }
     }
 
+    // Now send the selected dates to the URL
+    updateUrlWithDates();
+
+    // Re-render the calendar to reflect changes
     generateCalendar();
 }
-function updateHighlightedRange() {
-    const checkInDate = new Date(document.getElementById('check-in-date').dataset.date);
-    const checkOutDate = new Date(document.getElementById('check-out-date').dataset.date);
-    const allCells = document.querySelectorAll('.calendar td');
 
-    allCells.forEach(cell => {
-        const cellDate = new Date(
-            parseInt(cell.dataset.year, 10),
-            parseInt(cell.dataset.month, 10),
-            parseInt(cell.textContent, 10)
-        );
-
-        if (cellDate >= checkInDate && cellDate <= checkOutDate) {
-            cell.classList.add('highlighted-range');
+// Function to update the URL with the check-in and check-out dates
+function updateUrlWithDates() {
+    if (checkInDate) {
+        const checkInDateStr = checkInDate.toISOString().split('T')[0];  // Format as YYYY-MM-DD
+        if (checkOutDate) {
+            const checkOutDateStr = checkOutDate.toISOString().split('T')[0];  // Format as YYYY-MM-DD
+            // Update the URL with both checkIn and checkOut dates
+            window.history.replaceState(null, '', `reservation.php?checkIn=${encodeURIComponent(checkInDateStr)}&checkOut=${encodeURIComponent(checkOutDateStr)}`);
         } else {
-            cell.classList.remove('highlighted-range');
+            // Update the URL with only checkIn date
+            window.history.replaceState(null, '', `reservation.php?checkIn=${encodeURIComponent(checkInDateStr)}`);
         }
-    });
+    }
 }
 
 function highlightSection(section) {
@@ -182,13 +185,7 @@ window.onload = function () {
     generateCalendar();
 };
 
-function showRooms() {
-    
-    document.getElementById("searched-rooms").style.display = "block";
-}
-
 function resetValues() {
-
     document.getElementById('check-in-date').textContent = "Select Date";
     document.getElementById('check-out-date').textContent = "Select Date";
     document.getElementById('searched-rooms').style.display = "none";
