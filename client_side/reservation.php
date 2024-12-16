@@ -3,7 +3,7 @@ include('../includes/connection.php');
 include('../includes/navbar.php');
 
 
-$check_in_date = $_POST['check_in'] ?? null;
+/* $check_in_date = $_POST['check_in'] ?? null;
 $check_out_date = $_POST['check_out'] ?? null;
 
 $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
@@ -20,6 +20,10 @@ $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
 
+while ($row = $result->fetch_assoc()) {
+    print_r($row);
+}
+    */
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -188,6 +192,31 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                 <div id="message" style="margin-top: 10px; font-size: 32px;"></div>
                 <div class="rooms-container">
                     <?php
+                    $check_in_date = $_POST['check_in'] ?? null;
+                    $check_out_date = $_POST['check_out'] ?? null;
+
+                    $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
+                    FROM rooms r
+                    LEFT JOIN reservation res
+                    ON r.ID = res.Room_ID
+                    AND NOT (
+                        res.CheckOut <= '$check_in_date' OR  
+                        res.CheckIn >= '$check_out_date'   
+                    )
+                    WHERE res.Room_ID IS NULL;";
+
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    while ($row = $result->fetch_assoc()) {
+                        print_r($row);
+                    }
+
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo '<div class="room">';
