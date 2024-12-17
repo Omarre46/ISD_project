@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $imageNewName = uniqid('', true) . '.' . pathinfo($_FILES['room-image']['name'], PATHINFO_EXTENSION);
                 $uploadDirectory = './room_imgs/';
-                $imagePath = $uploadDirectory . $imageNewName;
+                $imagePath = $imageNewName;
 
                 if (!move_uploaded_file($_FILES['room-image']['tmp_name'], $imagePath)) {
                     $error = "Error uploading the image.";
@@ -67,6 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 $successMessage = "Room updated successfully.";
+                sleep(2);
+                header("Location:../admin/list_room.php");
             } else {
                 $error = "Error updating room: " . $stmt->error;
             }
