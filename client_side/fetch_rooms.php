@@ -2,7 +2,7 @@
 include('../includes/connection.php');
 //echo "Check in" . $_GET['check_in'];
 //echo "Check out" . $_GET['check_out'];
-
+ 
 
 $check_in_date = $_GET['check_in'] ?? null;
 $check_out_date = $_GET['check_out'] ?? null;
@@ -14,6 +14,7 @@ if (!$check_in_date || !$check_out_date) {
 
 echo "Check in" . htmlspecialchars($check_in_date);
 echo "Check out" . htmlspecialchars($check_out_date);
+
 
 
 $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
@@ -44,8 +45,9 @@ if ($result->num_rows > 0) {
         echo '<input type="hidden" name="room_id" value="' . htmlspecialchars($row['ID']) . '">';
         echo '<input type="hidden" name="room_name" value="' . htmlspecialchars($row['RoomName']) . '">';
         echo '<input type="hidden" name="room_price" value="' . htmlspecialchars($row['RoomPrice']) . '">';
-        echo '<input type="hidden" name="check_in" value="2024-12-15">';
-        echo '<input type="hidden" name="check_out" value="2024-12-20">';
+        echo '<input type="hidden" name="check_in" value="' . htmlspecialchars($check_in_date) . '">';
+        echo '<input type="hidden" name="check_out" value="' . htmlspecialchars($check_out_date) . '">';
+
         echo '<button type="submit">Book Now</button>';
         echo '</form>';
         echo '</div>';
