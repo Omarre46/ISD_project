@@ -47,7 +47,6 @@ if ($result->num_rows > 0) {
         echo '<input type="hidden" name="room_price" value="' . htmlspecialchars($row['RoomPrice']) . '">';
         echo '<input type="hidden" name="check_in" value="' . htmlspecialchars($check_in_date) . '">';
         echo '<input type="hidden" name="check_out" value="' . htmlspecialchars($check_out_date) . '">';
-
         echo '<button type="submit">Book Now</button>';
         echo '</form>';
         echo '</div>';
@@ -57,35 +56,4 @@ if ($result->num_rows > 0) {
     echo '<div class="room">No Rooms Found</div>';
 }
 ?>
-<script>
-    function updateFormDates(form) {
-        const checkInDate = document.getElementById('check_in').textContent.trim();
-        const checkOutDate = document.getElementById('check_out').textContent.trim();
-        const messageContainer = document.getElementById('message');
-
-        messageContainer.textContent = "";
-
-        if (checkInDate === "Select Date" || checkOutDate === "Select Date") {
-
-            messageContainer.textContent = "Please select both check-in and check-out dates before booking.";
-            messageContainer.style.color = "red";
-            return false;
-        }
-
-        function formatLocalDate(dateString) {
-            const date = new Date(dateString);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`
-        }
-
-        form.querySelector("input[name='check_in']").value = formatLocalDate(checkInDate);
-        form.querySelector("input[name='check_out']").value = formatLocalDate(checkOutDate);
-
-
-
-
-        return true;
-    }
-</script>
+ 
