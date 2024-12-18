@@ -263,8 +263,10 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                     console.log("Response Status:", this.status);
                     console.log("Response Text:", this.responseText);
                     if (this.status === 200) {
-                        const roomsContainer = document.getElementById("rooms-container");
+                        const roomsContainer = document.querySelector(".rooms-container");
+
                         roomsContainer.innerHTML = this.responseText;
+                        document.getElementById("searched-rooms").style.display = "block";
                     } else {
                         console.error("Failed to fetch rooms. Status:", this.status);
                     }
