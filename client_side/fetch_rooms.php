@@ -12,11 +12,6 @@ if (!$check_in_date || !$check_out_date) {
     exit;
 }
 
-echo "Check in" . htmlspecialchars($check_in_date);
-echo "Check out" . htmlspecialchars($check_out_date);
-
-
-
 $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
                     FROM rooms r
                     LEFT JOIN reservation res

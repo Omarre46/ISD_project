@@ -254,32 +254,18 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
             const formattedCheckInDate = formatLocalDate(checkInDate);
             const formattedCheckOutDate = formatLocalDate(checkOutDate);
 
-            console.log("Formatted Check-in Date:", formattedCheckInDate);
-            console.log("Formatted Check-out Date:", formattedCheckOutDate);
-
             const xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (this.readyState === 4) {
-                    console.log("Response Status:", this.status);
-                    console.log("Response Text:", this.responseText);
                     if (this.status === 200) {
                         const roomsContainer = document.querySelector(".rooms-container");
-
                         roomsContainer.innerHTML = this.responseText;
                         document.getElementById("searched-rooms").style.display = "block";
-                    } else {
-                        console.error("Failed to fetch rooms. Status:", this.status);
-                    }
+                    } 
                 }
             };
-
-
-            console.log(`Sending GET request to: fetch_rooms.php?check_in=${formattedCheckInDate}&check_out=${formattedCheckOutDate}`);
             xmlhttp.open("GET", `fetch_rooms.php?check_in=${formattedCheckInDate}&check_out=${formattedCheckOutDate}`, true);
-
-
             xmlhttp.send();
-
         }
     </script>
 </body>
