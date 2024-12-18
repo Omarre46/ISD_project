@@ -30,12 +30,12 @@ let checkOutDate = null;
 function showCalendar(field) {
     selectedField = field;
 
-    document.querySelector('.check-in').classList.remove('highlighted');
-    document.querySelector('.check-out').classList.remove('highlighted');
-    if (field == 'check-in') {
-        document.querySelector('.check-in').classList.add('highlighted');
-    } else if (field == 'check-out') {
-        document.querySelector('.check-out').classList.add('highlighted');
+    document.querySelector('.check_in').classList.remove('highlighted');
+    document.querySelector('.check_out').classList.remove('highlighted');
+    if (field == 'check_in') {
+        document.querySelector('.check_in').classList.add('highlighted');
+    } else if (field == 'check_out') {
+        document.querySelector('.check_out').classList.add('highlighted');
     }
 
     generateCalendar();
@@ -68,7 +68,7 @@ function buildMonth(date) {
     today.setHours(0, 0, 0, 0);
 
     let minDate = today;
-    if (selectedField == 'check-out' && checkInDate) {
+    if (selectedField == 'check_out' && checkInDate) {
         minDate = checkInDate;
     }
 
@@ -132,16 +132,16 @@ function selectDate(year, month, day) {
 
     messageContainer.textContent = "";
 
-    if (selectedField === 'check-in') {
+    if (selectedField === 'check_in') {
         checkInDate = date;
         checkOutDate = null;
-        document.getElementById('check-in-date').textContent = date.toDateString();
-        document.getElementById('check-in-date').dataset.date = date.toISOString();
-    } else if (selectedField == 'check-out') {
+        document.getElementById('check_in').textContent = date.toDateString();
+        document.getElementById('check_in').dataset.date = date.toISOString();
+    } else if (selectedField == 'check_out') {
         if (checkInDate && date > checkInDate) {
             checkOutDate = date;
-            document.getElementById('check-out-date').textContent = date.toDateString();
-            document.getElementById('check-out-date').dataset.date = date.toISOString();
+            document.getElementById('check_out').textContent = date.toDateString();
+            document.getElementById('check_out').dataset.date = date.toISOString();
         } else {
             messageContainer.textContent = "You can't select check out before check in";
             messageContainer.style.color = "red";
@@ -152,8 +152,8 @@ function selectDate(year, month, day) {
     generateCalendar();
 }
 function updateHighlightedRange() {
-    const checkInDate = new Date(document.getElementById('check-in-date').dataset.date);
-    const checkOutDate = new Date(document.getElementById('check-out-date').dataset.date);
+    const checkInDate = new Date(document.getElementById('check_in').dataset.date);
+    const checkOutDate = new Date(document.getElementById('check_out').dataset.date);
     const allCells = document.querySelectorAll('.calendar td');
 
     allCells.forEach(cell => {
@@ -172,7 +172,7 @@ function updateHighlightedRange() {
 }
 
 function highlightSection(section) {
-    const sections = document.querySelectorAll('.guests, .check-in, .check-out');
+    const sections = document.querySelectorAll('.guests, .check_in, .check_out');
     sections.forEach(sec => sec.classList.remove('active'));
 
     document.querySelector(`.${section}`).classList.add('active');
@@ -189,7 +189,7 @@ function showRooms() {
 
 function resetValues() {
 
-    document.getElementById('check-in-date').textContent = "Select Date";
-    document.getElementById('check-out-date').textContent = "Select Date";
+    document.getElementById('check_in').textContent = "Select Date";
+    document.getElementById('check_out').textContent = "Select Date";
     document.getElementById('searched-rooms').style.display = "none";
 }

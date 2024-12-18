@@ -2,28 +2,6 @@
 include('../includes/connection.php');
 include('../includes/navbar.php');
 
-
-/* $check_in_date = $_POST['check_in'] ?? null;
-$check_out_date = $_POST['check_out'] ?? null;
-
-$query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
-FROM rooms r
-LEFT JOIN reservation res
-ON r.ID = res.Room_ID
-AND NOT (
-    res.CheckOut <= '$check_in_date' OR  
-    res.CheckIn >= '$check_out_date'   
-)
-WHERE res.Room_ID IS NULL;";
-
-$stmt = $conn->prepare($query);
-$stmt->execute();
-$result = $stmt->get_result();
-
-while ($row = $result->fetch_assoc()) {
-    print_r($row);
-}
-    */
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -157,22 +135,22 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                             <button class="apply-button" onclick="applyChanges()">Apply</button>
                         </div>
                     </div>
-                    <div class="check-in" onclick="handleSectionClick('check-in')">
+                    <div class="check_in" onclick="handleSectionClick('check_in')">
                         <div class="font">
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                         <div class="title-information">
                             <h6>Check In</h6>
-                            <h6 id="check-in-date">Select Date</h6>
+                            <h6 id="check_in">Select Date</h6>
                         </div>
                     </div>
-                    <div class="check-out" onclick="handleSectionClick('check-out')">
+                    <div class="check_out" onclick="handleSectionClick('check_out')">
                         <div class="font">
                             <i class="fa-solid fa-calendar-days"></i>
                         </div>
                         <div class="title-information">
                             <h6>Check Out</h6>
-                            <h6 id="check-out-date">Select Date</h6>
+                            <h6 id="check_out">Select Date</h6>
                         </div>
                     </div>
                 </div>
@@ -185,63 +163,13 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                     <button onclick="resetValues()">Cancel</button>
                 </div>
                 <div class="Sbutton">
-                    <button onclick="showRooms()">Search</button>
+                    <button onclick="fetchRooms()">Search</button>
                 </div>
             </div>
             <div class="searched-rooms" id="searched-rooms" style="display: none;">
                 <div id="message" style="margin-top: 10px; font-size: 32px;"></div>
                 <div class="rooms-container">
-                    <?php
-                    $check_in_date = $_POST['check_in'] ?? null;
-                    $check_out_date = $_POST['check_out'] ?? null;
 
-                    $query = "SELECT r.ID, r.RoomName, r.RoomNumber, r.RoomCategory, r.Description, r.RoomPrice, r.RoomImage
-                    FROM rooms r
-                    LEFT JOIN reservation res
-                    ON r.ID = res.Room_ID
-                    AND NOT (
-                        res.CheckOut <= '$check_in_date' OR  
-                        res.CheckIn >= '$check_out_date'   
-                    )
-                    WHERE res.Room_ID IS NULL;";
-
-                    $stmt = $conn->prepare($query);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-
-                    while ($row = $result->fetch_assoc()) {
-                        print_r($row);
-                    }
-
-                    $stmt = $conn->prepare($query);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo '<div class="room">';
-                            echo '<img src="../admin/' . $row['RoomImage'] . '" alt="Room Image">';
-                            echo '<div class="room-info">';
-                            echo '<h3>Room Number: ' . htmlspecialchars($row['RoomNumber']) . '</h3>';
-                            echo '<h3>' . htmlspecialchars($row['RoomName']) . '</h3>';
-                            echo '<h3>' . htmlspecialchars($row['RoomCategory']) . ' Room</h3>';
-                            echo '<p>' . htmlspecialchars($row['Description']) . '</p>';
-                            echo '<div class="price">$' . htmlspecialchars($row['RoomPrice']) . ' Per Night</div>';
-                            echo '<form action="reservation.php" method="POST" onsubmit="return updateFormDates(this)">';
-                            echo '<input type="hidden" name="room_id" value="' . htmlspecialchars($row['ID']) . '">';
-                            echo '<input type="hidden" name="room_name" value="' . htmlspecialchars($row['RoomName']) . '">';
-                            echo '<input type="hidden" name="room_price" value="' . htmlspecialchars($row['RoomPrice']) . '">';
-                            echo '<input type="hidden" name="check_in" value="2024-12-15">';
-                            echo '<input type="hidden" name="check_out" value="2024-12-20">';
-                            echo '<button type="submit">Book Now</button>';
-                            echo '</form>';
-                            echo '</div>';
-                            echo '</div>';
-                        }
-                    } else {
-                        echo '<div class="room">No Rooms Found</div>';
-                    }
-                    ?>
                 </div>
             </div>
         </div>
@@ -305,18 +233,14 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
     <script src="scripts/search-rooms.js"></script>
     <script src="scripts/cart.js"></script>
     <script>
-        function updateFormDates(form) {
-            const checkInDate = document.getElementById('check-in-date').textContent.trim();
-            const checkOutDate = document.getElementById('check-out-date').textContent.trim();
-            const messageContainer = document.getElementById('message');
 
-            messageContainer.textContent = "";
+        function fetchRooms() {
+            const checkInDate = document.getElementById('check_in').textContent.trim();
+            const checkOutDate = document.getElementById('check_out').textContent.trim();
 
             if (checkInDate === "Select Date" || checkOutDate === "Select Date") {
-
-                messageContainer.textContent = "Please select both check-in and check-out dates before booking.";
-                messageContainer.style.color = "red";
-                return false;
+                alert("Please select both check-in and check-out dates.");
+                return;
             }
 
             function formatLocalDate(dateString) {
@@ -324,16 +248,36 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                 const year = date.getFullYear();
                 const month = String(date.getMonth() + 1).padStart(2, '0');
                 const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`
+                return `${year}-${month}-${day}`;
             }
 
-            form.querySelector("input[name='check_in']").value = formatLocalDate(checkInDate);
-            form.querySelector("input[name='check_out']").value = formatLocalDate(checkOutDate);
+            const formattedCheckInDate = formatLocalDate(checkInDate);
+            const formattedCheckOutDate = formatLocalDate(checkOutDate);
+
+            console.log("Formatted Check-in Date:", formattedCheckInDate);
+            console.log("Formatted Check-out Date:", formattedCheckOutDate);
+
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState === 4) {
+                    console.log("Response Status:", this.status);
+                    console.log("Response Text:", this.responseText);
+                    if (this.status === 200) {
+                        const roomsContainer = document.getElementById("rooms-container");
+                        roomsContainer.innerHTML = this.responseText;
+                    } else {
+                        console.error("Failed to fetch rooms. Status:", this.status);
+                    }
+                }
+            };
 
 
+            console.log(`Sending GET request to: fetch_rooms.php?check_in=${formattedCheckInDate}&check_out=${formattedCheckOutDate}`);
+            xmlhttp.open("GET", `fetch_rooms.php?check_in=${formattedCheckInDate}&check_out=${formattedCheckOutDate}`, true);
 
 
-            return true;
+            xmlhttp.send();
+
         }
     </script>
 </body>
