@@ -1,3 +1,7 @@
+let selectedField = '';
+let checkInDate = null;
+let checkOutDate = null;
+
 function togglePopup() {
     const popup = document.getElementById("guest-popup");
     popup.classList.toggle("visible");
@@ -22,10 +26,6 @@ function handleSectionClick(section) {
     highlightSection(section);
     showCalendar(section);
 }
-
-let selectedField = '';
-let checkInDate = null;
-let checkOutDate = null;
 
 function showCalendar(field) {
     selectedField = field;
@@ -90,7 +90,7 @@ function buildMonth(date) {
     for (let i = 0; i < 6; i++) {
         html += '<tr>';
         for (let j = 0; j < 7; j++) {
-            if (i == 0 && j < firstDay) {
+            if (i === 0 && j < firstDay) {
                 html += '<td></td>';
             } else if (day > daysInMonth) {
                 break;
@@ -126,9 +126,11 @@ function buildMonth(date) {
     html += '</tbody></table>';
     return html;
 }
+
 function selectDate(year, month, day) {
     const date = new Date(year, month, day);
     const messageContainer = document.getElementById('message-container');
+    messageContainer.textContent = "";  // Clear previous messages
 
     messageContainer.textContent = "";
 
@@ -149,6 +151,10 @@ function selectDate(year, month, day) {
         }
     }
 
+    // Now send the selected dates to the URL
+    updateUrlWithDates();
+
+    // Re-render the calendar to reflect changes
     generateCalendar();
 }
 function updateHighlightedRange() {
@@ -165,10 +171,8 @@ function updateHighlightedRange() {
 
         if (cellDate >= checkInDate && cellDate <= checkOutDate) {
             cell.classList.add('highlighted-range');
-        } else {
-            cell.classList.remove('highlighted-range');
         }
-    });
+    })
 }
 
 function highlightSection(section) {
@@ -181,11 +185,6 @@ function highlightSection(section) {
 window.onload = function () {
     generateCalendar();
 };
-
-function showRooms() {
-    
-    document.getElementById("searched-rooms").style.display = "block";
-}
 
 function resetValues() {
 
