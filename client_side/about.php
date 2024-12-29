@@ -1,4 +1,4 @@
-<div class="footer">
+<div class="navbar">
   <?php
   include('../includes/connection.php');
   include('../includes/navbar.php');
