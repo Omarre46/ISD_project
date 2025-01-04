@@ -6,7 +6,7 @@ require '../includes/connection.php'; // Include database connection
 session_start();
 
 // Check if the user is logged in as an admin
-if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
+if (!isset($_SESSION['loggedin']) || htmlspecialchars($_SESSION['name']) !== 'admin123') {
     header("Location: ../login.php");
     exit();
 }
@@ -18,29 +18,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $role = htmlspecialchars($_POST['role']);
 
-    // Check if the email already exists in the guests table
-    $emailCheckQuery = "SELECT * FROM guest WHERE Email = ?";
-    $emailCheckStmt = $conn->prepare($emailCheckQuery);
-    $emailCheckStmt->bind_param("s", $email);
-    $emailCheckStmt->execute();
-    $emailCheckResult = $emailCheckStmt->get_result();
+    try {
+        // Check if the email already exists in the guests table using PDO
+        $emailCheckQuery = "SELECT * FROM guest WHERE Email = :email";
+        $emailCheckStmt = $pdo->prepare($emailCheckQuery);
+        $emailCheckStmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $emailCheckStmt->execute();
 
-    if ($emailCheckResult->num_rows > 0) {
-        $errorMessage = "This email is already associated with a guest and cannot be used.";
-    } else {
-        // Insert the new employee into the database
-        $query = "INSERT INTO employees (Name, Email, Password, Role) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssss", $name, $email, $password, $role);
-
-        if ($stmt->execute()) {
-            $successMessage = "Employee added successfully.";
+        if ($emailCheckStmt->rowCount() > 0) {
+            $errorMessage = "This email is already associated with a guest and cannot be used.";
         } else {
-            $errorMessage = "Error adding employee: " . $conn->error;
+            // Insert the new employee into the database using PDO
+            $query = "INSERT INTO employees (Name, Email, Password, Role) VALUES (:name, :email, :password, :role)";
+            $stmt = $pdo->prepare($query);
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->bindParam(':role', $role, PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+                $successMessage = "Employee added successfully.";
+            } else {
+                $errorMessage = "Error adding employee: " . $stmt->errorInfo()[2];
+            }
         }
+    } catch (PDOException $e) {
+        $errorMessage = "Error: " . $e->getMessage();
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

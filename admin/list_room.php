@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("admin_navbar.php");
 require '../includes/connection.php'; // Include database connection
 
@@ -11,12 +11,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
     exit();
 }
 
-// Fetch room data from the database
-$query = "SELECT ID, RoomName, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage FROM rooms";
-$stmt = $conn->prepare($query);
-$stmt->execute();
-$result = $stmt->get_result();
-
+try {
+    // Fetch room data using PDO
+    $stmt = $pdo->prepare("SELECT ID, RoomName, RoomNumber, RoomCategory, Description, RoomPrice, RoomImage FROM rooms");
+    $stmt->execute();
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error fetching room data: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,36 +46,41 @@ $result = $stmt->get_result();
             </tr>
         </thead>
         <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<tr>';
-                    echo '<td>' . htmlspecialchars($row['ID']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['RoomName']) . '</td>'; #<!-- Display Room Name -->
-                    echo '<td>' . htmlspecialchars($row['RoomNumber']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['RoomCategory']) . '</td>';
-                    echo '<td>' . htmlspecialchars($row['Description']) . '</td>';
-                    echo '<td>' . '$' . htmlspecialchars($row['RoomPrice']) . '</td>';
-                    echo '<td>';
-                    echo '<div class="action-buttons">';
-                    echo '<button class="view-btn" onclick="showRoomDetails(\'' . htmlspecialchars($row['RoomName']) . '\', \'' . htmlspecialchars($row['RoomNumber']) . '\', \'' . htmlspecialchars($row['RoomCategory']) . '\', \'' . htmlspecialchars($row['Description']) . '\', \'' . htmlspecialchars($row['RoomPrice']) . '\', \'' . htmlspecialchars($row['RoomImage']) . '\')">View</button>';
-                    echo '<button><a href="modify_room.php?id=' . htmlspecialchars($row['ID']) . 
-                    '&roomName=' . htmlspecialchars($row['RoomName']) .  #<!-- Pass Room Name for modification -->
-                    '&roomNumber=' . htmlspecialchars($row['RoomNumber']) . 
-                    '&roomCategory=' . htmlspecialchars($row['RoomCategory']) . 
-                    '&roomDescription=' . htmlspecialchars($row['Description']) . 
-                    '&roomPrice=' . htmlspecialchars($row['RoomPrice']) . 
-                    '&roomImage=' . htmlspecialchars($row['RoomImage']) . 
-                    '" class="update-btn">Update</a></button>';
-                    echo '<button><a href="delete_room.php?id=' . htmlspecialchars($row['ID']) . '" class="delete-btn" onclick="return confirm(\'Are you sure you want to delete this room?\')">Delete</a></button>';
-                    echo '</div>';
-                    echo '</td>';
-                    echo '</tr>';
-                }
-            } else {
-                echo '<tr><td colspan="6">No rooms found</td></tr>';
-            }
-            ?>
+            <?php if (!empty($rooms)): ?>
+                <?php foreach ($rooms as $room): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($room['ID'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($room['RoomName'], ENT_QUOTES, 'UTF-8'); ?></td> <!-- Display Room Name -->
+                        <td><?php echo htmlspecialchars($room['RoomNumber'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($room['RoomCategory'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($room['Description'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td>$<?php echo htmlspecialchars($room['RoomPrice'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td>
+                            <div class="action-buttons">
+                                <!-- View Button -->
+                                <button class="view-btn" onclick="showRoomDetails(
+                                    '<?php echo htmlspecialchars($room['RoomName'], ENT_QUOTES, 'UTF-8'); ?>',
+                                    '<?php echo htmlspecialchars($room['RoomNumber'], ENT_QUOTES, 'UTF-8'); ?>',
+                                    '<?php echo htmlspecialchars($room['RoomCategory'], ENT_QUOTES, 'UTF-8'); ?>',
+                                    '<?php echo htmlspecialchars($room['Description'], ENT_QUOTES, 'UTF-8'); ?>',
+                                    '<?php echo htmlspecialchars($room['RoomPrice'], ENT_QUOTES, 'UTF-8'); ?>',
+                                    '<?php echo htmlspecialchars($room['RoomImage'], ENT_QUOTES, 'UTF-8'); ?>'
+                                )">View</button>
+
+                                <!-- Update Button -->
+                                <a href="modify_room.php?id=<?php echo $room['ID']; ?>&roomNumber=<?php echo urlencode($room['RoomNumber']); ?>&roomName=<?php echo urlencode($room['RoomName']); ?>&roomCategory=<?php echo urlencode($room['RoomCategory']); ?>&roomDescription=<?php echo urlencode($room['Description']); ?>&roomPrice=<?php echo urlencode($room['RoomPrice']); ?>&roomImage=<?php echo urlencode($room['RoomImage']); ?>" class="update-btn">Update</a>
+
+                                <!-- Delete Button -->
+                                <a href="delete_room.php?id=<?php echo htmlspecialchars($room['ID'], ENT_QUOTES, 'UTF-8'); ?>"
+                                   class="delete-btn"
+                                   onclick="return confirm('Are you sure you want to delete this room?')">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr><td colspan="7">No rooms found</td></tr>
+            <?php endif; ?>
         </tbody>
     </table>
 
@@ -95,19 +102,13 @@ $result = $stmt->get_result();
     <script>
         // Function to show the room details in the modal, including the image
         function showRoomDetails(roomName, roomNumber, roomCategory, roomDescription, roomPrice, roomImage) {
-            // Set the content of the modal
             document.getElementById('roomName').textContent = roomName;
             document.getElementById('roomNumber').textContent = roomNumber;
             document.getElementById('roomCategory').textContent = roomCategory;
             document.getElementById('roomDescription').textContent = roomDescription;
             document.getElementById('roomPrice').textContent = roomPrice;
+            document.getElementById('roomImage').src = roomImage;
 
-            // Set the image source
-            if (roomImage) {
-                document.getElementById('roomImage').src = roomImage; // Assuming images are stored in 'uploads' folder
-            }
-
-            // Show the modal
             document.getElementById('roomModal').style.display = "block";
         }
 

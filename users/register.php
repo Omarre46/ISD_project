@@ -5,71 +5,72 @@ require "../includes/connection.php";
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize and validate inputs
-    $name = trim($_POST['name']);
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = trim($_POST['password']);
+    $name = htmlspecialchars(trim($_POST['name']));
+    $username = htmlspecialchars(trim($_POST['username']));
+    $email = htmlspecialchars(trim($_POST['email']));
+    $password = htmlspecialchars(trim($_POST['password']));
 
     if (empty($name) || empty($username) || empty($email) || empty($password)) {
         $error = "Please fill all the fields.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Invalid email format.";
     } else {
-        // Check for duplicate entries (username, email in guests or employees)
-        $stmt = $conn->prepare("SELECT Email FROM guest WHERE Username = ? OR Email = ? 
-                               UNION 
-                               SELECT Email FROM employees WHERE Email = ?");
-        $stmt->bind_param("sss", $username, $email, $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        try {
+            $stmt = $pdo->prepare(
+                "SELECT Email 
+                 FROM guest 
+                 WHERE Username = :username OR Email = :email 
+                 UNION 
+                 SELECT Email 
+                 FROM employees 
+                 WHERE Email = :email"
+            );
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+            $result = $stmt->fetch();
 
-        if ($result->num_rows > 0) {
-            $error = "Username or Email already exists or the email is associated with an employee.";
-        } else {
-            // Hash the password
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-            // Get the current date in the format X/X/XXXX
-            $dateCreated = date("n/j/Y");
-
-            // Insert user into the database
-            $stmt = $conn->prepare("INSERT INTO guest (Name, Username, Email, Password, DateCreated) 
-                                    VALUES (?, ?, ?, ?
-                                    , ?)");
-            $stmt->bind_param("sssss", $name, $username, $email, $hashedPassword, $dateCreated);
-
-            if ($stmt->execute()) {
-                // Get the auto-incremented ID of the inserted row
-                $guestId = $conn->insert_id;
-            
-                // Check if the ID was retrieved successfully
-                if ($guestId > 0) {
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['name'] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-                    $_SESSION['email'] = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
-                    $_SESSION['guest_id'] = htmlspecialchars($guestId, ENT_QUOTES, 'UTF-8');
-        
-                    header("Location: ../client_side/home.php");
-                    exit();
-                } else {
-                    $error = "Failed to retrieve the Guest ID. Insert may have failed.";
-                }
-          
+            if ($result) {
+                $error = "Username or Email already exists or the email is associated with an employee.";
             } else {
-                $error = "Error occurred during registration. Please try again.";
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                $dateCreated = date("n/j/Y");
+
+                $stmt = $pdo->prepare(
+                    "INSERT INTO guest (Name, Username, Email, Password, DateCreated) 
+                     VALUES (:name, :username, :email, :password, :dateCreated)"
+                );
+                $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+                $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                $stmt->bindParam(':password', $hashedPassword, PDO::PARAM_STR);
+                $stmt->bindParam(':dateCreated', $dateCreated, PDO::PARAM_STR);
+
+                if ($stmt->execute()) {
+                    $guestId = $pdo->lastInsertId();
+
+                    if ($guestId > 0) {
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['name'] = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+                        $_SESSION['email'] = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
+                        $_SESSION['guest_id'] = htmlspecialchars($guestId, ENT_QUOTES, 'UTF-8');
+
+                        header("Location: ../client_side/home.php");
+                        exit();
+                    } else {
+                        $error = "Failed to retrieve the Guest ID. Insert may have failed.";
+                    }
+                } else {
+                    $error = "Error occurred during registration. Please try again.";
+                }
             }
+        } catch (PDOException $e) {
+            $error = "Database error: " . htmlspecialchars($e->getMessage());
         }
-        $stmt->close();
     }
 }
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">

@@ -11,9 +11,9 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
     exit();
 }
 
-// Fetch client data securely using prepared statements
+// Fetch client data securely using PDO
 try {
-    $stmt = $conn->prepare("
+    $stmt = $pdo->prepare("
         SELECT 
             guest.ID AS GuestID,
             guest.Name AS GuestName,
@@ -28,11 +28,12 @@ try {
         ORDER BY guest.ID ASC
     ");
     $stmt->execute();
-    $result = $stmt->get_result();
-} catch (Exception $e) {
-    die("Error fetching client data: " . $e->getMessage());
+    $clients = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch all rows as associative array
+} catch (PDOException $e) {
+    die("Error fetching client data: " . htmlspecialchars($e->getMessage()));
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,34 +62,33 @@ try {
             </thead>
             <tbody>
                 <?php
-                while ($row = $result->fetch_assoc()) {
+                foreach ($clients as $row) {
                     $id = htmlspecialchars($row['GuestID'], ENT_QUOTES, 'UTF-8');
                     $name = htmlspecialchars($row['GuestName'], ENT_QUOTES, 'UTF-8');
                     $username = htmlspecialchars($row['Username'], ENT_QUOTES, 'UTF-8');
                     $email = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
-                    $roomNumber = htmlspecialchars($row['RoomNumber'], ENT_QUOTES, 'UTF-8');
-                    $roomType = htmlspecialchars($row['RoomName'], ENT_QUOTES, 'UTF-8');
                     $dateCreated = htmlspecialchars($row['DateCreated'], ENT_QUOTES, 'UTF-8');
 
-                    // Handle cases where RoomNumber and RoomType may be NULL
-                    $roomNumber = empty($roomNumber) ? "No rooms reserved" : $roomNumber;
-                    $roomType = empty($roomType) ? "No rooms reserved" : $roomType;
+                    // Handle cases where RoomNumber and RoomName may be NULL
+                    $roomNumber = empty($row['RoomNumber']) ? "No rooms reserved" : htmlspecialchars($row['RoomNumber'], ENT_QUOTES, 'UTF-8');
+                    $roomType = empty($row['RoomName']) ? "No rooms reserved" : htmlspecialchars($row['RoomName'], ENT_QUOTES, 'UTF-8');
 
                     echo "<tr>
-                            <td>{$id}</td>
-                            <td>{$name}</td>
-                            <td>{$username}</td>
-                            <td>{$email}</td>
-                            <td>{$dateCreated}</td>
-                            <td>
-                                <div class='action-buttons'>
-                                    <button class='check-btn' onclick='showReservationDetails(\"{$roomNumber}\", \"{$roomType}\")'>Check Reservation</button>
-                                    <button class='delete-btn' onclick='confirmDelete({$id})'>Delete</button>
-                                </div>
-                            </td>
-                        </tr>";
+            <td>{$id}</td>
+            <td>{$name}</td>
+            <td>{$username}</td>
+            <td>{$email}</td>
+            <td>{$dateCreated}</td>
+            <td>
+                <div class='action-buttons'>
+                    <button class='check-btn' onclick='showReservationDetails(\"{$roomNumber}\", \"{$roomType}\")'>Check Reservation</button>
+                    <button class='delete-btn' onclick='confirmDelete({$id})'>Delete</button>
+                </div>
+            </td>
+          </tr>";
                 }
                 ?>
+
             </tbody>
         </table>
 

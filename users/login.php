@@ -2,7 +2,6 @@
 require '../includes/connection.php';
 session_start();
 
-// Secure session settings
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -10,80 +9,71 @@ if (!isset($_SESSION['csrf_token'])) {
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // CSRF Token Validation
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    if (htmlspecialchars(!isset($_POST['csrf_token'])) || htmlspecialchars($_POST['csrf_token']) !== htmlspecialchars($_SESSION['csrf_token'])) {
         die("Invalid CSRF token.");
     }
-
-    // Get and sanitize user inputs
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
     if (empty($email) || empty($password)) {
         $error = "Please fill all the fields.";
     } else {
-        // Check if email matches the admin credentials
-        if ($email === 'admin123@gmail.com' && $password === 'admin123') {
-            // Set session variables for admin
-            $_SESSION['loggedin'] = true;
-            $_SESSION['name'] = 'admin123'; // Admin name can be a placeholder
-            $_SESSION['email'] = $email;
-
-            // Redirect to admin dashboard
-            header("Location: ../admin/client_sec.php"); // Assuming your admin page is 'admin_dashboard.php'
-            exit();
-        }
-
-        // First, check if the email exists in the guest table
-        $stmt = $conn->prepare("SELECT * FROM guest WHERE Email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($row = $result->fetch_assoc()) {
-            // Verify hashed password for guest
-            if (password_verify($password, $row['Password'])) {
-                // Valid login, set session variables for guest
+        try {
+            if ($email === 'admin123@gmail.com' && $password === 'admin123') {
                 $_SESSION['loggedin'] = true;
-                $_SESSION['name'] = htmlspecialchars($row['Name'], ENT_QUOTES, 'UTF-8');
-                $_SESSION['email'] = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
-                $_SESSION['guest_id'] = htmlspecialchars($row['ID'], ENT_QUOTES, 'UTF-8');
+                $_SESSION['name'] = 'admin123';
+                $_SESSION['email'] = $email;
 
-                // Redirect to client home page
-                header("Location: ../client_side/home.php");
+                header("Location: ../admin/client_sec.php");
                 exit();
-            } else {
-                $error = "Invalid Email or Password.";
             }
-        } else {
-            // If email is not found in guest table, check the employee table
-            $stmt = $conn->prepare("SELECT * FROM employees WHERE Email = ?");
-            $stmt->bind_param("s", $email);
+
+            $stmt = $pdo->prepare("SELECT * FROM guest WHERE Email = :email");
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
-            $result = $stmt->get_result();
+            $guest = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($row = $result->fetch_assoc()) {
-                // Verify hashed password for employee
-                if (password_verify($password, $row['Password'])) {
-                    // Valid login, set session variables for employee
+            if ($guest) {
+                if (password_verify($password, $guest['Password'])) {
                     $_SESSION['loggedin'] = true;
-                    $_SESSION['employee_name'] = htmlspecialchars($row['Name'], ENT_QUOTES, 'UTF-8');
-                    $_SESSION['employee_email'] = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
-                    $_SESSION['employee_id'] = htmlspecialchars($row['ID'], ENT_QUOTES, 'UTF-8');
+                    $_SESSION['name'] = htmlspecialchars($guest['Name'], ENT_QUOTES, 'UTF-8');
+                    $_SESSION['email'] = htmlspecialchars($guest['Email'], ENT_QUOTES, 'UTF-8');
+                    $_SESSION['guest_id'] = htmlspecialchars($guest['ID'], ENT_QUOTES, 'UTF-8');
 
-                    // Redirect to employee dashboard
-                    header("Location: ../admin/employee_page.php"); // Assuming the employee dashboard is here
+                    header("Location: ../client_side/home.php");
                     exit();
                 } else {
                     $error = "Invalid Email or Password.";
                 }
             } else {
-                $error = "Invalid Email or Password.";
+                $stmt = $pdo->prepare("SELECT * FROM employees WHERE Email = :email");
+                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                $stmt->execute();
+                $employee = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($employee) {
+                    if (password_verify($password, $employee['Password'])) {
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['employee_name'] = htmlspecialchars($employee['Name'], ENT_QUOTES, 'UTF-8');
+                        $_SESSION['employee_email'] = htmlspecialchars($employee['Email'], ENT_QUOTES, 'UTF-8');
+                        $_SESSION['employee_id'] = htmlspecialchars($employee['ID'], ENT_QUOTES, 'UTF-8');
+
+                        header("Location: ../admin/employee_page.php");
+                        exit();
+                    } else {
+                        $error = "Invalid Email or Password.";
+                    }
+                } else {
+                    $error = "Invalid Email or Password.";
+                }
             }
+        } catch (PDOException $e) {
+            $error = "Database error: " . htmlspecialchars($e->getMessage());
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

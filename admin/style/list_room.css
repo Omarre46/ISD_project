@@ -161,6 +161,46 @@ button .delete-btn{
 .action-buttons button {
     margin: 5px;
 }
+/* Base styling for buttons */
+a {
+    text-decoration: none;  /* Remove underline */
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Update Button Styling */
+.update-btn {
+    background-color: #b9ca00; /* Green */
+    color: white;
+    border: 2px solid#b9c904;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.update-btn:hover {
+    background-color: #c3d408;
+    color: #f1f1f1;
+}
+
+/* Delete Button Styling */
+.delete-btn {
+    background-color: #f44336; /* Red */
+    color: white;
+    border: 2px solid #f44336;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #da190b;
+    color: #f1f1f1;
+}
+
+/* Optional: Make the buttons look like clickable buttons with box-shadow */
+a:active {
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
 
 
 @media (max-width: 575.98px) {

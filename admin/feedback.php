@@ -2,18 +2,18 @@
 include("admin_navbar.php");
 require("../includes/connection.php");
 
-// Fetch feedback from the database
-$feedbackData = [];
-$stmt =  $conn->prepare("SELECT * FROM feedback ORDER BY created_at DESC"); 
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_assoc()) {
-    $feedbackData[] = $row;
+// Fetch feedback from the database using PDO
+try {
+    $stmt = $pdo->prepare("SELECT * FROM feedback ORDER BY created_at DESC");
+    $stmt->execute();
+    $feedbackData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Error fetching feedback: " . htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8'));
 }
-$stmt->close();
 ?>
 <link rel="stylesheet" href="./style/feedback.css">
 
+<!-- Display Feedback List -->
 <table border="1">
     <thead>
         <tr>
@@ -29,15 +29,16 @@ $stmt->close();
     <tbody>
         <?php foreach ($feedbackData as $feedback): ?>
             <tr>
-                <td><?php echo htmlspecialchars($feedback['first_name']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['last_name']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['email']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['phone']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['description']); ?></td>
-                <td><?php echo htmlspecialchars($feedback['created_at']); ?></td>
+                <td><?php echo htmlspecialchars($feedback['first_name'], ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo htmlspecialchars($feedback['last_name'], ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo htmlspecialchars($feedback['email'], ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo htmlspecialchars($feedback['phone'], ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo htmlspecialchars($feedback['description'], ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo htmlspecialchars($feedback['created_at'], ENT_QUOTES, 'UTF-8'); ?></td>
                 <td>
                     <!-- Delete Button -->
-                    <a href="delete_feedback.php?delete_id=<?php echo $feedback['id']; ?>" onclick="return confirm('Are you sure you want to delete this feedback?');">
+                    <a href="delete_feedback.php?delete_id=<?php echo htmlspecialchars($feedback['id'], ENT_QUOTES, 'UTF-8'); ?>" 
+                       onclick="return confirm('Are you sure you want to delete this feedback?');">
                         <button type="button" class="delete-btn">Delete</button>
                     </a>
                 </td>

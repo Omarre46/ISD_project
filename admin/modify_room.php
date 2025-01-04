@@ -14,7 +14,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
 // Retrieve query parameters for prepopulating form fields
 $roomId = isset($_GET['id']) ? htmlspecialchars($_GET['id']) : '';
 $roomNumber = isset($_GET['roomNumber']) ? htmlspecialchars($_GET['roomNumber']) : '';
-$roomName = isset($_GET['roomName']) ? htmlspecialchars($_GET['roomName']) : ''; // Added RoomName
+$roomName = isset($_GET['roomName']) ? htmlspecialchars($_GET['roomName']) : '';
 $roomCategory = isset($_GET['roomCategory']) ? htmlspecialchars($_GET['roomCategory']) : '';
 $roomDescription = isset($_GET['roomDescription']) ? htmlspecialchars($_GET['roomDescription']) : '';
 $roomPrice = isset($_GET['roomPrice']) ? htmlspecialchars($_GET['roomPrice']) : '';
@@ -26,12 +26,12 @@ $successMessage = "";
 
 // Handle form submission for updating the room
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $roomId = trim($_POST['room-id']);
-    $roomNumber = trim($_POST['room-number']);
-    $roomName = trim($_POST['room-name']); // Added RoomName
-    $roomCategory = trim($_POST['room-category']);
-    $roomDescription = trim($_POST['room-description']);
-    $roomPrice = trim($_POST['room-price']);
+    $roomId = htmlspecialchars(trim($_POST['room-id']));
+    $roomNumber = htmlspecialchars(trim($_POST['room-number']));
+    $roomName = htmlspecialchars(trim($_POST['room-name']));
+    $roomCategory = htmlspecialchars(trim($_POST['room-category']));
+    $roomDescription = htmlspecialchars(trim($_POST['room-description']));
+    $roomPrice = htmlspecialchars(trim($_POST['room-price']));
     $imagePath = $roomImage; // Use the existing image path by default
 
     // Validate inputs
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $imageNewName = uniqid('', true) . '.' . pathinfo($_FILES['room-image']['name'], PATHINFO_EXTENSION);
                 $uploadDirectory = './room_imgs/';
-                $imagePath = $imageNewName;
+                $imagePath = $uploadDirectory . $imageNewName;
 
                 if (!move_uploaded_file($_FILES['room-image']['tmp_name'], $imagePath)) {
                     $error = "Error uploading the image.";
@@ -62,17 +62,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If no errors, update the database
         if (empty($error)) {
-            $stmt = $conn->prepare("UPDATE rooms SET RoomName = ?, RoomNumber = ?, RoomCategory = ?, Description = ?, RoomPrice = ?, RoomImage = ? WHERE ID = ?");
-            $stmt->bind_param("ssssssi", $roomName, $roomNumber, $roomCategory, $roomDescription, $roomPrice, $imagePath, $roomId);
+            try {
+                $stmt = $pdo->prepare("UPDATE rooms SET RoomName = ?, RoomNumber = ?, RoomCategory = ?, Description = ?, RoomPrice = ?, RoomImage = ? WHERE ID = ?");
+                $stmt->execute([$roomName, $roomNumber, $roomCategory, $roomDescription, $roomPrice, $imagePath, $roomId]);
 
-            if ($stmt->execute()) {
                 $successMessage = "Room updated successfully.";
-                sleep(2);
-                header("Location:../admin/list_room.php");
-            } else {
-                $error = "Error updating room: " . $stmt->error;
+                header("Location: ../admin/list_room.php");
+                exit();
+            } catch (PDOException $e) {
+                $error = "Error updating room: " . $e->getMessage();
             }
-            $stmt->close();
         }
     }
 }
@@ -141,6 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="submit" value="Modify">
             </div>
         </form>
+
     </center>
 </body>
 

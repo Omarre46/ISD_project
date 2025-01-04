@@ -2,30 +2,30 @@
 require '../includes/connection.php';
 session_start();
 
-// Check if the user is logged in as an admin
 if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
     header("Location: ../login.php");
     exit();
 }
 
-// Check if service_id is provided
 if (isset($_GET['service_id'])) {
-    $service_id = $_GET['service_id'];
+    $serviceId = htmlspecialchars($_GET['service_id'], ENT_QUOTES, 'UTF-8');
 
-    // Delete service record using prepared statement
+    if (!is_numeric($serviceId)) {
+        echo "Invalid service ID.";
+        exit();
+    }
+
     try {
-        $stmt = $conn->prepare("DELETE FROM service WHERE ID = ?");
-        $stmt->bind_param("i", $service_id);
+        $stmt = $pdo->prepare("DELETE FROM service WHERE ID = :id");
+        $stmt->bindParam(':id', $serviceId, PDO::PARAM_INT);
         $stmt->execute();
 
-        // Redirect to service list page after successful deletion
-        header("Location: client_requests.php");  // Assuming this page shows the service list
+        header("Location: client_requests.php");
         exit();
-    } catch (Exception $e) {
-        die("Error deleting service: " . $e->getMessage());
+    } catch (PDOException $e) {
+        die("Error deleting service: " . htmlspecialchars($e->getMessage()));
     }
 } else {
-    // Redirect to the service list page if no service_id is passed
     header("Location: client_requests.php");
     exit();
 }

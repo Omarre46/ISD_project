@@ -14,12 +14,12 @@ $error = "";
 $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $roomName = trim($_POST['room-name']);
-    $roomNumber = trim($_POST['room-number']);
-    $roomCategory = trim($_POST['room-category']);
-    $roomStatus = "Empty";
-    $roomDescription = trim($_POST['room-description']);
-    $roomPrice = trim($_POST['room-price']);
+    $roomName = htmlspecialchars(trim($_POST['room-name']));
+    $roomNumber = htmlspecialchars(trim($_POST['room-number']));
+    $roomCategory = htmlspecialchars(trim($_POST['room-category']));
+    $roomStatus = htmlspecialchars("Empty");
+    $roomDescription = htmlspecialchars(trim($_POST['room-description']));
+    $roomPrice = htmlspecialchars(trim($_POST['room-price']));
 
     // Validate inputs
     if (empty($roomName) || empty($roomNumber) || empty($roomCategory) || empty($roomDescription) || empty($roomPrice)) {
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $imageNewName = uniqid('', true) . '.' . pathinfo($_FILES['room-image']['name'], PATHINFO_EXTENSION);
                 $uploadDirectory = './room_imgs/';
-                $imagePath =  $imageNewName;
+                $imagePath = $uploadDirectory . $imageNewName;
 
                 if (!move_uploaded_file($_FILES['room-image']['tmp_name'], $imagePath)) {
                     $error = "Error uploading the image.";
@@ -51,30 +51,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // If no errors, proceed to check for room uniqueness and insert data
         if (empty($error)) {
-            // Check for room number uniqueness
-            $stmt = $conn->prepare("SELECT RoomNumber FROM rooms WHERE RoomNumber = ?");
-            $stmt->bind_param("s", $roomNumber);
-            $stmt->execute();
-            $stmt->store_result();
+            try {
+                // Check for room number uniqueness
+                $stmt = $pdo->prepare("SELECT RoomNumber FROM rooms WHERE RoomNumber = :roomNumber");
+                $stmt->bindParam(':roomNumber', $roomNumber, PDO::PARAM_STR);
+                $stmt->execute();
+                $existingRoom = $stmt->fetch();
 
-            if ($stmt->num_rows > 0) {
-                $error = "Room number already exists.";
-            } else {
-                // Insert the data into the database
-                $stmt = $conn->prepare("INSERT INTO rooms (RoomName, RoomNumber, RoomCategory, Status, Description, RoomPrice, RoomImage) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("sssssss", $roomName, $roomNumber, $roomCategory, $roomStatus, $roomDescription, $roomPrice, $imagePath);
-
-                if ($stmt->execute()) {
-                    $successMessage = "Room added successfully.";
+                if ($existingRoom) {
+                    $error = "Room number already exists.";
                 } else {
-                    $error = "Error adding room: " . $stmt->error;
+                    // Insert the data into the database
+                    $stmt = $pdo->prepare(
+                        "INSERT INTO rooms (RoomName, RoomNumber, RoomCategory, Status, Description, RoomPrice, RoomImage) 
+                         VALUES (:roomName, :roomNumber, :roomCategory, :roomStatus, :roomDescription, :roomPrice, :roomImage)"
+                    );
+                    $stmt->bindParam(':roomName', $roomName, PDO::PARAM_STR);
+                    $stmt->bindParam(':roomNumber', $roomNumber, PDO::PARAM_STR);
+                    $stmt->bindParam(':roomCategory', $roomCategory, PDO::PARAM_STR);
+                    $stmt->bindParam(':roomStatus', $roomStatus, PDO::PARAM_STR);
+                    $stmt->bindParam(':roomDescription', $roomDescription, PDO::PARAM_STR);
+                    $stmt->bindParam(':roomPrice', $roomPrice, PDO::PARAM_STR);
+                    $stmt->bindParam(':roomImage', $imagePath, PDO::PARAM_STR);
+
+                    if ($stmt->execute()) {
+                        $successMessage = "Room added successfully.";
+                    } else {
+                        $error = "Error adding room.";
+                    }
                 }
-                $stmt->close();
+            } catch (PDOException $e) {
+                $error = "Database error: " . htmlspecialchars($e->getMessage());
             }
         }
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

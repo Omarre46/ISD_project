@@ -1,37 +1,41 @@
 <?php
-include '../includes/connection.php'; // Database connection file
+include '../includes/connection.php';
 
-// Initialize message variables
 $message = '';
 $messageClass = '';
 
-// Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize and validate input data
     $firstName = htmlspecialchars(trim($_POST['first_name']));
     $lastName = htmlspecialchars(trim($_POST['last_name']));
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $phone = htmlspecialchars(trim($_POST['phone']));
     $description = htmlspecialchars(trim($_POST['description']));
-    $createdAt = date('Y-m-d H:i:s'); // Format timestamp as a string
+    $createdAt = htmlspecialchars(date('Y-m-d H:i:s')); 
 
-    // Check if required fields are filled
     if (!empty($firstName) && !empty($lastName) && !empty($email) && !empty($description)) {
-        // Check if email is valid
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             try {
-                // Prepare and execute the SQL statement
-                $stmt = $conn->prepare("INSERT INTO feedback (first_name, last_name, email, phone, description, created_at) VALUES (?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param('ssssss', $firstName, $lastName, $email, $phone, $description, $createdAt);
+                // Use PDO prepared statement
+                $query = "INSERT INTO feedback (first_name, last_name, email, phone, description, created_at) VALUES (:first_name, :last_name, :email, :phone, :description, :created_at)";
+                $stmt = $pdo->prepare($query);
 
+                // Bind parameters
+                $stmt->bindParam(':first_name', $firstName, PDO::PARAM_STR);
+                $stmt->bindParam(':last_name', $lastName, PDO::PARAM_STR);
+                $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+                $stmt->bindParam(':phone', $phone, PDO::PARAM_STR);
+                $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+                $stmt->bindParam(':created_at', $createdAt, PDO::PARAM_STR);
+
+                // Execute the statement
                 if ($stmt->execute()) {
                     $message = 'Thank you for your feedback! We will get back to you soon.';
-                    $messageClass = 'success'; // CSS class for success message
+                    $messageClass = 'success'; 
                 } else {
                     $message = 'An error occurred while submitting your feedback. Please try again later.';
-                    $messageClass = 'error'; // CSS class for error message
+                    $messageClass = 'error'; 
                 }
-            } catch (Exception $e) {
+            } catch (PDOException $e) {
                 $message = 'An error occurred: ' . $e->getMessage();
                 $messageClass = 'error';
             }
@@ -46,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../includes/style/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Success message */
         .success {
             color: green;
             font-size: 16px;
@@ -66,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: bold;
         }
 
-        /* Error message */
         .error {
             color: red;
             font-size: 16px;
@@ -78,32 +81,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <div class="navbar">
-        <?php
-        include('../includes/navbar.php');
-        if (isset($_SESSION['loggedin'])) {
+    <?php
+            include('../includes/navbar.php');
 
-            $guest_id = $_SESSION['guest_id'];
-            $hasReservation = false;
-
-            $query = "SELECT COUNT(*) as reservation_count FROM reservation WHERE Guest_ID = ?";
-            $stmt = $conn->prepare($query);
-
-            if ($stmt) {
-                $stmt->bind_param("i", $guest_id); 
-                $stmt->execute();
-                $result = $stmt->get_result();
-
-                if ($result->num_rows > 0) {
-                    $row = $result->fetch_assoc();
-                    $hasReservation = $row['reservation_count'] > 0;
+            if (htmlspecialchars(isset($_SESSION['loggedin']))) {
+                $guest_id = htmlspecialchars($_SESSION['guest_id']);
+                $hasReservation = false;
+                try {
+                    $query = "SELECT COUNT(*) as reservation_count FROM reservation WHERE Guest_ID = :guest_id";
+                    $stmt = $pdo->prepare($query);
+                    $stmt->bindParam(':guest_id', $guest_id, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if ($row) {
+                        $hasReservation = $row['reservation_count'] > 0;
+                    }
+                } catch (PDOException $e) {
+                    error_log("Database error: " . $e->getMessage());
                 }
-                $stmt->close();
-            }
 
-            if ($hasReservation)
-                include('../includes/service.php');
-        }
-        ?>
+                if ($hasReservation) {
+                    include('../includes/service.php');
+                }
+            }
+            ?>
     </div>
 
     <div class="contact">

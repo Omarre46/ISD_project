@@ -13,17 +13,25 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
 
 // Fetch service data securely using prepared statements
 try {
-    $stmt = $conn->prepare("
-        SELECT service.ID, service.Name AS guest_name, service.Type, service.Guest_ID, service.Employee_ID, service.Status, guest.Email, employees.Name AS employee_name
+    $stmt = $pdo->prepare("
+        SELECT 
+            service.ID, 
+            service.Name AS guest_name, 
+            service.Type, 
+            service.Guest_ID, 
+            service.Employee_ID, 
+            service.Status, 
+            guest.Email, 
+            employees.Name AS employee_name
         FROM service
         LEFT JOIN guest ON service.Guest_ID = guest.ID
         LEFT JOIN employees ON service.Employee_ID = employees.ID
         ORDER BY service.ID DESC
     ");
     $stmt->execute();
-    $result = $stmt->get_result();
-} catch (Exception $e) {
-    die("Error fetching service data: " . $e->getMessage());
+    $services = $stmt->fetchAll(); // Fetch all rows as an associative array
+} catch (PDOException $e) {
+    die("Error fetching service data: " . htmlspecialchars($e->getMessage()));
 }
 ?>
 
@@ -53,7 +61,7 @@ try {
             </thead>
             <tbody>
                 <?php
-                while ($row = $result->fetch_assoc()) {
+                foreach ($services as $row) {
                     $service_id = htmlspecialchars($row['ID'], ENT_QUOTES, 'UTF-8');
                     $guest_name = htmlspecialchars($row['guest_name'], ENT_QUOTES, 'UTF-8');
                     $service_type = htmlspecialchars($row['Type'], ENT_QUOTES, 'UTF-8');
@@ -62,17 +70,18 @@ try {
                     $guest_email = htmlspecialchars($row['Email'], ENT_QUOTES, 'UTF-8');
 
                     echo "<tr>
-                            <td>{$service_id}</td>
-                            <td>{$guest_name}</td>
-                            <td>{$service_type}</td>
-                            <td>{$employee_name}</td>
-                            <td>{$status}</td>
-                            <td>
-                                <button class='delete-btn' onclick='confirmDelete({$service_id})'>Delete</button>
-                            </td>
-                        </tr>";
+            <td>{$service_id}</td>
+            <td>{$guest_name}</td>
+            <td>{$service_type}</td>
+            <td>{$employee_name}</td>
+            <td>{$status}</td>
+            <td>
+                <button class='delete-btn' onclick='confirmDelete({$service_id})'>Delete</button>
+            </td>
+          </tr>";
                 }
                 ?>
+
             </tbody>
         </table>
     </center>

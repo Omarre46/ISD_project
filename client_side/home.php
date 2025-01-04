@@ -15,33 +15,30 @@
     <div class="container">
         <div class="navbar">
             <?php
-            include('../includes/connection.php');
+            include('../includes/connection.php'); // Ensure this includes your PDO setup
             include('../includes/navbar.php');
-            if (isset($_SESSION['loggedin'])) {
 
-                $guest_id = $_SESSION['guest_id'];
+            if (htmlspecialchars(isset($_SESSION['loggedin']))) {
+                $guest_id = htmlspecialchars($_SESSION['guest_id']);
                 $hasReservation = false;
-
-                $query = "SELECT COUNT(*) as reservation_count FROM reservation WHERE Guest_ID = ?";
-                $stmt = $conn->prepare($query);
-
-                if ($stmt) {
-                    $stmt->bind_param("i", $guest_id); 
+                try {
+                    $query = "SELECT COUNT(*) as reservation_count FROM reservation WHERE Guest_ID = :guest_id";
+                    $stmt = $pdo->prepare($query);
+                    $stmt->bindParam(':guest_id', $guest_id, PDO::PARAM_INT);
                     $stmt->execute();
-                    $result = $stmt->get_result();
-
-                    if ($result->num_rows > 0) {
-                        $row = $result->fetch_assoc();
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if ($row) {
                         $hasReservation = $row['reservation_count'] > 0;
                     }
-                    $stmt->close();
+                } catch (PDOException $e) {
+                    error_log("Database error: " . $e->getMessage());
                 }
-                
-                if ($hasReservation)
+
+                if ($hasReservation) {
                     include('../includes/service.php');
+                }
             }
             ?>
-
         </div>
 
         <div class="contents">

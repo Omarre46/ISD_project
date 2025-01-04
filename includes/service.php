@@ -2,7 +2,7 @@
 include "../includes/connection.php";
 
 $roomNumber = "";
-$guestID = $_SESSION['guest_id'];
+$guestID = htmlspecialchars($_SESSION['guest_id']);
 
 // Fetch Room Number
 $stmt = $conn->prepare("
@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 $stmt->close();
 
 // Handle Form Submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form_identifier']) && $_POST['form_identifier'] === 'service_form') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && htmlspecialchars(isset($_POST['form_identifier'])) && htmlspecialchars($_POST['form_identifier']) === 'service_form') {
     $serviceType = trim($_POST['serviceType']);
 
     if (empty($serviceType)) {

@@ -8,27 +8,27 @@ if (!isset($_SESSION['cart'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['room_id'], $_POST['room_name'], $_POST['room_price'], $_POST['check_in'], $_POST['check_out'])) {
-        $room_id = $_POST['room_id'];
+        $room_id = htmlspecialchars($_POST['room_id']);
         $_SESSION['cart'][] = [
-            'room_id' => $_POST['room_id'],
-            'room_name' => $_POST['room_name'],
-            'room_price' => $_POST['room_price'],
-            'check_in' => $_POST['check_in'],
-            'check_out' => $_POST['check_out']
+            'room_id' => htmlspecialchars($_POST['room_id']),
+            'room_name' => htmlspecialchars($_POST['room_name']),
+            'room_price' => htmlspecialchars($_POST['room_price']),
+            'check_in' => htmlspecialchars($_POST['check_in']),
+            'check_out' => htmlspecialchars($_POST['check_out'])
         ];
     }
-    if (!isset($_SESSION['isReserved'])) {
-        $sql = "UPDATE rooms SET Status = 1 WHERE ID = ?";
-        $stmt = $conn->prepare($sql);
 
-        if ($stmt) {
-            $stmt->bind_param("i", $room_id);
+    if (!isset($_SESSION['isReserved'])) {
+        try {
+            $sql = "UPDATE rooms SET Status = 1 WHERE ID = :room_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':room_id', $room_id, PDO::PARAM_INT);
             $stmt->execute();
-            $stmt->close();
+        } catch (PDOException $e) {
+            $errors[] = "Error updating room status: " . $e->getMessage();
         }
     }
 }
-
 
 $errors = [];
 $success = [];
@@ -36,13 +36,12 @@ $success = [];
 if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
     if (isset($_SESSION['loggedin']) && isset($_SESSION['guest_id'])) {
         if (!isset($_SESSION['isReserved'])) {
-            $guest_id = $_SESSION['guest_id'];
+            $guest_id = htmlspecialchars($_SESSION['guest_id']);
 
             foreach ($_SESSION['cart'] as $cart_item) {
-
-                $room_id = $cart_item['room_id'];
-                $check_in = $cart_item['check_in'];
-                $check_out = $cart_item['check_out'];
+                $room_id = htmlspecialchars($cart_item['room_id']);
+                $check_in = htmlspecialchars($cart_item['check_in']);
+                $check_out = htmlspecialchars($cart_item['check_out']);
 
                 $check_in = date('Y-m-d', strtotime($check_in));
                 $check_out = date('Y-m-d', strtotime($check_out));
@@ -52,20 +51,22 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                     continue;
                 }
 
-                $sql = "INSERT INTO reservation (Room_ID, Guest_ID, CheckIn, CheckOut) VALUES (?, ?, ?, ?)";
-                $stmt = $conn->prepare($sql);
+                try {
+                    $sql = "INSERT INTO reservation (Room_ID, Guest_ID, CheckIn, CheckOut) VALUES (:room_id, :guest_id, :check_in, :check_out)";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':room_id', $room_id, PDO::PARAM_INT);
+                    $stmt->bindParam(':guest_id', $guest_id, PDO::PARAM_INT);
+                    $stmt->bindParam(':check_in', $check_in, PDO::PARAM_STR);
+                    $stmt->bindParam(':check_out', $check_out, PDO::PARAM_STR);
 
-                if ($stmt) {
-                    $stmt->bind_param("ssss", $room_id, $guest_id, $check_in, $check_out);
                     if ($stmt->execute()) {
                         $_SESSION['isReserved'] = true;
                         $success[] = "Reservation successfully added";
                     } else {
-                        $errors[] = "Error bookin room";
+                        $errors[] = "Error booking room.";
                     }
-                    $stmt->close();
-                } else {
-                    $errors[] = "Error preparing statement";
+                } catch (PDOException $e) {
+                    $errors[] = "Error inserting reservation: " . $e->getMessage();
                 }
             }
 
@@ -73,16 +74,15 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                 unset($_SESSION['cart']);
             }
         } else {
-            $errors[] = "You have already reserved a room !";
+            $errors[] = "You have already reserved a room!";
         }
     } else {
         $errors[] = "You need to be logged in to complete the reservation.";
         $_SESSION['cart'] = [];
     }
 }
-
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -178,11 +178,11 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
             <h3>Your Cart</h3>
             <form id="cart-form" method="POST">
                 <?php
-                if (isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                if (htmlspecialchars(isset($_SESSION['cart'])) && htmlspecialchars(count($_SESSION['cart'])) > 0) {
                     $total = 0;
                     foreach ($_SESSION['cart'] as $cart_item) {
-                        $check_in_date = strtotime($cart_item['check_in']);
-                        $check_out_date = strtotime($cart_item['check_out']);
+                        $check_in_date = htmlspecialchars(strtotime($cart_item['check_in']));
+                        $check_out_date = htmlspecialchars(strtotime($cart_item['check_out']));
                         $nights = ($check_out_date - $check_in_date) / (60 * 60 * 24);
 
                         if ($nights <= 0) {
@@ -190,7 +190,7 @@ if (isset($_POST['checkout']) && isset($_SESSION['cart'])) {
                             continue;
                         }
 
-                        $room_total_price = $nights * $cart_item['room_price'];
+                        $room_total_price = $nights * htmlspecialchars($cart_item['room_price']);
 
                         echo '<p>Room: ' . htmlspecialchars($cart_item['room_name']) . '</p>';
                         echo '<p>Price: $' . htmlspecialchars($cart_item['room_price']) . ' per night</p>';

@@ -14,28 +14,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['name'] !== 'admin123') {
 
 // Check if the 'id' parameter is set in the URL
 if (isset($_GET['id'])) {
-    $clientId = $_GET['id'];
+    $clientId = htmlspecialchars($_GET['id'], ENT_QUOTES, 'UTF-8');
 
-    // Validate the ID (ensure it's a number to prevent SQL injection)
+    // Validate the ID (ensure it's a numeric value)
     if (!is_numeric($clientId)) {
         echo "Invalid client ID.";
         exit();
     }
 
-    // Prepare the DELETE SQL query using a prepared statement
-    $stmt = $conn->prepare("DELETE FROM guest WHERE ID = ?");
-    $stmt->bind_param("i", $clientId);  // "i" stands for integer type
-    
-    // Execute the query and check if it was successful
-    if ($stmt->execute()) {
-        // Redirect to the client list page after successful deletion
-        header("Location: client_sec.php?message=Client deleted successfully");
-    } else {
-        echo "Error deleting client: " . $stmt->error;
-    }
+    try {
+        // Prepare the DELETE SQL query using a prepared statement
+        $stmt = $pdo->prepare("DELETE FROM guest WHERE ID = :id");
+        $stmt->bindParam(':id', $clientId, PDO::PARAM_INT);
 
-    // Close the prepared statement
-    $stmt->close();
+        // Execute the query
+        if ($stmt->execute()) {
+            // Redirect to the client list page after successful deletion
+            header("Location: client_sec.php?message=Client deleted successfully");
+            exit();
+        } else {
+            echo "Error deleting client.";
+        }
+    } catch (PDOException $e) {
+        echo "Error deleting client: " . htmlspecialchars($e->getMessage());
+    }
 } else {
     echo "No client ID provided.";
 }
